@@ -12,15 +12,11 @@ namespace Dash.Player {
         RayCastController rayCastController = null;
         MovementStats stats = null;
         Vector2 inputValue = Vector2.zero;
-#if UNITY_EDITOR
-        [ReadOnly, SerializeField]
-#endif
         bool bJumpPressed = false;
-#if UNITY_EDITOR
-        [ReadOnly, SerializeField]
-#endif
         bool bCanJump = false;
         bool bWallSliding = false;
+        float velocityXSmoothing;
+        const float smoothTime = .1f;
         public Movement (Player player, MovementStats stats) : base (player) {
             this.stats = stats;
             rayCastController = player.RayCastController;
@@ -48,6 +44,7 @@ namespace Dash.Player {
             else {
                 nVel.x += inputValue.x * stats.AirVel * Time.deltaTime;
                 nVel.x = Mathf.Clamp (nVel.x, -stats.NormalVel * Time.deltaTime, stats.NormalVel * Time.deltaTime);
+                nVel.x = Mathf.SmoothDamp (player.Rb.velocity.x, nVel.x, ref velocityXSmoothing, smoothTime);
             }
             player.Rb.velocity = nVel;
         }
@@ -114,10 +111,10 @@ namespace Dash.Player {
 
     [System.Serializable]
     public class MovementStats : PlayerStats {
-        public float NormalVel = 1000f;
-        public float AirVel = 750f;
+        public float NormalVel = 250f;
+        public float AirVel = 100f;
         public float JumpVel = 15f;
-        public float WallJumpVel = 10f;
+        public float WallJumpVel = 7.5f;
         public float FallGravityMultiplier = 1.5f;
         public float WallSlidingGravityMultiplier = 0.02f;
     }

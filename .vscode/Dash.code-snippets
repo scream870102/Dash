@@ -18,11 +18,11 @@
 	"Create a player component": {
 		"prefix": "cpc",
 		"body": [
-			"namespace DashSlash.Player {",
+			"namespace Dash.Player {",
 			"    [System.Serializable]",
 			"    public class ${1:Component} : PlayerComponent {",
 			"        ${1:Component}Stats stats = null;",
-			"        public Movement (Player player, ${1:Component}Stats stats) : base (player) {",
+			"        public ${1:Component} (Player player, ${1:Component}Stats stats) : base (player) {",
 			"            this.stats = stats;",
 			"        }",
 			"        override public void Tick ( ) { }",

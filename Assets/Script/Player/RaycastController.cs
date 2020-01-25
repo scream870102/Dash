@@ -25,6 +25,7 @@ public class RayCastController {
     public bool Down => info.down;
     public bool Right => info.right;
     public bool Left => info.left;
+    public bool IsCollide => (Up || Down || Right || Left);
     public List<HitResult> Result => result;
     public void Init (BoxCollider2D collider2D) {
         col = collider2D;

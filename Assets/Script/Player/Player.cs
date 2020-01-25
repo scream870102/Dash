@@ -7,13 +7,14 @@
     public class Player : MonoBehaviour {
 #if UNITY_EDITOR
         // this is for monitor value change
-        [ReadOnly, SerializeField] Movement tmp = null;
+        [ReadOnly, SerializeField] Dash tmp = null;
 #endif
         Rigidbody2D rb = null;
         PlayerControl playerControl = null;
         [SerializeField] RayCastController rayCastController = null;
         List<PlayerComponent> components = new List<PlayerComponent> ( );
         [SerializeField] MovementStats movementStats = null;
+        [SerializeField] DashStats dashStats = null;
         public PlayerControl PlayerControl => playerControl;
         public RayCastController RayCastController => rayCastController;
         public Rigidbody2D Rb => rb;
@@ -21,8 +22,9 @@
             playerControl = new PlayerControl ( );
             rb = GetComponent<Rigidbody2D> ( );
             components.Add (new Movement (this, movementStats));
+            components.Add (new Dash (this, dashStats));
 #if UNITY_EDITOR
-            tmp = components [0] as Movement;
+            tmp = components [1] as Dash;
 #endif
 
         }
