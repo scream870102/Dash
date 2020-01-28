@@ -60,6 +60,10 @@
                 o.FixedTick ( );
         }
 
+        public void AddEnergy (float supplement) {
+            Dash.AddEnergy (supplement);
+        }
+
     }
 
 }
