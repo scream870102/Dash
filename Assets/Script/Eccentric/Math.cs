@@ -1,8 +1,8 @@
-using System;
-
-using UnityEngine;
 namespace Eccentric {
-    public static class Math {
+    using System;
+
+    using UnityEngine;
+    static class Math {
         /// <summary>check if a value between the two value or not</summary>
         /// <remarks>will return true if the value equal to a or b</remarks>
         /// <param name="value">the value you want to check</param>
@@ -92,6 +92,11 @@ namespace Eccentric {
         /// <summary>return a random vector2</summary>
         public static Vector2 RandomVec2 (Vector2 num) {
             return new Vector3 (RandomNum (num.x), RandomNum (num.y));
+        }
+
+        /// <summary>return the degree due to direction</summary>
+        public static float GetDegree (Vector2 direction) {
+            return Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
         }
     }
 }

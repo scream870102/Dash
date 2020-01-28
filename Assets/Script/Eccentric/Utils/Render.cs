@@ -1,6 +1,6 @@
-using UnityEngine;
-namespace GalaxySeeker {
-    public static class Render {
+namespace Eccentric.Utils {
+    using UnityEngine;
+    static class Render {
         /// <summary>flip target due to IsFacingRight</summary>
         /// <param name="IsFacingRight">is target facing at right direction</param>
         /// <param name="target">which transform to change</param>

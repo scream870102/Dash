@@ -1,4 +1,4 @@
-namespace Dash.Player {
+namespace CJStudio.Dash.Player {
     using System.Collections.Generic;
     using System;
 
@@ -7,7 +7,7 @@ namespace Dash.Player {
     using UnityEngine.InputSystem;
     using UnityEngine;
     [System.Serializable]
-    public class Movement : PlayerComponent {
+    class Movement : PlayerComponent {
         float originGravity = 0f;
         RayCastController rayCastController = null;
         MovementStats stats = null;
@@ -26,32 +26,32 @@ namespace Dash.Player {
             CheckCollision ( );
             Move ( );
             Jump ( );
-            if (player.Rb.velocity.y <= 0f && !bWallSliding)
-                player.Rb.gravityScale = originGravity * stats.FallGravityMultiplier;
-            else if (bWallSliding && player.Rb.velocity.y <= 0f)
-                player.Rb.gravityScale = originGravity * stats.WallSlidingGravityMultiplier;
+            if (Player.Rb.velocity.y <= 0f && !bWallSliding)
+                Player.Rb.gravityScale = originGravity * stats.FallGravityMultiplier;
+            else if (bWallSliding && Player.Rb.velocity.y <= 0f)
+                Player.Rb.gravityScale = originGravity * stats.WallSlidingGravityMultiplier;
             else
-                player.Rb.gravityScale = originGravity;
+                Player.Rb.gravityScale = originGravity;
 
         }
         override public void FixedTick ( ) { }
 
         void Move ( ) {
-            Vector2 nVel = player.Rb.velocity;
+            Vector2 nVel = Player.Rb.velocity;
             if (rayCastController.Down) {
                 nVel.x = inputValue.x * stats.NormalVel * Time.deltaTime;
             }
             else {
                 nVel.x += inputValue.x * stats.AirVel * Time.deltaTime;
                 nVel.x = Mathf.Clamp (nVel.x, -stats.NormalVel * Time.deltaTime, stats.NormalVel * Time.deltaTime);
-                nVel.x = Mathf.SmoothDamp (player.Rb.velocity.x, nVel.x, ref velocityXSmoothing, smoothTime);
+                nVel.x = Mathf.SmoothDamp (Player.Rb.velocity.x, nVel.x, ref velocityXSmoothing, smoothTime);
             }
-            player.Rb.velocity = nVel;
+            Player.Rb.velocity = nVel;
         }
 
         void Jump ( ) {
             if (bCanJump && bJumpPressed) {
-                Vector2 vel = player.Rb.velocity;
+                Vector2 vel = Player.Rb.velocity;
                 //Wall Jump
                 if (bWallSliding && !rayCastController.Down) {
                     EHitDirection wallDirection = rayCastController.Left?EHitDirection.LEFT : EHitDirection.RIGHT;
@@ -65,7 +65,7 @@ namespace Dash.Player {
                         return;
                 }
                 vel.y = stats.JumpVel;
-                player.Rb.velocity = vel;
+                Player.Rb.velocity = vel;
                 bCanJump = false;
             }
         }
@@ -82,16 +82,16 @@ namespace Dash.Player {
         }
 
         override public void OnEnable ( ) {
-            control.GamePlay.Move.performed += OnMoveValueChanged;
-            control.GamePlay.Move.canceled += OnMoveValueReleased;
-            control.GamePlay.Jump.started += OnJumpPressed;
-            control.GamePlay.Jump.canceled += OnJumpReleased;
+            Control.GamePlay.Move.performed += OnMoveValueChanged;
+            Control.GamePlay.Move.canceled += OnMoveValueReleased;
+            Control.GamePlay.Jump.started += OnJumpPressed;
+            Control.GamePlay.Jump.canceled += OnJumpReleased;
         }
         override public void OnDisable ( ) {
-            control.GamePlay.Move.performed -= OnMoveValueChanged;
-            control.GamePlay.Move.canceled -= OnMoveValueReleased;
-            control.GamePlay.Jump.started -= OnJumpPressed;
-            control.GamePlay.Jump.canceled -= OnJumpReleased;
+            Control.GamePlay.Move.performed -= OnMoveValueChanged;
+            Control.GamePlay.Move.canceled -= OnMoveValueReleased;
+            Control.GamePlay.Jump.started -= OnJumpPressed;
+            Control.GamePlay.Jump.canceled -= OnJumpReleased;
         }
 
         void OnMoveValueChanged (InputAction.CallbackContext ctx) {
@@ -110,7 +110,7 @@ namespace Dash.Player {
     }
 
     [System.Serializable]
-    public class MovementStats : PlayerStats {
+    class MovementStats : PlayerStats {
         public float NormalVel = 250f;
         public float AirVel = 100f;
         public float JumpVel = 15f;

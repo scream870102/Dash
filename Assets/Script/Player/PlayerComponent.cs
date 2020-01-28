@@ -1,8 +1,10 @@
-namespace Dash.Player {
+namespace CJStudio.Dash.Player {
     [System.Serializable]
-    public class PlayerComponent {
-        protected Player player = null;
-        protected PlayerControl control = null;
+    class PlayerComponent {
+        Player player = null;
+        PlayerControl control = null;
+        public Player Player => player;
+        public PlayerControl Control => control;
         public PlayerComponent (Player player) {
             this.player = player;
             this.control = player.PlayerControl;

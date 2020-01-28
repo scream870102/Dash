@@ -3,7 +3,7 @@
     using System.Linq;
     using System;
 
-    public static class DomainEvents {
+    static class DomainEvents {
         private static Dictionary<Type, List<Delegate>> m_actionsByType;
         public static void Register<T> (Action<T> callback)where T : IDomainEvent {
             var eventType = typeof (T);

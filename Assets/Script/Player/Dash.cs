@@ -1,10 +1,16 @@
-﻿namespace Dash.Player {
+﻿namespace CJStudio.Dash.Player {
+    using System.Collections.Generic;
+
     using Eccentric.Utils;
 
     using UnityEngine.InputSystem;
     using UnityEngine;
     [System.Serializable]
-    public class Dash : PlayerComponent {
+    class Dash : PlayerComponent {
+        public event System.Action<DashProps> DashPrepare = null;
+        public event System.Action DashEnded = null;
+        public event System.Action<DashProps> EnergyChange = null;
+        DashProps props = null;
 #if UNITY_EDITOR
         [ReadOnly, SerializeField]
 #endif
@@ -50,12 +56,19 @@
             timer = new Timer ( );
             maxCharge = stats.BasicChargeTime;
             normalTimeScale = Time.timeScale;
+            props = new DashProps ( );
+            if (EnergyChange != null)
+                EnergyChange (props);
+            props.MaxCharge = stats.BasicChargeTime;
+            props.MaxEnergy = stats.BasicEnergy;
         }
         override public void Tick ( ) {
             CheckCollision ( );
             if (bAim && !bUsingDash) {
                 if (bUsingEnergy) {
                     energy -= Time.unscaledDeltaTime;
+                    if (EnergyChange != null)
+                        EnergyChange (props);
                     if (energy <= 0f) {
                         ResetState ( );
                         return;
@@ -67,6 +80,7 @@
                     charge = 0f;
                 }
                 charge += Time.unscaledDeltaTime;
+                DashPreparing ( );
             }
 
         }
@@ -78,6 +92,20 @@
             }
         }
 
+        void DashPreparing ( ) {
+            props.Charge = charge;
+            props.EnergyRemain = energy;
+            props.Direction = direction;
+            props.Pos = Player.Tf.position;
+            if (DashPrepare != null)
+                DashPrepare (props);
+        }
+
+        void DashAimFin ( ) {
+            if (DashEnded != null)
+                DashEnded ( );
+        }
+
         void UseDash ( ) {
             if (bAim && !bUsingDash) {
                 Time.timeScale = normalTimeScale;
@@ -85,6 +113,7 @@
                 velocity = distance / stats.AnimTime;
                 bUsingDash = true;
                 timer.Reset (stats.AnimTime);
+                DashAimFin ( );
             }
         }
 
@@ -94,7 +123,20 @@
                 bUsingDash = false;
                 bCanDash = false;
             }
-            player.Rb.MovePosition (player.Rb.position + direction * velocity * Time.fixedDeltaTime);
+            #region CHECK_BREAKABLE_OBJECT
+            if (Player.RayCastController.IsCollide) {
+                List<HitResult> results = Player.RayCastController.Result;
+                foreach (HitResult o in results) {
+                    if (o.hit2D.collider.tag == "Breakable") {
+                        o.hit2D.collider.GetComponent<BreakableItem> ( ).Break ( );
+                        ResetState ( );
+                        bUsingDash = false;
+                        bCanDash = true;
+                    }
+                }
+            }
+            #endregion
+            Player.Rb.MovePosition (Player.Rb.position + direction * velocity * Time.fixedDeltaTime);
         }
         void ResetState ( ) {
             bAim = false;
@@ -103,10 +145,11 @@
             velocity = 0f;
             direction = Vector2.zero;
             Time.timeScale = normalTimeScale;
+            DashAimFin ( );
         }
 
         void CheckCollision ( ) {
-            if (player.RayCastController.IsCollide)
+            if (Player.RayCastController.IsCollide)
                 bCanDash = true;
         }
 
@@ -133,25 +176,35 @@
             UseDash ( );
         }
         override public void OnEnable ( ) {
-            control.GamePlay.Use.started += OnUsePressed;
-            control.GamePlay.Dash.started += OnDashStarted;
-            control.GamePlay.Dash.performed += OnDashPerformed;
-            control.GamePlay.Dash.canceled += OnDashCanceled;
+            Control.GamePlay.Use.started += OnUsePressed;
+            Control.GamePlay.Dash.started += OnDashStarted;
+            Control.GamePlay.Dash.performed += OnDashPerformed;
+            Control.GamePlay.Dash.canceled += OnDashCanceled;
         }
         override public void OnDisable ( ) {
-            control.GamePlay.Use.started -= OnUsePressed;
-            control.GamePlay.Dash.started -= OnDashStarted;
-            control.GamePlay.Dash.performed -= OnDashPerformed;
-            control.GamePlay.Dash.canceled -= OnDashCanceled;
+            Control.GamePlay.Use.started -= OnUsePressed;
+            Control.GamePlay.Dash.started -= OnDashStarted;
+            Control.GamePlay.Dash.performed -= OnDashPerformed;
+            Control.GamePlay.Dash.canceled -= OnDashCanceled;
         }
     }
 
     [System.Serializable]
-    public class DashStats : PlayerStats {
+    class DashStats : PlayerStats {
         public float BasicChargeTime = 0f;
         public float BasicEnergy = 10f;
         public float ChargeMultiplier = 0f;
         public float AnimTime = .3f;
         public float AimTimeScale = .01f;
     }
+    class DashProps {
+        public float Charge { get; set; }
+        public float EnergyRemain { get; set; }
+        public Vector2 Direction { get; set; }
+        public Vector2 Pos { get; set; }
+        public float MaxCharge { get; set; }
+        public float MaxEnergy { get; set; }
+
+    }
+
 }

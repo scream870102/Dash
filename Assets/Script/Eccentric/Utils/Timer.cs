@@ -3,7 +3,7 @@ namespace Eccentric.Utils {
     /// <summary>a countdown timer easy to use</summary>
     /// <remarks>call method Reset to reset timer and call property IsFinshed to check if countdown finished</remarks>
     [System.Serializable]
-    public class Timer {
+    class Timer {
         float timeSection;
         float timer;
 #if UNITY_EDITOR

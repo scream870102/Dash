@@ -4,7 +4,7 @@ using Eccentric.Utils;
 
 using UnityEngine;
 [System.Serializable]
-public class RayCastController {
+class RayCastController {
 #if UNITY_EDITOR
     [ReadOnly, SerializeField]
 #endif
