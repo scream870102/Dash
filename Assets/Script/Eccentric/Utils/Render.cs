@@ -18,11 +18,11 @@ namespace Eccentric.Utils {
             target.localScale = tmp;
         }
 
-        public static void ChangeDirectionXWithSpriteRender (bool flipX, SpriteRenderer renderer) {
-            renderer.flipX = flipX;
+        public static void ChangeDirectionXWithSpriteRender (bool flipX, SpriteRenderer renderer, bool IsInvert = false) {
+            renderer.flipX = flipX ^ IsInvert;
         }
-        public static void ChangeDirectionYWithSpriteRender (bool flipY, SpriteRenderer renderer) {
-            renderer.flipY = flipY;
+        public static void ChangeDirectionYWithSpriteRender (bool flipY, SpriteRenderer renderer, bool IsInvert = false) {
+            renderer.flipY = flipY ^ IsInvert;
         }
     }
 }

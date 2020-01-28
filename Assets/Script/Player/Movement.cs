@@ -8,20 +8,24 @@ namespace CJStudio.Dash.Player {
     using UnityEngine;
     [System.Serializable]
     class Movement : PlayerComponent {
+        MovementStats stats = null;
         float originGravity = 0f;
         RayCastController rayCastController = null;
-        MovementStats stats = null;
         Vector2 inputValue = Vector2.zero;
         bool bJumpPressed = false;
         bool bCanJump = false;
         bool bWallSliding = false;
-        float velocityXSmoothing;
+        bool bFaceRight = true;
+        #region LERP
         const float smoothTime = .1f;
+        float velocityXSmoothing;
+        #endregion
         public Movement (Player player, MovementStats stats) : base (player) {
             this.stats = stats;
             rayCastController = player.RayCastController;
             originGravity = player.Rb.gravityScale;
         }
+
         override public void Tick ( ) {
             CheckCollision ( );
             Move ( );
@@ -32,8 +36,23 @@ namespace CJStudio.Dash.Player {
                 Player.Rb.gravityScale = originGravity * stats.WallSlidingGravityMultiplier;
             else
                 Player.Rb.gravityScale = originGravity;
+            #region ANIMATOR_PAPAMETER
+            Player.Anim.SetFloat ("velX", Mathf.Abs (Player.Rb.velocity.x));
+            Player.Anim.SetFloat ("velY", Player.Rb.velocity.y);
+            Player.Anim.SetBool ("wallSlide", bWallSliding);
+            #endregion
+            #region SPRITE_RENDER_DIRECTION
+            if (!Player.IsDashing && Player.Rb.velocity.x != 0f) {
+                if (bWallSliding)
+                    bFaceRight = rayCastController.Right;
+                else
+                    bFaceRight = Player.Rb.velocity.x > 0f;
+                Render.ChangeDirectionXWithSpriteRender (bFaceRight, Player.Rend, true);
+            }
+            #endregion
 
         }
+        
         override public void FixedTick ( ) { }
 
         void Move ( ) {
@@ -67,6 +86,7 @@ namespace CJStudio.Dash.Player {
                 vel.y = stats.JumpVel;
                 Player.Rb.velocity = vel;
                 bCanJump = false;
+                Player.Anim.SetTrigger ("jump");
             }
         }
 

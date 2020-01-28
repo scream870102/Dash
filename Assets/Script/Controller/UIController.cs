@@ -14,12 +14,14 @@ namespace CJStudio.Dash {
         [SerializeField] SpriteRenderer arrowSprite = null;
         [SerializeField] GameObject dashUI = null;
         [SerializeField] RectTransform energyBar = null;
+        [SerializeField] RawImage noobImage = null;
         float energyBarMaxHeight = 0f;
         override protected void Awake ( ) {
             base.Awake ( );
             if (energyBar)
                 energyBarMaxHeight = energyBar.sizeDelta.y;
             player = GameManager.Instance.Player;
+            noobImage.enabled = false;
         }
 
         void OnDashPrepare (DashProps e) {
@@ -41,19 +43,25 @@ namespace CJStudio.Dash {
             energyBar.sizeDelta = new Vector2 (energyBar.sizeDelta.x, ratio);
         }
 
+        void OnPlayerDead (OnPlayerDead e) {
+            noobImage.enabled = true;
+        }
+
         void OnEnable ( ) {
             if (arrowSprite != null && player != null) {
-                player.Dash.DashPrepare += OnDashPrepare;
-                player.Dash.DashEnded += OnDashEnded;
+                player.Dash.Aim += OnDashPrepare;
+                player.Dash.AimEnded += OnDashEnded;
                 player.Dash.EnergyChange += OnEnergyChange;
+                DomainEvents.Register<OnPlayerDead> (OnPlayerDead);
             }
         }
 
         void OnDisable ( ) {
             if (arrowSprite != null && player != null) {
-                player.Dash.DashPrepare -= OnDashPrepare;
-                player.Dash.DashEnded -= OnDashEnded;
+                player.Dash.Aim -= OnDashPrepare;
+                player.Dash.AimEnded -= OnDashEnded;
                 player.Dash.EnergyChange -= OnEnergyChange;
+                DomainEvents.Unregister<OnPlayerDead> (OnPlayerDead);
             }
         }
     }
