@@ -65,7 +65,7 @@
                 UsingDash ( );
             }
         }
-        
+
         public void AddEnergy (float supplement) {
             float newEnergy = this.energy + supplement;
             energy = Mathf.Clamp (newEnergy, 0f, stats.BasicEnergy);

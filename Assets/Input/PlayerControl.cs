@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.Utilities;
 
 public class @PlayerControl : IInputActionCollection, IDisposable
 {
-    private InputActionAsset asset;
+    public InputActionAsset asset { get; }
     public @PlayerControl()
     {
         asset = InputActionAsset.FromJson(@"{
@@ -221,6 +221,17 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""1a7da60e-dbcc-454d-9376-ecbee9b0ce99"",
                     ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb147077-f1a9-42e3-993e-f3de1d901667"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

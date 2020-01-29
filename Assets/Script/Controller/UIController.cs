@@ -9,6 +9,7 @@ namespace CJStudio.Dash {
 
     using UnityEngine.UI;
     using UnityEngine;
+    
     class UIController : TSingletonMonoBehavior<UIController> {
         P.Player player = null;
         [SerializeField] SpriteRenderer arrowSprite = null;
