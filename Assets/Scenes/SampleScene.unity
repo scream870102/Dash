@@ -1027,7 +1027,7 @@ GameObject:
   - component: {fileID: 838653379}
   - component: {fileID: 838653378}
   - component: {fileID: 838653377}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: New Sprite (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1336,7 +1336,7 @@ GameObject:
   - component: {fileID: 1431176259}
   - component: {fileID: 1431176258}
   - component: {fileID: 1431176257}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: New Sprite (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1882,7 +1882,7 @@ GameObject:
   - component: {fileID: 1864461148}
   - component: {fileID: 1864461147}
   - component: {fileID: 1864461146}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1993,7 +1993,7 @@ GameObject:
   - component: {fileID: 1875100343}
   - component: {fileID: 1875100344}
   - component: {fileID: 1875100345}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2021,7 +2021,7 @@ MonoBehaviour:
       left: 0
     layers:
       serializedVersion: 2
-      m_Bits: 3639
+      m_Bits: 1793
     rayNums: {x: 3, y: 3}
     offset: -0.015
     rayLength: 0.05
