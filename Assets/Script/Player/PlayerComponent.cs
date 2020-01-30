@@ -13,6 +13,7 @@ namespace CJStudio.Dash.Player {
         public virtual void FixedTick ( ) { }
         public virtual void OnEnable ( ) { }
         public virtual void OnDisable ( ) { }
+        public virtual void SetSaveData (SaveData data) { }
 
     }
     public abstract class PlayerStats { }

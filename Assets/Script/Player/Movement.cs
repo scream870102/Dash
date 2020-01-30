@@ -52,7 +52,7 @@ namespace CJStudio.Dash.Player {
             #endregion
 
         }
-        
+
         override public void FixedTick ( ) { }
 
         void Move ( ) {

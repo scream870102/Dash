@@ -3,6 +3,8 @@ namespace CJStudio.Dash {
 
     using UnityEngine;
     class GameManager : TSingletonMonoBehavior<GameManager> {
+        StageController stageController = null;
+        public StageController StageController => stageController;
         Player.Player player = null;
         public Player.Player Player {
             get {
@@ -14,6 +16,7 @@ namespace CJStudio.Dash {
         }
         override protected void Awake ( ) {
             base.Awake ( );
+            stageController = new StageController ( );
         }
 
     }

@@ -3,6 +3,7 @@
 
     using Eccentric;
 
+    using UnityEngine.InputSystem;
     using UnityEngine;
     class Player : MonoBehaviour {
         List<PlayerComponent> components = new List<PlayerComponent> ( );
@@ -36,13 +37,17 @@
         }
 
         void OnEnable ( ) {
+            PlayerControl.UI.Certain.performed += OnCertainPressed;
+            playerControl.UI.Disable ( );
             playerControl.GamePlay.Enable ( );
             foreach (PlayerComponent o in components)
                 o.OnEnable ( );
         }
 
         void OnDisable ( ) {
+            PlayerControl.UI.Certain.performed -= OnCertainPressed;
             playerControl.GamePlay.Disable ( );
+            playerControl.UI.Disable ( );
             foreach (PlayerComponent o in components)
                 o.OnDisable ( );
         }
@@ -74,6 +79,18 @@
 
         public void OnDieAnimFined ( ) {
             DomainEvents.Raise (new OnPlayerDead ( ));
+            playerControl.GamePlay.Disable ( );
+            playerControl.UI.Enable ( );
+        }
+
+        public void SetSaveData (SaveData data) {
+            Movement.SetSaveData (data);
+            Dash.SetSaveData (data);
+        }
+        void OnCertainPressed (InputAction.CallbackContext ctx) {
+            playerControl.UI.Disable ( );
+            playerControl.GamePlay.Enable ( );
+            DomainEvents.Raise (new OnStageReset ( ));
         }
 
     }

@@ -11,6 +11,8 @@
         public event System.Action AimEnded = null;
         public event System.Action<DashProps> EnergyChange = null;
         public bool IsDashing => bUsingDash;
+        public float Energy => energy;
+        public bool CanDash => bCanDash;
         DashProps props = null;
         Timer timer = null;
         DashStats stats = null;
@@ -146,6 +148,12 @@
         void CheckCollision ( ) {
             if (Player.RayCastController.IsCollide)
                 bCanDash = true;
+        }
+
+        override public void SetSaveData (SaveData data) {
+            this.bCanDash = data.CanUseDash;
+            this.energy = data.EnergyRemain;
+            EnergyChanging ( );
         }
 
         void OnDashBtnStarted (InputAction.CallbackContext ctx) {

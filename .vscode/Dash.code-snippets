@@ -16,26 +16,26 @@
 	// 	"description": "Log output to console"
 	// }
 	"Create a player component": {
-		"prefix": "cpc",
+		"prefix": "CreatePlayerComponent",
 		"body": [
 			"namespace Dash.Player {",
 			"    [System.Serializable]",
-			"    public class ${1:Component} : PlayerComponent {",
-			"        ${1:Component}Stats stats = null;",
-			"        public ${1:Component} (Player player, ${1:Component}Stats stats) : base (player) {",
+			"    public class Component : PlayerComponent {",
+			"        ComponentStats stats = null;",
+			"        public Component (Player player, ComponentStats stats) : base (player) {",
 			"            this.stats = stats;",
 			"        }",
 			"        override public void Tick ( ) { }",
 			"        override public void FixedTick ( ) { }",
 			"        override public void OnEnable ( ) { }",
 			"        override public void OnDisable ( ) { }",
+			"        override public void SetSaveData (SaveData data) { }",
 			"    }",
+			"",
 			"    [System.Serializable]",
-			"    public class ${1:Component}Stats : PlayerStats { }",
-			"}",
-			""
+			"    public class ComponentStats : PlayerStats { }",
+			"}"
 		],
 		"description": "Create a player component"
-	},
-
+	}
 }

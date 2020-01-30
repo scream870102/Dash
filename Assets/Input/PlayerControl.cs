@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @PlayerControl : IInputActionCollection, IDisposable
+namespace CJStudio.Dash
 {
-    public InputActionAsset asset { get; }
-    public @PlayerControl()
+    public class @PlayerControl : IInputActionCollection, IDisposable
     {
-        asset = InputActionAsset.FromJson(@"{
+        public InputActionAsset asset { get; }
+        public @PlayerControl()
+        {
+            asset = InputActionAsset.FromJson(@"{
     ""name"": ""PlayerControl"",
     ""maps"": [
         {
@@ -240,123 +242,202 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""41b25908-6d71-401c-bb32-afa83d2161d6"",
+            ""actions"": [
+                {
+                    ""name"": ""Certain"",
+                    ""type"": ""Button"",
+                    ""id"": ""d16656d1-f063-4ddf-9887-9e38f53a3f64"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ad029d91-f0e0-425c-8a2e-27fe2ff99bf6"",
+                    ""path"": ""<DualShockGamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Certain"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6d22d60-3a84-4c43-9e1d-1ef6c9795fa8"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Certain"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // GamePlay
-        m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
-        m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
-        m_GamePlay_Jump = m_GamePlay.FindAction("Jump", throwIfNotFound: true);
-        m_GamePlay_Dash = m_GamePlay.FindAction("Dash", throwIfNotFound: true);
-        m_GamePlay_Use = m_GamePlay.FindAction("Use", throwIfNotFound: true);
-    }
+            // GamePlay
+            m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
+            m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
+            m_GamePlay_Jump = m_GamePlay.FindAction("Jump", throwIfNotFound: true);
+            m_GamePlay_Dash = m_GamePlay.FindAction("Dash", throwIfNotFound: true);
+            m_GamePlay_Use = m_GamePlay.FindAction("Use", throwIfNotFound: true);
+            // UI
+            m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+            m_UI_Certain = m_UI.FindAction("Certain", throwIfNotFound: true);
+        }
 
-    public void Dispose()
-    {
-        UnityEngine.Object.Destroy(asset);
-    }
-
-    public InputBinding? bindingMask
-    {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
-    }
-
-    public ReadOnlyArray<InputDevice>? devices
-    {
-        get => asset.devices;
-        set => asset.devices = value;
-    }
-
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-    public bool Contains(InputAction action)
-    {
-        return asset.Contains(action);
-    }
-
-    public IEnumerator<InputAction> GetEnumerator()
-    {
-        return asset.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    public void Enable()
-    {
-        asset.Enable();
-    }
-
-    public void Disable()
-    {
-        asset.Disable();
-    }
-
-    // GamePlay
-    private readonly InputActionMap m_GamePlay;
-    private IGamePlayActions m_GamePlayActionsCallbackInterface;
-    private readonly InputAction m_GamePlay_Move;
-    private readonly InputAction m_GamePlay_Jump;
-    private readonly InputAction m_GamePlay_Dash;
-    private readonly InputAction m_GamePlay_Use;
-    public struct GamePlayActions
-    {
-        private @PlayerControl m_Wrapper;
-        public GamePlayActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_GamePlay_Move;
-        public InputAction @Jump => m_Wrapper.m_GamePlay_Jump;
-        public InputAction @Dash => m_Wrapper.m_GamePlay_Dash;
-        public InputAction @Use => m_Wrapper.m_GamePlay_Use;
-        public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GamePlayActions set) { return set.Get(); }
-        public void SetCallbacks(IGamePlayActions instance)
+        public void Dispose()
         {
-            if (m_Wrapper.m_GamePlayActionsCallbackInterface != null)
+            UnityEngine.Object.Destroy(asset);
+        }
+
+        public InputBinding? bindingMask
+        {
+            get => asset.bindingMask;
+            set => asset.bindingMask = value;
+        }
+
+        public ReadOnlyArray<InputDevice>? devices
+        {
+            get => asset.devices;
+            set => asset.devices = value;
+        }
+
+        public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+        public bool Contains(InputAction action)
+        {
+            return asset.Contains(action);
+        }
+
+        public IEnumerator<InputAction> GetEnumerator()
+        {
+            return asset.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void Enable()
+        {
+            asset.Enable();
+        }
+
+        public void Disable()
+        {
+            asset.Disable();
+        }
+
+        // GamePlay
+        private readonly InputActionMap m_GamePlay;
+        private IGamePlayActions m_GamePlayActionsCallbackInterface;
+        private readonly InputAction m_GamePlay_Move;
+        private readonly InputAction m_GamePlay_Jump;
+        private readonly InputAction m_GamePlay_Dash;
+        private readonly InputAction m_GamePlay_Use;
+        public struct GamePlayActions
+        {
+            private @PlayerControl m_Wrapper;
+            public GamePlayActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_GamePlay_Move;
+            public InputAction @Jump => m_Wrapper.m_GamePlay_Jump;
+            public InputAction @Dash => m_Wrapper.m_GamePlay_Dash;
+            public InputAction @Use => m_Wrapper.m_GamePlay_Use;
+            public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(GamePlayActions set) { return set.Get(); }
+            public void SetCallbacks(IGamePlayActions instance)
             {
-                @Move.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
-                @Jump.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
-                @Dash.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
-                @Dash.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
-                @Dash.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
-                @Use.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnUse;
-                @Use.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnUse;
-                @Use.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnUse;
-            }
-            m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
-                @Dash.started += instance.OnDash;
-                @Dash.performed += instance.OnDash;
-                @Dash.canceled += instance.OnDash;
-                @Use.started += instance.OnUse;
-                @Use.performed += instance.OnUse;
-                @Use.canceled += instance.OnUse;
+                if (m_Wrapper.m_GamePlayActionsCallbackInterface != null)
+                {
+                    @Move.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
+                    @Move.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
+                    @Move.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
+                    @Jump.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
+                    @Jump.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
+                    @Jump.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
+                    @Dash.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
+                    @Dash.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
+                    @Dash.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
+                    @Use.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnUse;
+                    @Use.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnUse;
+                    @Use.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnUse;
+                }
+                m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Move.started += instance.OnMove;
+                    @Move.performed += instance.OnMove;
+                    @Move.canceled += instance.OnMove;
+                    @Jump.started += instance.OnJump;
+                    @Jump.performed += instance.OnJump;
+                    @Jump.canceled += instance.OnJump;
+                    @Dash.started += instance.OnDash;
+                    @Dash.performed += instance.OnDash;
+                    @Dash.canceled += instance.OnDash;
+                    @Use.started += instance.OnUse;
+                    @Use.performed += instance.OnUse;
+                    @Use.canceled += instance.OnUse;
+                }
             }
         }
-    }
-    public GamePlayActions @GamePlay => new GamePlayActions(this);
-    public interface IGamePlayActions
-    {
-        void OnMove(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
-        void OnDash(InputAction.CallbackContext context);
-        void OnUse(InputAction.CallbackContext context);
+        public GamePlayActions @GamePlay => new GamePlayActions(this);
+
+        // UI
+        private readonly InputActionMap m_UI;
+        private IUIActions m_UIActionsCallbackInterface;
+        private readonly InputAction m_UI_Certain;
+        public struct UIActions
+        {
+            private @PlayerControl m_Wrapper;
+            public UIActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Certain => m_Wrapper.m_UI_Certain;
+            public InputActionMap Get() { return m_Wrapper.m_UI; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+            public void SetCallbacks(IUIActions instance)
+            {
+                if (m_Wrapper.m_UIActionsCallbackInterface != null)
+                {
+                    @Certain.started -= m_Wrapper.m_UIActionsCallbackInterface.OnCertain;
+                    @Certain.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnCertain;
+                    @Certain.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnCertain;
+                }
+                m_Wrapper.m_UIActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Certain.started += instance.OnCertain;
+                    @Certain.performed += instance.OnCertain;
+                    @Certain.canceled += instance.OnCertain;
+                }
+            }
+        }
+        public UIActions @UI => new UIActions(this);
+        public interface IGamePlayActions
+        {
+            void OnMove(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
+            void OnDash(InputAction.CallbackContext context);
+            void OnUse(InputAction.CallbackContext context);
+        }
+        public interface IUIActions
+        {
+            void OnCertain(InputAction.CallbackContext context);
+        }
     }
 }

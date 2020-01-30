@@ -9,7 +9,7 @@ namespace CJStudio.Dash {
 
     using UnityEngine.UI;
     using UnityEngine;
-    
+
     class UIController : TSingletonMonoBehavior<UIController> {
         P.Player player = null;
         [SerializeField] SpriteRenderer arrowSprite = null;
@@ -48,12 +48,17 @@ namespace CJStudio.Dash {
             noobImage.enabled = true;
         }
 
+        void OnStageReset (OnStageReset e) {
+            noobImage.enabled = false;
+        }
+
         void OnEnable ( ) {
             if (arrowSprite != null && player != null) {
                 player.Dash.Aim += OnDashPrepare;
                 player.Dash.AimEnded += OnDashEnded;
                 player.Dash.EnergyChange += OnEnergyChange;
                 DomainEvents.Register<OnPlayerDead> (OnPlayerDead);
+                DomainEvents.Register<OnStageReset> (OnStageReset);
             }
         }
 
@@ -63,6 +68,7 @@ namespace CJStudio.Dash {
                 player.Dash.AimEnded -= OnDashEnded;
                 player.Dash.EnergyChange -= OnEnergyChange;
                 DomainEvents.Unregister<OnPlayerDead> (OnPlayerDead);
+                DomainEvents.Unregister<OnStageReset> (OnStageReset);
             }
         }
     }

@@ -227,6 +227,44 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "41b25908-6d71-401c-bb32-afa83d2161d6",
+            "actions": [
+                {
+                    "name": "Certain",
+                    "type": "Button",
+                    "id": "d16656d1-f063-4ddf-9887-9e38f53a3f64",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ad029d91-f0e0-425c-8a2e-27fe2ff99bf6",
+                    "path": "<DualShockGamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Certain",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6d22d60-3a84-4c43-9e1d-1ef6c9795fa8",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Certain",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
