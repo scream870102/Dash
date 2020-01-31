@@ -59,7 +59,6 @@ namespace CJStudio.Dash.Player {
             Vector2 nVel = Player.Rb.velocity;
             if (rayCastController.Down) {
                 nVel.x = inputValue.x * stats.NormalVel * Time.deltaTime;
-                Debug.Log (nVel.x);
             }
             else {
                 nVel.x += inputValue.x * stats.AirVel * Time.deltaTime;

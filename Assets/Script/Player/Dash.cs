@@ -1,5 +1,5 @@
 ﻿namespace CJStudio.Dash.Player {
-    using System.Collections.Generic;
+    using CJStudio.Dash.Camera;
 
     using Eccentric.Utils;
 
@@ -107,6 +107,7 @@
                 timer.Reset (stats.AnimTime);
                 AimAnimEnded ( );
                 Player.Anim.SetBool ("dash", true);
+                GameManager.Instance.CameraController.ShakeCamera (stats.DashShakeProps);
             }
         }
 
@@ -143,6 +144,7 @@
             charge = stats.MinCharge;
             velocity = 0f;
             direction = Vector2.zero;
+            //GameManager.Instance.CameraController.DisableCameraShake ( );
             Time.timeScale = normalTimeScale;
             AimAnimEnded ( );
         }
@@ -163,6 +165,7 @@
             if (!bUsingDash && bCanDash) {
                 ResetState ( );
                 bAim = true;
+                //GameManager.Instance.CameraController.SetCameraShake (stats.AimShakeProps);
                 Player.Anim.SetBool ("aim", true);
                 timer.Reset (stats.BasicChargeTime);
                 direction = ctx.ReadValue<Vector2> ( ).normalized;
@@ -209,6 +212,8 @@
         public float AimTimeScale = .01f;
         public LayerMask BreakableItemLayer = 0;
         public float RayForBreakableItem = 1.0f;
+        public CameraShakeProps DashShakeProps = null;
+        //public CameraShakeProps AimShakeProps = null;
     }
     class DashProps {
         public float Charge { get; set; }

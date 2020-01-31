@@ -1,10 +1,14 @@
 namespace CJStudio.Dash {
+    using Camera;
+
     using Eccentric.Utils;
 
     using UnityEngine;
     class GameManager : TSingletonMonoBehavior<GameManager> {
         StageController stageController = null;
+        [SerializeField] CameraController cameraController = null;
         public StageController StageController => stageController;
+        public CameraController CameraController => cameraController;
         Player.Player player = null;
         public Player.Player Player {
             get {
@@ -18,7 +22,6 @@ namespace CJStudio.Dash {
             base.Awake ( );
             stageController = new StageController ( );
         }
-
     }
 
 }
