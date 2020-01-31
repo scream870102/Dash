@@ -25,6 +25,7 @@
         float velocity = 0f;
         Vector2 direction = Vector2.zero;
         float normalTimeScale = 0f;
+        float chargeJudge = 0f;
         public Dash (Player player, DashStats stats) : base (player) {
             this.stats = stats;
             energy = stats.BasicEnergy;
@@ -34,6 +35,7 @@
             EnergyChanging ( );
             props.MaxCharge = stats.MaxCharge;
             props.MaxEnergy = stats.BasicEnergy;
+            chargeJudge = 0.5f * (stats.MinCharge + stats.MaxCharge) / stats.MaxCharge;
         }
 
         override public void Tick ( ) {
@@ -98,7 +100,8 @@
         void UseDash ( ) {
             if (bAim && !bUsingDash) {
                 Time.timeScale = normalTimeScale;
-                float distance = stats.ChargeMultiplier * charge / stats.MaxCharge;
+                float chargeRatio = charge / stats.MaxCharge;
+                float distance = chargeRatio * (chargeRatio >= chargeJudge?stats.MaxChargeMultiplier : stats.MinChargeMultiplier);
                 velocity = distance / stats.AnimTime;
                 bUsingDash = true;
                 timer.Reset (stats.AnimTime);
@@ -198,9 +201,10 @@
     class DashStats : PlayerStats {
         public float BasicChargeTime => MaxCharge - MinCharge;
         public float MinCharge = 1f;
-        public float MaxCharge = 5f;
+        public float MaxCharge = 2f;
         public float BasicEnergy = 10f;
-        public float ChargeMultiplier = 0f;
+        public float MaxChargeMultiplier = 10f;
+        public float MinChargeMultiplier = 5f;
         public float AnimTime = .3f;
         public float AimTimeScale = .01f;
         public LayerMask BreakableItemLayer = 0;

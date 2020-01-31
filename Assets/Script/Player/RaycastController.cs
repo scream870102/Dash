@@ -27,6 +27,15 @@ class RayCastController {
     public bool Left => info.left;
     public bool IsCollide => (Up || Down || Right || Left);
     public List<HitResult> Result => result;
+    
+    public RayCastController (LayerMask layers, Vector2 rayNums, float offset, float rayLength, BoxCollider2D collider2D) {
+        this.layers = layers;
+        this.rayNums = rayNums;
+        this.offset = offset;
+        this.rayLength = rayLength;
+        Init (collider2D);
+    }
+
     public void Init (BoxCollider2D collider2D) {
         col = collider2D;
         points = new RayCastPoint ( );

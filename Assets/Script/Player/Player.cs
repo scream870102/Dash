@@ -86,6 +86,7 @@
         public void SetSaveData (SaveData data) {
             Movement.SetSaveData (data);
             Dash.SetSaveData (data);
+            rb.velocity = Vector2.zero;
         }
         void OnCertainPressed (InputAction.CallbackContext ctx) {
             playerControl.UI.Disable ( );

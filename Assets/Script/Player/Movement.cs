@@ -37,7 +37,7 @@ namespace CJStudio.Dash.Player {
             else
                 Player.Rb.gravityScale = originGravity;
             #region ANIMATOR_PAPAMETER
-            Player.Anim.SetFloat ("velX", Mathf.Abs (Player.Rb.velocity.x));
+            Player.Anim.SetFloat ("velX", Mathf.Abs (inputValue.x));
             Player.Anim.SetFloat ("velY", Player.Rb.velocity.y);
             Player.Anim.SetBool ("wallSlide", bWallSliding);
             #endregion
@@ -59,6 +59,7 @@ namespace CJStudio.Dash.Player {
             Vector2 nVel = Player.Rb.velocity;
             if (rayCastController.Down) {
                 nVel.x = inputValue.x * stats.NormalVel * Time.deltaTime;
+                Debug.Log (nVel.x);
             }
             else {
                 nVel.x += inputValue.x * stats.AirVel * Time.deltaTime;

@@ -2624,7 +2624,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayCastController:
-    result: []
+    result:
+    - direction: 0
     info:
       up: 0
       down: 0
@@ -2645,11 +2646,12 @@ MonoBehaviour:
     WallSlidingGravityMultiplier: 0.02
   dashStats:
     MinCharge: 1
-    MaxCharge: 5
+    MaxCharge: 2
     BasicEnergy: 10
-    ChargeMultiplier: 10
+    MaxChargeMultiplier: 10
+    MinChargeMultiplier: 5
     AnimTime: 0.3
-    AimTimeScale: 0.01
+    AimTimeScale: 0.05
     BreakableItemLayer:
       serializedVersion: 2
       m_Bits: 1024
