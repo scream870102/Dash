@@ -1,7 +1,4 @@
 namespace CJStudio.Dash {
-    using System.Collections.Generic;
-
-    using Eccentric.Utils;
     using Eccentric;
 
     using P = Player;
@@ -10,19 +7,23 @@ namespace CJStudio.Dash {
     using UnityEngine.UI;
     using UnityEngine;
 
-    class UIController : TSingletonMonoBehavior<UIController> {
+    class UIController : MonoBehaviour {
         P.Player player = null;
         [SerializeField] SpriteRenderer arrowSprite = null;
         [SerializeField] GameObject dashUI = null;
         [SerializeField] RectTransform energyBar = null;
         [SerializeField] RawImage noobImage = null;
+        [SerializeField] GameObject endObject = null;
+        [SerializeField] Text elapsedTimeText = null;
+        [SerializeField] Text timeText = null;
         float energyBarMaxHeight = 0f;
-        override protected void Awake ( ) {
-            base.Awake ( );
+        void Awake ( ) {
             if (energyBar)
                 energyBarMaxHeight = energyBar.sizeDelta.y;
             player = GameManager.Instance.Player;
             noobImage.enabled = false;
+            endObject.SetActive (false);
+
         }
 
         void OnDashPrepare (DashProps e) {
@@ -44,6 +45,10 @@ namespace CJStudio.Dash {
             energyBar.sizeDelta = new Vector2 (energyBar.sizeDelta.x, ratio);
         }
 
+        void OnElapsedTimeChange (float elapsedTime) {
+            elapsedTimeText.text = elapsedTime.ToString ("0.00");
+        }
+
         void OnPlayerDead (OnPlayerDead e) {
             noobImage.enabled = true;
         }
@@ -52,23 +57,34 @@ namespace CJStudio.Dash {
             noobImage.enabled = false;
         }
 
+        void OnGoalReached (float time) {
+            endObject.SetActive (true);
+            timeText.text = time.ToString ("0.00");
+        }
+
         void OnEnable ( ) {
-            if (arrowSprite != null && player != null) {
-                player.Dash.Aim += OnDashPrepare;
-                player.Dash.AimEnded += OnDashEnded;
-                player.Dash.EnergyChange += OnEnergyChange;
-                DomainEvents.Register<OnPlayerDead> (OnPlayerDead);
-                DomainEvents.Register<OnStageReset> (OnStageReset);
+            player.Dash.Aim += OnDashPrepare;
+            player.Dash.AimEnded += OnDashEnded;
+            player.Dash.EnergyChange += OnEnergyChange;
+            DomainEvents.Register<OnPlayerDead> (OnPlayerDead);
+            DomainEvents.Register<OnStageReset> (OnStageReset);
+            GameController gameController = GameObject.FindObjectOfType<GameController> ( );
+            if (gameController) {
+                gameController.GoalReached += OnGoalReached;
+                gameController.ElapsedTimeChange += OnElapsedTimeChange;
             }
         }
 
         void OnDisable ( ) {
-            if (arrowSprite != null && player != null) {
-                player.Dash.Aim -= OnDashPrepare;
-                player.Dash.AimEnded -= OnDashEnded;
-                player.Dash.EnergyChange -= OnEnergyChange;
-                DomainEvents.Unregister<OnPlayerDead> (OnPlayerDead);
-                DomainEvents.Unregister<OnStageReset> (OnStageReset);
+            player.Dash.Aim -= OnDashPrepare;
+            player.Dash.AimEnded -= OnDashEnded;
+            player.Dash.EnergyChange -= OnEnergyChange;
+            DomainEvents.UnRegister<OnPlayerDead> (OnPlayerDead);
+            DomainEvents.UnRegister<OnStageReset> (OnStageReset);
+            GameController gameController = GameObject.FindObjectOfType<GameController> ( );
+            if (gameController) {
+                gameController.GoalReached -= OnGoalReached;
+                gameController.ElapsedTimeChange -= OnElapsedTimeChange;
             }
         }
     }

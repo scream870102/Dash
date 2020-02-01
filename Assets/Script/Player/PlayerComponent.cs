@@ -7,7 +7,7 @@ namespace CJStudio.Dash.Player {
         public PlayerControl Control => control;
         public PlayerComponent (Player player) {
             this.player = player;
-            this.control = player.PlayerControl;
+            this.control = player.Control;
         }
         public virtual void Tick ( ) { }
         public virtual void FixedTick ( ) { }

@@ -11,13 +11,12 @@
         Transform tf = null;
         Animator anim = null;
         SpriteRenderer rend = null;
-        PlayerControl playerControl = null;
+        GameController gameController = null;
         [SerializeField] RayCastController rayCastController = null;
         #region STATS
         [SerializeField] MovementStats movementStats = null;
         [SerializeField] DashStats dashStats = null;
         #endregion
-        public PlayerControl PlayerControl => playerControl;
         public RayCastController RayCastController => rayCastController;
         public Rigidbody2D Rb => rb;
         public Transform Tf => tf;
@@ -26,8 +25,14 @@
         public Dash Dash => components [1] as Dash;
         public Movement Movement => components [0] as Movement;
         public bool IsDashing => Dash.IsDashing;
+        public PlayerControl Control => GameManager.Instance.Control;
+        public GameController GameController {
+            get {
+                if (gameController)return gameController;
+                return gameController = GameObject.FindObjectOfType<GameController> ( )as GameController;
+            }
+        }
         void Awake ( ) {
-            playerControl = new PlayerControl ( );
             rb = GetComponent<Rigidbody2D> ( );
             anim = GetComponent<Animator> ( );
             rend = GetComponent<SpriteRenderer> ( );
@@ -37,17 +42,16 @@
         }
 
         void OnEnable ( ) {
-            PlayerControl.UI.Certain.performed += OnCertainPressed;
-            playerControl.UI.Disable ( );
-            playerControl.GamePlay.Enable ( );
+            Control.UI.Confirm.performed += OnConfirmPressed;
+            Control.Disable ( );
+            Control.GamePlay.Enable ( );
             foreach (PlayerComponent o in components)
                 o.OnEnable ( );
         }
 
         void OnDisable ( ) {
-            PlayerControl.UI.Certain.performed -= OnCertainPressed;
-            playerControl.GamePlay.Disable ( );
-            playerControl.UI.Disable ( );
+            Control.UI.Confirm.performed -= OnConfirmPressed;
+            Control.Disable ( );
             foreach (PlayerComponent o in components)
                 o.OnDisable ( );
         }
@@ -79,8 +83,8 @@
 
         public void OnDieAnimFined ( ) {
             DomainEvents.Raise (new OnPlayerDead ( ));
-            playerControl.GamePlay.Disable ( );
-            playerControl.UI.Enable ( );
+            Control.Disable ( );
+            Control.UI.Enable ( );
         }
 
         public void SetSaveData (SaveData data) {
@@ -88,9 +92,9 @@
             Dash.SetSaveData (data);
             rb.velocity = Vector2.zero;
         }
-        void OnCertainPressed (InputAction.CallbackContext ctx) {
-            playerControl.UI.Disable ( );
-            playerControl.GamePlay.Enable ( );
+        void OnConfirmPressed (InputAction.CallbackContext ctx) {
+            Control.Disable ( );
+            Control.GamePlay.Enable ( );
             DomainEvents.Raise (new OnStageReset ( ));
         }
 

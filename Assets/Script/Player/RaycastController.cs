@@ -136,7 +136,7 @@ public class RayCastInfo {
 }
 
 [System.Serializable]
-public class HitResult {
+class HitResult {
     public RaycastHit2D hit2D;
     public EHitDirection direction = EHitDirection.NONE;
     public HitResult (RaycastHit2D hit2D, EHitDirection direction) {

@@ -18,7 +18,7 @@
                 actions.Add (callback);
         }
 
-        public static void Unregister<T> (Action<T> callback)where T : IDomainEvent {
+        public static void UnRegister<T> (Action<T> callback)where T : IDomainEvent {
             if (m_actionsByType == null) {
                 return;
             }

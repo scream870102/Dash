@@ -1,14 +1,14 @@
 namespace CJStudio.Dash {
-    using Camera;
+    using System;
 
     using Eccentric.Utils;
+    using Eccentric;
 
+    using UnityEngine.SceneManagement;
     using UnityEngine;
     class GameManager : TSingletonMonoBehavior<GameManager> {
-        StageController stageController = null;
-        [SerializeField] CameraController cameraController = null;
-        public StageController StageController => stageController;
-        public CameraController CameraController => cameraController;
+        PlayerControl control = null;
+        public PlayerControl Control => control;
         Player.Player player = null;
         public Player.Player Player {
             get {
@@ -20,8 +20,27 @@ namespace CJStudio.Dash {
         }
         override protected void Awake ( ) {
             base.Awake ( );
-            stageController = new StageController ( );
+            control = new PlayerControl ( );
         }
+        void OnEnable ( ) {
+            DomainEvents.Register<OnGameStarted> (OnGameStarted);
+        }
+        void OnDisable ( ) {
+            DomainEvents.UnRegister<OnGameStarted> (OnGameStarted);
+        }
+        void OnGameStarted (OnGameStarted e) {
+            GameObject.FindObjectOfType<GameController> ( ).GameEnded += OnGameEnded;
+        }
+
+        void OnGameEnded ( ) {
+            Debug.Log ("GameEnd");
+            GameObject.FindObjectOfType<GameController> ( ).GameEnded -= OnGameEnded;
+            SceneManager.LoadScene ("TitleScene");
+        }
+        public void LoadScene (string name) {
+            SceneManager.LoadScene (name);
+        }
+
     }
 
 }

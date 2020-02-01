@@ -32,7 +32,7 @@
 
         void OnTriggerEnter2D (Collider2D other) {
             if (other.gameObject.tag == "Player") {
-                GameManager.Instance.StageController.SetSavePoint (this, other.GetComponent<P.Player> ( ));
+                GameManager.Instance.Player.GameController.StageController.SetSavePoint (this, other.GetComponent<P.Player> ( ));
             }
         }
     }

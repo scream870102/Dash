@@ -245,12 +245,28 @@ namespace CJStudio.Dash
         },
         {
             ""name"": ""UI"",
-            ""id"": ""41b25908-6d71-401c-bb32-afa83d2161d6"",
+            ""id"": ""ef56a287-1935-43c5-b1d1-c47020e1ff91"",
             ""actions"": [
                 {
-                    ""name"": ""Certain"",
+                    ""name"": ""Choose"",
+                    ""type"": ""Value"",
+                    ""id"": ""34c944aa-1432-4456-85df-93f52d63da46"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Cancel"",
                     ""type"": ""Button"",
-                    ""id"": ""d16656d1-f063-4ddf-9887-9e38f53a3f64"",
+                    ""id"": ""3bfaa53d-9202-4187-80b1-9d58fb25d757"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""3691cb56-5925-425f-b518-03ef67e0d549"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -259,23 +275,45 @@ namespace CJStudio.Dash
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""ad029d91-f0e0-425c-8a2e-27fe2ff99bf6"",
-                    ""path"": ""<DualShockGamepad>/buttonEast"",
+                    ""id"": ""edaf3a9e-edbb-4224-ae93-95ea013940b2"",
+                    ""path"": ""<DualShockGamepad>/leftStick/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Certain"",
+                    ""action"": ""Choose"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d6d22d60-3a84-4c43-9e1d-1ef6c9795fa8"",
-                    ""path"": ""<Keyboard>/anyKey"",
+                    ""id"": ""4a3e0a8a-8782-41dc-8c1a-d156873344bc"",
+                    ""path"": ""<Gamepad>/dpad/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Certain"",
+                    ""action"": ""Choose"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""289cc8a4-3711-418f-b801-96116d15405f"",
+                    ""path"": ""<DualShockGamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e06676d-c917-4dba-a11a-4b8d76b6e62d"",
+                    ""path"": ""<DualShockGamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -292,7 +330,9 @@ namespace CJStudio.Dash
             m_GamePlay_Use = m_GamePlay.FindAction("Use", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-            m_UI_Certain = m_UI.FindAction("Certain", throwIfNotFound: true);
+            m_UI_Choose = m_UI.FindAction("Choose", throwIfNotFound: true);
+            m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
+            m_UI_Confirm = m_UI.FindAction("Confirm", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -399,12 +439,16 @@ namespace CJStudio.Dash
         // UI
         private readonly InputActionMap m_UI;
         private IUIActions m_UIActionsCallbackInterface;
-        private readonly InputAction m_UI_Certain;
+        private readonly InputAction m_UI_Choose;
+        private readonly InputAction m_UI_Cancel;
+        private readonly InputAction m_UI_Confirm;
         public struct UIActions
         {
             private @PlayerControl m_Wrapper;
             public UIActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Certain => m_Wrapper.m_UI_Certain;
+            public InputAction @Choose => m_Wrapper.m_UI_Choose;
+            public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
+            public InputAction @Confirm => m_Wrapper.m_UI_Confirm;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -414,16 +458,28 @@ namespace CJStudio.Dash
             {
                 if (m_Wrapper.m_UIActionsCallbackInterface != null)
                 {
-                    @Certain.started -= m_Wrapper.m_UIActionsCallbackInterface.OnCertain;
-                    @Certain.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnCertain;
-                    @Certain.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnCertain;
+                    @Choose.started -= m_Wrapper.m_UIActionsCallbackInterface.OnChoose;
+                    @Choose.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnChoose;
+                    @Choose.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnChoose;
+                    @Cancel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
+                    @Cancel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
+                    @Cancel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
+                    @Confirm.started -= m_Wrapper.m_UIActionsCallbackInterface.OnConfirm;
+                    @Confirm.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnConfirm;
+                    @Confirm.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnConfirm;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
                 {
-                    @Certain.started += instance.OnCertain;
-                    @Certain.performed += instance.OnCertain;
-                    @Certain.canceled += instance.OnCertain;
+                    @Choose.started += instance.OnChoose;
+                    @Choose.performed += instance.OnChoose;
+                    @Choose.canceled += instance.OnChoose;
+                    @Cancel.started += instance.OnCancel;
+                    @Cancel.performed += instance.OnCancel;
+                    @Cancel.canceled += instance.OnCancel;
+                    @Confirm.started += instance.OnConfirm;
+                    @Confirm.performed += instance.OnConfirm;
+                    @Confirm.canceled += instance.OnConfirm;
                 }
             }
         }
@@ -437,7 +493,9 @@ namespace CJStudio.Dash
         }
         public interface IUIActions
         {
-            void OnCertain(InputAction.CallbackContext context);
+            void OnChoose(InputAction.CallbackContext context);
+            void OnCancel(InputAction.CallbackContext context);
+            void OnConfirm(InputAction.CallbackContext context);
         }
     }
 }

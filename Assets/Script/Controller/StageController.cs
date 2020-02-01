@@ -5,12 +5,15 @@ namespace CJStudio.Dash {
         Stage currentStage = null;
         SaveData playerData = null;
         P.Player player = null;
-        public StageController ( ) {
+        public StageController (Stage initStage) {
             DomainEvents.Register<OnStageReset> (OnStageReset);
+            currentStage = initStage;
+            player = GameManager.Instance.Player;
+            playerData = new SaveData (GameManager.Instance.Player.Dash.Energy);
         }
 
         ~StageController ( ) {
-            DomainEvents.Unregister<OnStageReset> (OnStageReset);
+            DomainEvents.UnRegister<OnStageReset> (OnStageReset);
         }
 
         void OnStageReset (OnStageReset e) {
@@ -26,7 +29,7 @@ namespace CJStudio.Dash {
         }
         void LoadSavePoint ( ) {
             if (currentStage) {
-                currentStage.EnableStage ();
+                currentStage.EnableStage ( );
                 //set player data
                 player.SetSaveData (playerData);
                 player.Tf.position = currentStage.StagePosition;

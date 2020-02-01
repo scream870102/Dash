@@ -12,7 +12,7 @@ namespace Eccentric.Utils {
         protected virtual void Awake ( ) {
             if (instance == null)instance = this as T;
             if (instance == this)DontDestroyOnLoad (this);
-            else Destroy (this);
+            else DestroyImmediate (this);
         }
 
         protected virtual void OnDestroy ( ) {

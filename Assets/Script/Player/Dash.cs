@@ -107,7 +107,8 @@
                 timer.Reset (stats.AnimTime);
                 AimAnimEnded ( );
                 Player.Anim.SetBool ("dash", true);
-                GameManager.Instance.CameraController.ShakeCamera (stats.DashShakeProps);
+                Player.GameController.CameraController.ShakeCamera (stats.DashShakeProps);
+                Player.Rb.velocity = Vector2.zero;
             }
         }
 
@@ -144,7 +145,7 @@
             charge = stats.MinCharge;
             velocity = 0f;
             direction = Vector2.zero;
-            //GameManager.Instance.CameraController.DisableCameraShake ( );
+            Player.GameController.CameraController.DisableCameraShake ( );
             Time.timeScale = normalTimeScale;
             AimAnimEnded ( );
         }
@@ -165,7 +166,7 @@
             if (!bUsingDash && bCanDash) {
                 ResetState ( );
                 bAim = true;
-                //GameManager.Instance.CameraController.SetCameraShake (stats.AimShakeProps);
+                Player.GameController.CameraController.SetCameraShake (stats.AimShakeProps);
                 Player.Anim.SetBool ("aim", true);
                 timer.Reset (stats.BasicChargeTime);
                 direction = ctx.ReadValue<Vector2> ( ).normalized;
@@ -213,7 +214,7 @@
         public LayerMask BreakableItemLayer = 0;
         public float RayForBreakableItem = 1.0f;
         public CameraShakeProps DashShakeProps = null;
-        //public CameraShakeProps AimShakeProps = null;
+        public CameraShakeProps AimShakeProps = null;
     }
     class DashProps {
         public float Charge { get; set; }
