@@ -54,14 +54,15 @@
             Control.UI.Enable ( );
         }
         void OnConfirmPressed (InputAction.CallbackContext ctx) {
+            if (state == EGameState.WAITING)
+                GameManager.Instance.LoadScene ("GameScene");
+        }
+
+        void OnCancelPressed (InputAction.CallbackContext ctx) {
             if (state == EGameState.WAITING) {
                 if (GameEnded != null)
                     GameEnded ( );
             }
-        }
-
-        void OnCancelPressed (InputAction.CallbackContext ctx) {
-            GameManager.Instance.LoadScene ("GameScene");
         }
     }
     class OnGoalReached : IDomainEvent {

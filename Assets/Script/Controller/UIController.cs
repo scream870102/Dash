@@ -12,7 +12,7 @@ namespace CJStudio.Dash {
         [SerializeField] SpriteRenderer arrowSprite = null;
         [SerializeField] GameObject dashUI = null;
         [SerializeField] RectTransform energyBar = null;
-        [SerializeField] RawImage noobImage = null;
+        [SerializeField] GameObject noobImage = null;
         [SerializeField] GameObject endObject = null;
         [SerializeField] Text elapsedTimeText = null;
         [SerializeField] Text timeText = null;
@@ -21,7 +21,7 @@ namespace CJStudio.Dash {
             if (energyBar)
                 energyBarMaxHeight = energyBar.sizeDelta.y;
             player = GameManager.Instance.Player;
-            noobImage.enabled = false;
+            noobImage.SetActive (false);
             endObject.SetActive (false);
 
         }
@@ -50,11 +50,11 @@ namespace CJStudio.Dash {
         }
 
         void OnPlayerDead (OnPlayerDead e) {
-            noobImage.enabled = true;
+            noobImage.SetActive (true);
         }
 
         void OnStageReset (OnStageReset e) {
-            noobImage.enabled = false;
+            noobImage.SetActive (false);
         }
 
         void OnGoalReached (float time) {

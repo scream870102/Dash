@@ -4,13 +4,19 @@
     using Eccentric;
 
     using UnityEngine.InputSystem;
+    using UnityEngine.UI;
     using UnityEngine;
     class Player : MonoBehaviour {
+        #region TEST
+        public Text deltaText = null;
+        #endregion
         List<PlayerComponent> components = new List<PlayerComponent> ( );
         Rigidbody2D rb = null;
         Transform tf = null;
         Animator anim = null;
         SpriteRenderer rend = null;
+        TrailRenderer trail = null;
+        ParticleSystem particle = null;
         GameController gameController = null;
         [SerializeField] RayCastController rayCastController = null;
         #region STATS
@@ -22,10 +28,12 @@
         public Transform Tf => tf;
         public Animator Anim => anim;
         public SpriteRenderer Rend => rend;
+        public TrailRenderer Trail => trail;
+        public ParticleSystem Particle => particle;
         public Dash Dash => components [1] as Dash;
         public Movement Movement => components [0] as Movement;
-        public bool IsDashing => Dash.IsDashing;
         public PlayerControl Control => GameManager.Instance.Control;
+        public bool IsDashing => Dash.IsDashing;
         public GameController GameController {
             get {
                 if (gameController)return gameController;
@@ -36,6 +44,10 @@
             rb = GetComponent<Rigidbody2D> ( );
             anim = GetComponent<Animator> ( );
             rend = GetComponent<SpriteRenderer> ( );
+            trail = GetComponentInChildren<TrailRenderer> ( );
+            particle = GetComponentInChildren<ParticleSystem> ( );
+            particle.Clear ( );
+            particle.Stop ( );
             tf = this.transform;
             components.Add (new Movement (this, movementStats));
             components.Add (new Dash (this, dashStats));
@@ -43,6 +55,7 @@
 
         void OnEnable ( ) {
             Control.UI.Confirm.performed += OnConfirmPressed;
+            Control.UI.Cancel.performed += OnCancelPressed;
             Control.Disable ( );
             Control.GamePlay.Enable ( );
             foreach (PlayerComponent o in components)
@@ -51,6 +64,7 @@
 
         void OnDisable ( ) {
             Control.UI.Confirm.performed -= OnConfirmPressed;
+            Control.UI.Cancel.performed -= OnCancelPressed;
             Control.Disable ( );
             foreach (PlayerComponent o in components)
                 o.OnDisable ( );
@@ -78,6 +92,7 @@
         void OnTriggerEnter2D (Collider2D other) {
             if (other.gameObject.layer == (int)LayerMask.NameToLayer ("DeadZone")) {
                 Anim.SetTrigger ("die");
+                Control.Disable ( );
             }
         }
 
@@ -96,6 +111,10 @@
             Control.Disable ( );
             Control.GamePlay.Enable ( );
             DomainEvents.Raise (new OnStageReset ( ));
+        }
+        void OnCancelPressed (InputAction.CallbackContext ctx) {
+            Control.Disable ( );
+            GameManager.Instance.LoadScene ("TitleScene");
         }
 
     }

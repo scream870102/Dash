@@ -109,6 +109,7 @@
                 Player.Anim.SetBool ("dash", true);
                 Player.GameController.CameraController.ShakeCamera (stats.DashShakeProps);
                 Player.Rb.velocity = Vector2.zero;
+                Player.Trail.enabled = true;
             }
         }
 
@@ -148,6 +149,7 @@
             Player.GameController.CameraController.DisableCameraShake ( );
             Time.timeScale = normalTimeScale;
             AimAnimEnded ( );
+            Player.Trail.enabled = false;
         }
 
         //Check if player bomb into any collider which can reset its dash state

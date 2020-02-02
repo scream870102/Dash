@@ -30,6 +30,12 @@ namespace CJStudio.Dash.Player {
             CheckCollision ( );
             Move ( );
             Jump ( );
+            if (bWallSliding)
+                Player.Particle.Play ( );
+            else {
+                Player.Particle.Clear ( );
+                Player.Particle.Pause ( );
+            }
             if (Player.Rb.velocity.y <= 0f && !bWallSliding)
                 Player.Rb.gravityScale = originGravity * stats.FallGravityMultiplier;
             else if (bWallSliding && Player.Rb.velocity.y <= 0f)
@@ -50,6 +56,9 @@ namespace CJStudio.Dash.Player {
                 Render.ChangeDirectionXWithSpriteRender (bFaceRight, Player.Rend, true);
             }
             #endregion
+            #region TEST
+            Player.deltaText.text = "fps:" + (1f / Time.unscaledDeltaTime).ToString ("0") + "\nVel:" + Player.Rb.velocity.x.ToString ("0.00") + "\nInput:" + inputValue.x.ToString ("0.00");
+            #endregion
 
         }
 
@@ -58,14 +67,15 @@ namespace CJStudio.Dash.Player {
         void Move ( ) {
             Vector2 nVel = Player.Rb.velocity;
             if (rayCastController.Down) {
-                nVel.x = inputValue.x * stats.NormalVel * Time.deltaTime;
+                nVel.x = inputValue.x * stats.NormalVel;
             }
             else {
-                nVel.x += inputValue.x * stats.AirVel * Time.deltaTime;
-                nVel.x = Mathf.Clamp (nVel.x, -stats.NormalVel * Time.deltaTime, stats.NormalVel * Time.deltaTime);
+                nVel.x += inputValue.x * stats.AirVel;
+                nVel.x = Mathf.Clamp (nVel.x, -stats.NormalVel, stats.NormalVel);
                 nVel.x = Mathf.SmoothDamp (Player.Rb.velocity.x, nVel.x, ref velocityXSmoothing, smoothTime);
             }
             Player.Rb.velocity = nVel;
+
         }
 
         void Jump ( ) {
@@ -91,11 +101,14 @@ namespace CJStudio.Dash.Player {
         }
 
         void CheckCollision ( ) {
+            bool preWallSlide = bWallSliding;
             bCanJump = false;
             bWallSliding = false;
             if ((rayCastController.Left || rayCastController.Right) && !rayCastController.Down) {
                 bWallSliding = true;
                 bCanJump = true;
+                if (!preWallSlide)
+                    Player.Rb.velocity = new Vector2 (Player.Rb.velocity.x, 0f);
             }
             if (rayCastController.Down)
                 bCanJump = true;

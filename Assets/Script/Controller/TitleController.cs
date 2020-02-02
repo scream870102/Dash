@@ -12,6 +12,7 @@
         [SerializeField] ConsoleButton buttons;
         [SerializeField] Color activeColor;
         [SerializeField] Color deactiveColor;
+        [SerializeField] GameObject tutorialObject = null;
         PlayerControl Control => GameManager.Instance.Control;
         void Awake ( ) { }
         void OnEnable ( ) {
@@ -23,6 +24,7 @@
             Control.UI.Confirm.started += OnConfirmPressed;
             Control.Disable ( );
             Control.UI.Enable ( );
+            tutorialObject.SetActive (false);
         }
 
         void OnDisable ( ) {
@@ -38,7 +40,7 @@
             SceneManager.LoadScene ("GameScene");
         }
         public void OnTutorialPressed ( ) {
-            Debug.Log ("Tutorial");
+            tutorialObject.SetActive (true);
         }
 
         public void OnExitPressed ( ) {
@@ -63,7 +65,10 @@
         }
 
         void OnConfirmPressed (InputAction.CallbackContext ctx) {
-            buttons.Invoke ( );
+            if (!tutorialObject.activeInHierarchy)
+                buttons.Invoke ( );
+            else
+                tutorialObject.SetActive (false);
         }
     }
 

@@ -33,7 +33,6 @@ namespace CJStudio.Dash {
         }
 
         void OnGameEnded ( ) {
-            Debug.Log ("GameEnd");
             GameObject.FindObjectOfType<GameController> ( ).GameEnded -= OnGameEnded;
             SceneManager.LoadScene ("TitleScene");
         }
