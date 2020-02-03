@@ -30,7 +30,7 @@
             state = EGameState.PLAYING;
         }
         void Update ( ) {
-            elapsedTime += Time.unscaledDeltaTime;
+            elapsedTime += Time.deltaTime;
             if (ElapsedTimeChange != null)
                 ElapsedTimeChange (elapsedTime);
         }

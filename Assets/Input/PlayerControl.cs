@@ -37,7 +37,7 @@ namespace CJStudio.Dash
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Dash"",
+                    ""name"": ""Aim"",
                     ""type"": ""Value"",
                     ""id"": ""684986ca-c1ea-4fa0-a44a-581ee49ee5d8"",
                     ""expectedControlType"": ""Vector2"",
@@ -45,7 +45,7 @@ namespace CJStudio.Dash
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Use"",
+                    ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""6ed0a2bf-5afe-4a0a-8047-3473ab6f600c"",
                     ""expectedControlType"": """",
@@ -149,7 +149,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -160,7 +160,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -171,7 +171,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -182,7 +182,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -193,7 +193,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -204,7 +204,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -215,7 +215,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -226,7 +226,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -237,7 +237,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -248,7 +248,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -259,7 +259,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -270,7 +270,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Use"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -281,7 +281,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Use"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -292,7 +292,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Use"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -303,7 +303,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Use"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -314,7 +314,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Use"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -458,8 +458,8 @@ namespace CJStudio.Dash
             m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
             m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
             m_GamePlay_Jump = m_GamePlay.FindAction("Jump", throwIfNotFound: true);
+            m_GamePlay_Aim = m_GamePlay.FindAction("Aim", throwIfNotFound: true);
             m_GamePlay_Dash = m_GamePlay.FindAction("Dash", throwIfNotFound: true);
-            m_GamePlay_Use = m_GamePlay.FindAction("Use", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Choose = m_UI.FindAction("Choose", throwIfNotFound: true);
@@ -516,16 +516,16 @@ namespace CJStudio.Dash
         private IGamePlayActions m_GamePlayActionsCallbackInterface;
         private readonly InputAction m_GamePlay_Move;
         private readonly InputAction m_GamePlay_Jump;
+        private readonly InputAction m_GamePlay_Aim;
         private readonly InputAction m_GamePlay_Dash;
-        private readonly InputAction m_GamePlay_Use;
         public struct GamePlayActions
         {
             private @PlayerControl m_Wrapper;
             public GamePlayActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_GamePlay_Move;
             public InputAction @Jump => m_Wrapper.m_GamePlay_Jump;
+            public InputAction @Aim => m_Wrapper.m_GamePlay_Aim;
             public InputAction @Dash => m_Wrapper.m_GamePlay_Dash;
-            public InputAction @Use => m_Wrapper.m_GamePlay_Use;
             public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -541,12 +541,12 @@ namespace CJStudio.Dash
                     @Jump.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
+                    @Aim.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAim;
+                    @Aim.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAim;
+                    @Aim.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAim;
                     @Dash.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
                     @Dash.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
                     @Dash.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
-                    @Use.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnUse;
-                    @Use.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnUse;
-                    @Use.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnUse;
                 }
                 m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
                 if (instance != null)
@@ -557,12 +557,12 @@ namespace CJStudio.Dash
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
+                    @Aim.started += instance.OnAim;
+                    @Aim.performed += instance.OnAim;
+                    @Aim.canceled += instance.OnAim;
                     @Dash.started += instance.OnDash;
                     @Dash.performed += instance.OnDash;
                     @Dash.canceled += instance.OnDash;
-                    @Use.started += instance.OnUse;
-                    @Use.performed += instance.OnUse;
-                    @Use.canceled += instance.OnUse;
                 }
             }
         }
@@ -620,8 +620,8 @@ namespace CJStudio.Dash
         {
             void OnMove(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnAim(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
-            void OnUse(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

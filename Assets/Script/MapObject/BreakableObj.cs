@@ -1,7 +1,7 @@
-﻿namespace CJStudio.Dash {
+﻿namespace CJStudio.Dash.MapObject {
     using UnityEngine;
     [RequireComponent (typeof (Collider2D))]
-    class BreakableItem : MonoBehaviour {
+    class BreakableObj : AMapObject {
         LayerMask layer = 0;
         void Awake ( ) {
             layer = LayerMask.NameToLayer ("BreakableItem");

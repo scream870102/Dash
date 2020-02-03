@@ -1,6 +1,6 @@
 ﻿namespace CJStudio.Dash.Player {
     using CJStudio.Dash.Camera;
-
+    using CJStudio.Dash.MapObject;
     using Eccentric.Utils;
 
     using UnityEngine.InputSystem;
@@ -14,7 +14,7 @@
         public float Energy => energy;
         public bool CanDash => bCanDash;
         DashProps props = null;
-        Timer timer = null;
+        UnscaledTimer timer = null;
         DashStats stats = null;
         bool bUsingDash = false;
         bool bCanDash = false;
@@ -29,7 +29,7 @@
         public Dash (Player player, DashStats stats) : base (player) {
             this.stats = stats;
             energy = stats.BasicEnergy;
-            timer = new Timer ( );
+            timer = new UnscaledTimer ( );
             normalTimeScale = Time.timeScale;
             props = new DashProps ( );
             EnergyChanging ( );
@@ -124,7 +124,7 @@
             #region CHECK_BREAKABLE_OBJECT
             RaycastHit2D result = Physics2D.Raycast (Player.Tf.position, direction, stats.RayForBreakableItem, stats.BreakableItemLayer);
             if (result.collider != null && result.collider.tag == "Breakable") {
-                result.collider.GetComponent<BreakableItem> ( ).Break ( );
+                result.collider.GetComponent<BreakableObj> ( ).Break ( );
                 ResetState ( );
                 bUsingDash = false;
                 bCanDash = true;
@@ -164,7 +164,7 @@
             EnergyChanging ( );
         }
 
-        void OnDashBtnStarted (InputAction.CallbackContext ctx) {
+        void OnAimBtnStarted (InputAction.CallbackContext ctx) {
             if (!bUsingDash && bCanDash) {
                 ResetState ( );
                 bAim = true;
@@ -175,31 +175,31 @@
                 Time.timeScale = stats.AimTimeScale;
             }
         }
-        void OnDashBtnPerformed (InputAction.CallbackContext ctx) {
+        void OnAimBtnPerformed (InputAction.CallbackContext ctx) {
             if (bAim && !bUsingDash) {
                 direction = ctx.ReadValue<Vector2> ( ).normalized;
             }
         }
-        void OnDashBtnCanceled (InputAction.CallbackContext ctx) {
+        void OnAimBtnCanceled (InputAction.CallbackContext ctx) {
             if (!bUsingDash) {
                 ResetState ( );
             }
         }
-        void OnUseBtnPressed (InputAction.CallbackContext ctx) {
+        void OnDashBtnPressed (InputAction.CallbackContext ctx) {
             UseDash ( );
         }
         override public void OnEnable ( ) {
-            Control.GamePlay.Use.started += OnUseBtnPressed;
-            Control.GamePlay.Dash.started += OnDashBtnStarted;
-            Control.GamePlay.Dash.performed += OnDashBtnPerformed;
-            Control.GamePlay.Dash.canceled += OnDashBtnCanceled;
+            Control.GamePlay.Dash.started += OnDashBtnPressed;
+            Control.GamePlay.Aim.started += OnAimBtnStarted;
+            Control.GamePlay.Aim.performed += OnAimBtnPerformed;
+            Control.GamePlay.Aim.canceled += OnAimBtnCanceled;
         }
 
         override public void OnDisable ( ) {
-            Control.GamePlay.Use.started -= OnUseBtnPressed;
-            Control.GamePlay.Dash.started -= OnDashBtnStarted;
-            Control.GamePlay.Dash.performed -= OnDashBtnPerformed;
-            Control.GamePlay.Dash.canceled -= OnDashBtnCanceled;
+            Control.GamePlay.Dash.started -= OnDashBtnPressed;
+            Control.GamePlay.Aim.started -= OnAimBtnStarted;
+            Control.GamePlay.Aim.performed -= OnAimBtnPerformed;
+            Control.GamePlay.Aim.canceled -= OnAimBtnCanceled;
         }
     }
 
