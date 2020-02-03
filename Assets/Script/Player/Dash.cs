@@ -1,6 +1,6 @@
 ﻿namespace CJStudio.Dash.Player {
     using CJStudio.Dash.Camera;
-
+    using CJStudio.Dash.MapObject;
     using Eccentric.Utils;
 
     using UnityEngine.InputSystem;
@@ -124,7 +124,7 @@
             #region CHECK_BREAKABLE_OBJECT
             RaycastHit2D result = Physics2D.Raycast (Player.Tf.position, direction, stats.RayForBreakableItem, stats.BreakableItemLayer);
             if (result.collider != null && result.collider.tag == "Breakable") {
-                result.collider.GetComponent<MapObject.BreakableObj> ( ).Break ( );
+                result.collider.GetComponent<BreakableObj> ( ).Break ( );
                 ResetState ( );
                 bUsingDash = false;
                 bCanDash = true;

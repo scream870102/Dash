@@ -1,4 +1,4 @@
-namespace CJStudio.Dash.MapObject {
+﻿namespace CJStudio.Dash.MapObject {
     using Eccentric.Utils;
 
     using UnityEngine;

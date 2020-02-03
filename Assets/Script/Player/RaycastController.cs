@@ -67,7 +67,7 @@ class RayCastController {
             originPoint.y -= vertSpace * i;
             RaycastHit2D hit = Physics2D.Raycast (originPoint, Vector2.right, rayLength, layers);
             if (hit.collider) {
-                results.Add (new HitResult (hit, EHitDirection.RIGHT, new Vector2 (1.0f, i / (rayNums.x - 1))));
+                results.Add (new HitResult (hit, EHitDirection.RIGHT, new Vector2 (1f, i / (rayNums.x - 1))));
                 info.right = true;
             }
 #if UNITY_EDITOR
@@ -79,7 +79,7 @@ class RayCastController {
             originPoint.y -= vertSpace * i;
             hit = Physics2D.Raycast (originPoint, Vector2.left, rayLength, layers);
             if (hit.collider) {
-                results.Add (new HitResult (hit, EHitDirection.LEFT, new Vector2 (0f, i / (rayNums.x - 1))));
+                results.Add (new HitResult (hit, EHitDirection.RIGHT, new Vector2 (0f, i / (rayNums.x - 1))));
                 info.left = true;
             }
 #if UNITY_EDITOR
@@ -106,7 +106,7 @@ class RayCastController {
             originPoint.x += horiSpace * i;
             hit = Physics2D.Raycast (originPoint, Vector2.down, rayLength, layers);
             if (hit.collider) {
-                results.Add (new HitResult (hit, EHitDirection.DOWN, new Vector2 (i / (rayNums.y - 1), 1f)));
+                results.Add (new HitResult (hit, EHitDirection.UP, new Vector2 (i / (rayNums.y - 1), 1f)));
                 info.down = true;
             }
 #if UNITY_EDITOR

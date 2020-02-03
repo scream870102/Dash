@@ -1,4 +1,4 @@
-namespace CJStudio.Dash.MapObject {
+﻿namespace CJStudio.Dash.MapObject {
     using UnityEngine;
     public class AMapObject : MonoBehaviour {
         public virtual void Init ( ) {

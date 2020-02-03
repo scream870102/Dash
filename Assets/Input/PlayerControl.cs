@@ -149,7 +149,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -160,7 +160,7 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -371,6 +371,7 @@ namespace CJStudio.Dash
             m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
             m_GamePlay_Aim = m_GamePlay.FindAction("Aim", throwIfNotFound: true);
             m_GamePlay_Jump = m_GamePlay.FindAction("Jump", throwIfNotFound: true);
+            m_GamePlay_Aim = m_GamePlay.FindAction("Aim", throwIfNotFound: true);
             m_GamePlay_Dash = m_GamePlay.FindAction("Dash", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -429,6 +430,7 @@ namespace CJStudio.Dash
         private readonly InputAction m_GamePlay_Move;
         private readonly InputAction m_GamePlay_Aim;
         private readonly InputAction m_GamePlay_Jump;
+        private readonly InputAction m_GamePlay_Aim;
         private readonly InputAction m_GamePlay_Dash;
         public struct GamePlayActions
         {
@@ -437,6 +439,7 @@ namespace CJStudio.Dash
             public InputAction @Move => m_Wrapper.m_GamePlay_Move;
             public InputAction @Aim => m_Wrapper.m_GamePlay_Aim;
             public InputAction @Jump => m_Wrapper.m_GamePlay_Jump;
+            public InputAction @Aim => m_Wrapper.m_GamePlay_Aim;
             public InputAction @Dash => m_Wrapper.m_GamePlay_Dash;
             public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
             public void Enable() { Get().Enable(); }
@@ -456,6 +459,9 @@ namespace CJStudio.Dash
                     @Jump.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
+                    @Aim.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAim;
+                    @Aim.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAim;
+                    @Aim.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAim;
                     @Dash.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
                     @Dash.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
                     @Dash.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
@@ -472,6 +478,9 @@ namespace CJStudio.Dash
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
+                    @Aim.started += instance.OnAim;
+                    @Aim.performed += instance.OnAim;
+                    @Aim.canceled += instance.OnAim;
                     @Dash.started += instance.OnDash;
                     @Dash.performed += instance.OnDash;
                     @Dash.canceled += instance.OnDash;
@@ -533,6 +542,7 @@ namespace CJStudio.Dash
             void OnMove(InputAction.CallbackContext context);
             void OnAim(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnAim(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
         }
         public interface IUIActions

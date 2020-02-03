@@ -2,9 +2,12 @@
     using UnityEngine;
     [RequireComponent (typeof (Collider2D))]
     class BreakableObj : AMapObject {
+        LayerMask layer = 0;
         void Awake ( ) {
-            gameObject.layer = LayerMask.NameToLayer ("Ground");
-            gameObject.tag = "Breakable";
+            layer = LayerMask.NameToLayer ("BreakableItem");
+            gameObject.layer = (int)layer;
+            if (gameObject.tag != "Breakable")
+                gameObject.tag = "Breakable";
         }
         public void Break ( ) {
             this.gameObject.SetActive (false);
