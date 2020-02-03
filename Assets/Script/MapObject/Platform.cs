@@ -1,4 +1,5 @@
-﻿namespace CJStudio.Dash.MapObject {
+﻿﻿
+namespace CJStudio.Dash.MapObject {
     using Eccentric.Utils;
 
     using UnityEngine;
@@ -49,6 +50,12 @@
                 passenger.SetParent (null);
                 passenger = null;
             }
+        }
+        private void OnDisable ( ) {
+            if (passenger && passenger.parent == this.transform) {
+                passenger.SetParent (null);
+            }
+            passenger = null;
 
         }
         override public void Init ( ) {

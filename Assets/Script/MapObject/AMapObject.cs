@@ -2,7 +2,15 @@
     using UnityEngine;
     public class AMapObject : MonoBehaviour {
         public virtual void Init ( ) {
-            this.gameObject.SetActive (true);
+            SetActive (true);
+        }
+        protected virtual void SetActive (bool value) {
+            if (!value) {
+                for (int i = 0; i < transform.childCount; i++) {
+                    transform.GetChild (i).SetParent (null);
+                }
+            }
+            gameObject.SetActive (value);
         }
     }
 }

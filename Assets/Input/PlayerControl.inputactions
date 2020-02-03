@@ -130,28 +130,6 @@
                 {
                     "name": "",
                     "id": "63c87357-0184-4952-b772-1a209fdd858b",
-                    "path": "<DualShockGamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1a7da60e-dbcc-454d-9376-ecbee9b0ce99",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4573040c-aa37-42f8-814a-1226cd6fd7b6",
                     "path": "<DualShockGamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
@@ -214,6 +192,28 @@
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "1d8d94db-8bd9-46d4-a0f1-f2ebf8f4277f",
+                    "path": "<DualShockGamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "acbfdfd9-9e6d-4e44-8f8e-d26325f4fe86",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
