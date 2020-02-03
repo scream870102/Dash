@@ -29,23 +29,23 @@ namespace CJStudio.Dash
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""16ed0fe0-31ac-4cf0-8dc4-9973ba4fb39e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
-                    ""id"": ""16ed0fe0-31ac-4cf0-8dc4-9973ba4fb39e"",
+                    ""id"": ""684986ca-c1ea-4fa0-a44a-581ee49ee5d8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
                     ""name"": ""Dash"",
-                    ""type"": ""Value"",
-                    ""id"": ""684986ca-c1ea-4fa0-a44a-581ee49ee5d8"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Use"",
                     ""type"": ""Button"",
                     ""id"": ""6ed0a2bf-5afe-4a0a-8047-3473ab6f600c"",
                     ""expectedControlType"": """",
@@ -144,133 +144,12 @@ namespace CJStudio.Dash
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4573040c-aa37-42f8-814a-1226cd6fd7b6"",
-                    ""path"": ""<DualShockGamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""fb1447c3-edae-46a1-a37b-466ccec2c531"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""b923ba94-71d3-4659-a338-9a828aa61b66"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""8863a19b-8193-44cd-954d-bea2a4f0b681"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""7be2c59b-2dac-4db9-b40d-cdda45d6de9e"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""81254b29-4033-4031-afbf-d3a123220ff5"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""caac4a72-9494-4b70-914a-3b854359c3da"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""f01d48a9-3d06-499d-9810-f4a6ace06a15"",
-                    ""path"": ""<Keyboard>/i"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""47c2e45c-2969-4fe5-acf3-a949f8d2d57d"",
-                    ""path"": ""<Keyboard>/k"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""30c315b3-2811-43ce-9e78-596816eeeb30"",
-                    ""path"": ""<Keyboard>/j"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""b02fa47a-517b-4ae1-9826-55a5e2139921"",
-                    ""path"": ""<Keyboard>/l"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
                     ""id"": ""63c87357-0184-4952-b772-1a209fdd858b"",
                     ""path"": ""<DualShockGamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Use"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -281,42 +160,75 @@ namespace CJStudio.Dash
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Use"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cb147077-f1a9-42e3-993e-f3de1d901667"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""id"": ""4573040c-aa37-42f8-814a-1226cd6fd7b6"",
+                    ""path"": ""<DualShockGamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Use"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""8efbfbfe-26df-4627-97ad-8bdd8f8e6486"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""name"": ""2D Vector"",
+                    ""id"": ""caac4a72-9494-4b70-914a-3b854359c3da"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Use"",
-                    ""isComposite"": false,
+                    ""action"": ""Aim"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""c9b4146c-fbd1-4765-9d55-0df5d7a816d2"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""name"": ""up"",
+                    ""id"": ""f01d48a9-3d06-499d-9810-f4a6ace06a15"",
+                    ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Use"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""47c2e45c-2969-4fe5-acf3-a949f8d2d57d"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""30c315b3-2811-43ce-9e78-596816eeeb30"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""b02fa47a-517b-4ae1-9826-55a5e2139921"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -407,28 +319,6 @@ namespace CJStudio.Dash
                 },
                 {
                     ""name"": """",
-                    ""id"": ""289cc8a4-3711-418f-b801-96116d15405f"",
-                    ""path"": ""<DualShockGamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Confirm"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a07a9c0b-7531-4dc3-84d9-bcd4e25996a0"",
-                    ""path"": ""<Keyboard>/z"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Confirm"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""0e06676d-c917-4dba-a11a-4b8d76b6e62d"",
                     ""path"": ""<DualShockGamepad>/buttonSouth"",
                     ""interactions"": """",
@@ -448,6 +338,28 @@ namespace CJStudio.Dash
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b09df8ab-8d8c-4d38-9482-d565381f34b7"",
+                    ""path"": ""<DualShockGamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""11c40d08-4db5-4638-9773-d108023d52b4"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -457,9 +369,9 @@ namespace CJStudio.Dash
             // GamePlay
             m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
             m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
+            m_GamePlay_Aim = m_GamePlay.FindAction("Aim", throwIfNotFound: true);
             m_GamePlay_Jump = m_GamePlay.FindAction("Jump", throwIfNotFound: true);
             m_GamePlay_Dash = m_GamePlay.FindAction("Dash", throwIfNotFound: true);
-            m_GamePlay_Use = m_GamePlay.FindAction("Use", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Choose = m_UI.FindAction("Choose", throwIfNotFound: true);
@@ -515,17 +427,17 @@ namespace CJStudio.Dash
         private readonly InputActionMap m_GamePlay;
         private IGamePlayActions m_GamePlayActionsCallbackInterface;
         private readonly InputAction m_GamePlay_Move;
+        private readonly InputAction m_GamePlay_Aim;
         private readonly InputAction m_GamePlay_Jump;
         private readonly InputAction m_GamePlay_Dash;
-        private readonly InputAction m_GamePlay_Use;
         public struct GamePlayActions
         {
             private @PlayerControl m_Wrapper;
             public GamePlayActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_GamePlay_Move;
+            public InputAction @Aim => m_Wrapper.m_GamePlay_Aim;
             public InputAction @Jump => m_Wrapper.m_GamePlay_Jump;
             public InputAction @Dash => m_Wrapper.m_GamePlay_Dash;
-            public InputAction @Use => m_Wrapper.m_GamePlay_Use;
             public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -538,15 +450,15 @@ namespace CJStudio.Dash
                     @Move.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMove;
+                    @Aim.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAim;
+                    @Aim.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAim;
+                    @Aim.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnAim;
                     @Jump.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnJump;
                     @Dash.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
                     @Dash.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
                     @Dash.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnDash;
-                    @Use.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnUse;
-                    @Use.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnUse;
-                    @Use.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnUse;
                 }
                 m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
                 if (instance != null)
@@ -554,15 +466,15 @@ namespace CJStudio.Dash
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @Aim.started += instance.OnAim;
+                    @Aim.performed += instance.OnAim;
+                    @Aim.canceled += instance.OnAim;
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
                     @Dash.started += instance.OnDash;
                     @Dash.performed += instance.OnDash;
                     @Dash.canceled += instance.OnDash;
-                    @Use.started += instance.OnUse;
-                    @Use.performed += instance.OnUse;
-                    @Use.canceled += instance.OnUse;
                 }
             }
         }
@@ -619,9 +531,9 @@ namespace CJStudio.Dash
         public interface IGamePlayActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnAim(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
-            void OnUse(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

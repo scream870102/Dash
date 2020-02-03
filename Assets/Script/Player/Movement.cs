@@ -105,13 +105,19 @@ namespace CJStudio.Dash.Player {
             bCanJump = false;
             bWallSliding = false;
             if ((rayCastController.Left || rayCastController.Right) && !rayCastController.Down) {
-                bWallSliding = true;
-                bCanJump = true;
-                if (!preWallSlide)
-                    Player.Rb.velocity = new Vector2 (Player.Rb.velocity.x, 0f);
+                foreach (HitResult o in rayCastController.Result) {
+                    if (o.detailPos.y == 0) {
+                        bWallSliding = true;
+                        bCanJump = true;
+                        if (!preWallSlide)
+                            Player.Rb.velocity = new Vector2 (Player.Rb.velocity.x, 0f);
+                        break;
+                    }
+                }
             }
-            if (rayCastController.Down)
+            if (rayCastController.Down) {
                 bCanJump = true;
+            }
         }
 
         override public void OnEnable ( ) {

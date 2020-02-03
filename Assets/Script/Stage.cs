@@ -1,5 +1,7 @@
 ﻿namespace CJStudio.Dash {
     using System.Collections.Generic;
+
+    using MapObject;
     using P = Player;
     using UnityEngine;
     [RequireComponent (typeof (Collider2D))]
@@ -8,7 +10,7 @@
         [SerializeField] bool CanRecoverSeveral = false;
         bool bRecovered = false;
         public GameObject RecoverObjectParent => recoverObjectParent;
-        public List<GameObject> stageObjects = new List<GameObject> ( );
+        public List<AMapObject> stageObjects = new List<AMapObject> ( );
         public Vector2 StagePosition => transform.position;
         void Awake ( ) {
             this.gameObject.tag = "Stage";
@@ -16,18 +18,14 @@
         }
         public void EnableStage ( ) {
             if (CanRecoverSeveral) {
-                foreach (GameObject o in stageObjects)
-                    o.SetActive (true);
+                foreach (AMapObject o in stageObjects)
+                    o.Init ( );
             }
             else if (!bRecovered) {
-                foreach (GameObject o in stageObjects)
-                    o.SetActive (true);
+                foreach (AMapObject o in stageObjects)
+                    o.Init ( );
             }
             bRecovered = true;
-        }
-        public void DisableStage ( ) {
-            foreach (GameObject o in stageObjects)
-                o.SetActive (false);
         }
 
         void OnTriggerEnter2D (Collider2D other) {

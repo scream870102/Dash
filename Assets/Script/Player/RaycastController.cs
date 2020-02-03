@@ -27,7 +27,7 @@ class RayCastController {
     public bool Left => info.left;
     public bool IsCollide => (Up || Down || Right || Left);
     public List<HitResult> Result => result;
-    
+
     public RayCastController (LayerMask layers, Vector2 rayNums, float offset, float rayLength, BoxCollider2D collider2D) {
         this.layers = layers;
         this.rayNums = rayNums;
@@ -67,7 +67,7 @@ class RayCastController {
             originPoint.y -= vertSpace * i;
             RaycastHit2D hit = Physics2D.Raycast (originPoint, Vector2.right, rayLength, layers);
             if (hit.collider) {
-                results.Add (new HitResult (hit, EHitDirection.RIGHT));
+                results.Add (new HitResult (hit, EHitDirection.RIGHT, new Vector2 (1.0f, i / (rayNums.x - 1))));
                 info.right = true;
             }
 #if UNITY_EDITOR
@@ -79,7 +79,7 @@ class RayCastController {
             originPoint.y -= vertSpace * i;
             hit = Physics2D.Raycast (originPoint, Vector2.left, rayLength, layers);
             if (hit.collider) {
-                results.Add (new HitResult (hit, EHitDirection.LEFT));
+                results.Add (new HitResult (hit, EHitDirection.LEFT, new Vector2 (0f, i / (rayNums.x - 1))));
                 info.left = true;
             }
 #if UNITY_EDITOR
@@ -94,7 +94,7 @@ class RayCastController {
             originPoint.x += horiSpace * i;
             RaycastHit2D hit = Physics2D.Raycast (originPoint, Vector2.up, rayLength, layers);
             if (hit.collider) {
-                results.Add (new HitResult (hit, EHitDirection.UP));
+                results.Add (new HitResult (hit, EHitDirection.UP, new Vector2 (i / (rayNums.y - 1), 0f)));
                 info.up = true;
             }
 #if UNITY_EDITOR
@@ -106,7 +106,7 @@ class RayCastController {
             originPoint.x += horiSpace * i;
             hit = Physics2D.Raycast (originPoint, Vector2.down, rayLength, layers);
             if (hit.collider) {
-                results.Add (new HitResult (hit, EHitDirection.DOWN));
+                results.Add (new HitResult (hit, EHitDirection.DOWN, new Vector2 (i / (rayNums.y - 1), 1f)));
                 info.down = true;
             }
 #if UNITY_EDITOR
@@ -139,9 +139,11 @@ public class RayCastInfo {
 class HitResult {
     public RaycastHit2D hit2D;
     public EHitDirection direction = EHitDirection.NONE;
-    public HitResult (RaycastHit2D hit2D, EHitDirection direction) {
+    public Vector2 detailPos;
+    public HitResult (RaycastHit2D hit2D, EHitDirection direction, Vector2 detailPos) {
         this.hit2D = hit2D;
         this.direction = direction;
+        this.detailPos = detailPos;
     }
 
 }

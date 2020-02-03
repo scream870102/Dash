@@ -1,4 +1,5 @@
 using CJStudio.Dash;
+using CJStudio.Dash.MapObject;
 
 using UnityEditor;
 
@@ -11,7 +12,7 @@ public class Example {
         if (stage.RecoverObjectParent != null) {
             stage.stageObjects.Clear ( );
             for (int i = 0; i < stage.RecoverObjectParent.transform.childCount; i++) {
-                stage.stageObjects.Add (stage.RecoverObjectParent.transform.GetChild (i).gameObject);
+                stage.stageObjects.AddRange (stage.RecoverObjectParent.transform.GetChild (i).GetComponents<AMapObject> ( ));
 
             }
         }

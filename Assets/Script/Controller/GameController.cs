@@ -30,7 +30,7 @@
             state = EGameState.PLAYING;
         }
         void Update ( ) {
-            elapsedTime += Time.unscaledDeltaTime;
+            elapsedTime += Time.deltaTime;
             if (ElapsedTimeChange != null)
                 ElapsedTimeChange (elapsedTime);
         }
@@ -54,6 +54,7 @@
             Control.UI.Enable ( );
         }
         void OnConfirmPressed (InputAction.CallbackContext ctx) {
+            Debug.Log ("GC Confirm");
             if (state == EGameState.WAITING)
                 GameManager.Instance.LoadScene ("GameScene");
         }

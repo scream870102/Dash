@@ -108,6 +108,7 @@
             rb.velocity = Vector2.zero;
         }
         void OnConfirmPressed (InputAction.CallbackContext ctx) {
+            Debug.Log ("Confirm");
             Control.Disable ( );
             Control.GamePlay.Enable ( );
             DomainEvents.Raise (new OnStageReset ( ));
