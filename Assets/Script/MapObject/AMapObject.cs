@@ -1,6 +1,11 @@
 ﻿namespace CJStudio.Dash.MapObject {
     using UnityEngine;
     public class AMapObject : MonoBehaviour {
+        protected Collider2D col = null;
+        virtual protected void Awake ( ) {
+            col = GetComponent<Collider2D> ( );
+            gameObject.layer = LayerMask.NameToLayer ("Ground");
+        }
         public virtual void Init ( ) {
             SetActive (true);
         }

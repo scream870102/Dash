@@ -9,17 +9,15 @@ namespace CJStudio.Dash.MapObject {
         [SerializeField] float time = 0f;
         [SerializeField] LayerMask passengerLayer = 0;
         Vector2 initPos = Vector2.zero;
-        Collider2D col = null;
         Vector2 velocity = Vector2.zero;
         ScaledTimer timer = null;
         bool bPlus = true;
         Transform passenger = null;
-        void Awake ( ) {
-            col = GetComponent<Collider2D> ( );
+        override protected void Awake ( ) {
+            base.Awake ( );
             col.isTrigger = false;
             initPos = transform.position;
             velocity = moveRange / time;
-            gameObject.layer = LayerMask.NameToLayer ("Ground");
         }
 
         void Start ( ) {

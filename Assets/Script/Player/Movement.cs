@@ -9,13 +9,32 @@ namespace CJStudio.Dash.Player {
     [System.Serializable]
     class Movement : PlayerComponent {
         MovementStats stats = null;
+        EPlayerState state = EPlayerState.NORMAL;
         float originGravity = 0f;
         RayCastController rayCastController = null;
         Vector2 inputValue = Vector2.zero;
+#if UNITY_EDITOR
+        [ReadOnly, SerializeField]
+#endif
+        float externalHoriVel = 0f;
+#if UNITY_EDITOR
+        [ReadOnly, SerializeField]
+#endif
+        float frictionAccumulation = 0f;
         bool bJumpPressed = false;
         bool bCanJump = false;
         bool bWallSliding = false;
         bool bFaceRight = true;
+#if UNITY_EDITOR
+        [ReadOnly, SerializeField]
+#endif
+
+        bool bExternalVel = false;
+#if UNITY_EDITOR
+        [ReadOnly, SerializeField]
+#endif
+
+        bool bExternalVelPositive = false;
         #region LERP
         const float smoothTime = .1f;
         float velocityXSmoothing;
@@ -30,18 +49,22 @@ namespace CJStudio.Dash.Player {
             CheckCollision ( );
             Move ( );
             Jump ( );
+            #region WALL_SLIDE_VFX
             if (bWallSliding)
                 Player.Particle.Play ( );
             else {
                 Player.Particle.Clear ( );
                 Player.Particle.Pause ( );
             }
+            #endregion
+            #region CHANGE_GRAVITY_SCALE
             if (Player.Rb.velocity.y <= 0f && !bWallSliding)
                 Player.Rb.gravityScale = originGravity * stats.FallGravityMultiplier;
             else if (bWallSliding && Player.Rb.velocity.y <= 0f)
                 Player.Rb.gravityScale = originGravity * stats.WallSlidingGravityMultiplier;
             else
                 Player.Rb.gravityScale = originGravity;
+            #endregion
             #region ANIMATOR_PAPAMETER
             Player.Anim.SetFloat ("velX", Mathf.Abs (inputValue.x));
             Player.Anim.SetFloat ("velY", Player.Rb.velocity.y);
@@ -66,7 +89,20 @@ namespace CJStudio.Dash.Player {
 
         void Move ( ) {
             Vector2 nVel = Player.Rb.velocity;
-            if (rayCastController.Down) {
+            if (bExternalVel && rayCastController.Down) {
+                nVel.x = inputValue.x * stats.NormalVel + externalHoriVel;
+                if (externalHoriVel > 0f) {
+                    externalHoriVel -= frictionAccumulation * Time.deltaTime;
+                }
+                else if (externalHoriVel < 0f) {
+                    externalHoriVel += frictionAccumulation * Time.deltaTime;
+                }
+                if ((externalHoriVel >= 0f && !bExternalVelPositive) || (externalHoriVel <= 0f && bExternalVelPositive)) {
+                    bExternalVel = false;
+                    externalHoriVel = 0f;
+                }
+            }
+            else if (rayCastController.Down) {
                 nVel.x = inputValue.x * stats.NormalVel;
             }
             else {
@@ -104,17 +140,34 @@ namespace CJStudio.Dash.Player {
             bool preWallSlide = bWallSliding;
             bCanJump = false;
             bWallSliding = false;
-            if ((rayCastController.Left || rayCastController.Right) && !rayCastController.Down) {
+            bExternalVel = false;
+
+            //if there is external Vel exist calculate the friction accumulation
+            //and in only will affect by one collider
+            if (externalHoriVel != 0f) {
+                bExternalVel = true;
+                frictionAccumulation = 0f;
                 foreach (HitResult o in rayCastController.Result) {
-                    if (o.detailPos.y == 0) {
-                        bWallSliding = true;
-                        bCanJump = true;
-                        if (!preWallSlide)
-                            Player.Rb.velocity = new Vector2 (Player.Rb.velocity.x, 0f);
+                    if (o.direction == EHitDirection.DOWN) {
+                        frictionAccumulation = o.hit2D.collider.friction;
                         break;
                     }
                 }
             }
+
+            if ((rayCastController.Left || rayCastController.Right) && !rayCastController.Down) {
+                foreach (HitResult o in rayCastController.Result) {
+                    if (o.detailPos.y == 0) {
+                        //Check if this first time to grab the wall
+                        if (!preWallSlide)
+                            Player.Rb.velocity = new Vector2 (Player.Rb.velocity.x, 0f);
+                        bWallSliding = true;
+                        bCanJump = true;
+                        break;
+                    }
+                }
+            }
+
             if (rayCastController.Down) {
                 bCanJump = true;
             }
@@ -146,6 +199,17 @@ namespace CJStudio.Dash.Player {
         void OnJumpReleased (InputAction.CallbackContext ctx) {
             bJumpPressed = false;
         }
+
+        public void AddHoriVelocity (float vel) {
+            externalHoriVel += vel;
+            bExternalVelPositive = externalHoriVel > 0f;
+        }
+
+        public void AddVertVelocity (float vel) {
+            Vector2 nVel = Player.Rb.velocity;
+            nVel.y += vel;
+            Player.Rb.velocity = nVel;
+        }
     }
 
     [System.Serializable]
@@ -156,5 +220,12 @@ namespace CJStudio.Dash.Player {
         public float WallJumpVel = 7.5f;
         public float FallGravityMultiplier = 1.5f;
         public float WallSlidingGravityMultiplier = 0.02f;
+    }
+    enum EPlayerState {
+        NORMAL,
+        WALL_SLIDE,
+        SPRING,
+        SPACE,
+        SLIDE,
     }
 }

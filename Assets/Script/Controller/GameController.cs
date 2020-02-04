@@ -54,7 +54,6 @@
             Control.UI.Enable ( );
         }
         void OnConfirmPressed (InputAction.CallbackContext ctx) {
-            Debug.Log ("GC Confirm");
             if (state == EGameState.WAITING)
                 GameManager.Instance.LoadScene ("GameScene");
         }

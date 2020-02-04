@@ -9,6 +9,7 @@
     class Player : MonoBehaviour {
         #region TEST
         public Text deltaText = null;
+        [SerializeField] Movement movement = null;
         #endregion
         List<PlayerComponent> components = new List<PlayerComponent> ( );
         Rigidbody2D rb = null;
@@ -51,6 +52,9 @@
             tf = this.transform;
             components.Add (new Movement (this, movementStats));
             components.Add (new Dash (this, dashStats));
+#if UNITY_EDITOR
+            movement = components [0] as Movement;
+#endif
         }
 
         void OnEnable ( ) {
@@ -108,7 +112,6 @@
             rb.velocity = Vector2.zero;
         }
         void OnConfirmPressed (InputAction.CallbackContext ctx) {
-            Debug.Log ("Confirm");
             Control.Disable ( );
             Control.GamePlay.Enable ( );
             DomainEvents.Raise (new OnStageReset ( ));
@@ -116,6 +119,14 @@
         void OnCancelPressed (InputAction.CallbackContext ctx) {
             Control.Disable ( );
             GameManager.Instance.LoadScene ("TitleScene");
+        }
+
+        public void AddHoriVelocity (float vel) {
+            Movement.AddHoriVelocity (vel);
+        }
+
+        public void AddVertVelocity (float vel) {
+            Movement.AddVertVelocity (vel);
         }
 
     }

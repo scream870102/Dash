@@ -106,7 +106,7 @@ class RayCastController {
             originPoint.x += horiSpace * i;
             hit = Physics2D.Raycast (originPoint, Vector2.down, rayLength, layers);
             if (hit.collider) {
-                results.Add (new HitResult (hit, EHitDirection.UP, new Vector2 (i / (rayNums.y - 1), 1f)));
+                results.Add (new HitResult (hit, EHitDirection.DOWN, new Vector2 (i / (rayNums.y - 1), 1f)));
                 info.down = true;
             }
 #if UNITY_EDITOR
