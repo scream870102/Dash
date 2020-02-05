@@ -111,6 +111,7 @@
             Movement.SetSaveData (data);
             Dash.SetSaveData (data);
             rb.velocity = Vector2.zero;
+            
         }
         void OnConfirmPressed (InputAction.CallbackContext ctx) {
             Control.Disable ( );
@@ -138,6 +139,14 @@
     }
     class OnPlayerDead : IDomainEvent {
         public OnPlayerDead ( ) { }
+    }
+
+    class OnSpaceAreaEnter : IDomainEvent {
+        bool bEnter;
+        public bool IsEnter => bEnter;
+        public OnSpaceAreaEnter (bool IsEnter) {
+            this.bEnter = IsEnter;
+        }
     }
 
 }

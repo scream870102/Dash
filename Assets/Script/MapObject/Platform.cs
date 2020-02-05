@@ -3,7 +3,6 @@ namespace CJStudio.Dash.MapObject {
     using Eccentric.Utils;
 
     using UnityEngine;
-    [RequireComponent (typeof (Collider2D))]
     class Platform : AMapObject {
         [SerializeField] Vector2 moveRange = Vector2.zero;
         [SerializeField] float time = 0f;

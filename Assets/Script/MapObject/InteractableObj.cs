@@ -1,7 +1,6 @@
 ﻿namespace CJStudio.Dash.MapObject {
     using P = Player;
     using UnityEngine;
-    [RequireComponent (typeof (Collider2D))]
     class InteractableObj : MonoBehaviour {
         [SerializeField] [Range (0f, 5f)] float energyToPlus = 1f;
         void OnTriggerEnter2D (Collider2D other) {

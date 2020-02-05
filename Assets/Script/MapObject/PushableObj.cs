@@ -3,7 +3,6 @@
 
     using UnityEngine;
     using P = CJStudio.Dash.Player;
-    [RequireComponent (typeof (Collider2D))]
     class PushableObj : AMapObject {
         Vector2 initPos;
         P.Player player = null;

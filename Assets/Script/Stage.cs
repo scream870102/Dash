@@ -3,7 +3,6 @@
 
     using MapObject;
     using P = Player;
-    using MapObject;
 
     using UnityEngine;
     [RequireComponent (typeof (Collider2D))]

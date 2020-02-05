@@ -2,7 +2,6 @@
     using System.Collections.Generic;
     using P = CJStudio.Dash.Player;
     using UnityEngine;
-    [RequireComponent (typeof (Collider2D))]
     class Spring : AMapObject {
         [SerializeField] Vector2 force = Vector2.zero;
         [SerializeField] ESpringDirection direction = ESpringDirection.UP;

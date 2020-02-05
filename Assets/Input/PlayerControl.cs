@@ -144,6 +144,17 @@ namespace CJStudio.Dash
                 },
                 {
                     ""name"": """",
+                    ""id"": ""8c549ea8-78c7-4af2-ab30-ea4ccb1b05ea"",
+                    ""path"": ""<DualShockGamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""63c87357-0184-4952-b772-1a209fdd858b"",
                     ""path"": ""<DualShockGamepad>/rightStick"",
                     ""interactions"": """",
@@ -223,6 +234,17 @@ namespace CJStudio.Dash
                     ""name"": """",
                     ""id"": ""acbfdfd9-9e6d-4e44-8f8e-d26325f4fe86"",
                     ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5d33840-e609-4029-9511-84828bf64ab6"",
+                    ""path"": ""<DualShockGamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

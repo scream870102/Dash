@@ -37,5 +37,17 @@
 			"}"
 		],
 		"description": "Create a player component"
+	},
+	"Create A map Object": {
+		"prefix": "amapobj",
+		"body": [
+			"namespace CJStudio.Dash.MapObject {",
+			"    using UnityEngine;",
+			"    class ${1:example} : AMapObject { }",
+			"",
+			"}",
+			""
+		],
+		"description": "Create A map Object"
 	}
 }

@@ -1,5 +1,6 @@
 ﻿namespace CJStudio.Dash.MapObject {
     using UnityEngine;
+    [RequireComponent (typeof (Collider2D))]
     public class AMapObject : MonoBehaviour {
         protected Collider2D col = null;
         virtual protected void Awake ( ) {

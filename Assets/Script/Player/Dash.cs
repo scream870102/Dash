@@ -1,6 +1,8 @@
 ﻿namespace CJStudio.Dash.Player {
     using CJStudio.Dash.Camera;
     using CJStudio.Dash.MapObject;
+
+    using Eccentric.Input;
     using Eccentric.Utils;
 
     using UnityEngine.InputSystem;
@@ -110,6 +112,8 @@
                 Player.GameController.CameraController.ShakeCamera (stats.DashShakeProps);
                 Player.Rb.velocity = Vector2.zero;
                 Player.Trail.enabled = true;
+                GamepadController.VibrateController (EVibrateDuration.NORMAL, EVibrateStrength.NORMAL);
+
             }
         }
 
