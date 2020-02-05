@@ -15,19 +15,20 @@
                 List<ContactPoint2D> contacts = new List<ContactPoint2D> ( );
                 col.GetContacts (contacts);
                 foreach (ContactPoint2D o in contacts) {
-                    P.Player p = o.collider.GetComponent<P.Player> ( );
-                    if (p != null) {
-                        if (direction == ESpringDirection.UP && o.normal.y == -1)
-                            p.AddVertVelocity (force.y);
-                        else if (direction == ESpringDirection.DOWN && o.normal.y == 1)
-                            p.AddVertVelocity (force.y);
-                        else if (direction == ESpringDirection.LEFT && o.normal.x == 1)
-                            p.AddHoriVelocity (force.x);
-                        else if (direction == ESpringDirection.RIGHT && o.normal.x == -1)
-                            p.AddHoriVelocity (force.x);
-                        break;
+                    if (o.collider.gameObject.tag == "Player") {
+                        P.Player p = GameManager.Instance.Player;
+                        if (p != null) {
+                            if (direction == ESpringDirection.UP && o.normal.y == -1)
+                                p.AddVertVelocity (force.y);
+                            else if (direction == ESpringDirection.DOWN && o.normal.y == 1)
+                                p.AddVertVelocity (force.y);
+                            else if (direction == ESpringDirection.LEFT && o.normal.x == 1)
+                                p.AddHoriVelocity (force.x);
+                            else if (direction == ESpringDirection.RIGHT && o.normal.x == -1)
+                                p.AddHoriVelocity (force.x);
+                            break;
+                        }
                     }
-
                 }
             }
         }

@@ -35,6 +35,7 @@
         public Movement Movement => components [0] as Movement;
         public PlayerControl Control => GameManager.Instance.Control;
         public bool IsDashing => Dash.IsDashing;
+        public Collider2D PushObj { get; private set; }
         public GameController GameController {
             get {
                 if (gameController)return gameController;
@@ -127,6 +128,11 @@
 
         public void AddVertVelocity (float vel) {
             Movement.AddVertVelocity (vel);
+        }
+
+        public void SetPushObj (Collider2D obj = null) {
+            this.PushObj = obj;
+            Anim.SetBool ("push", obj != null);
         }
 
     }

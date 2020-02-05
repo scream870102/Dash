@@ -101,6 +101,23 @@ namespace CJStudio.Dash.Player {
                     bExternalVel = false;
                     externalHoriVel = 0f;
                 }
+                // if (rayCastController.Left || rayCastController.Right) {
+                //     bExternalVel = false;
+                //     externalHoriVel = 0f;
+                // }
+            }
+            else if (bExternalVel) {
+                nVel.x = inputValue.x * stats.AirVel + externalHoriVel;
+                if (externalHoriVel > 0f) {
+                    externalHoriVel -= stats.AirFriction * Time.deltaTime;
+                }
+                else if (externalHoriVel < 0f) {
+                    externalHoriVel += stats.AirFriction * Time.deltaTime;
+                }
+                if ((externalHoriVel >= 0f && !bExternalVelPositive) || (externalHoriVel <= 0f && bExternalVelPositive)) {
+                    bExternalVel = false;
+                    externalHoriVel = 0f;
+                }
             }
             else if (rayCastController.Down) {
                 nVel.x = inputValue.x * stats.NormalVel;
@@ -119,12 +136,14 @@ namespace CJStudio.Dash.Player {
                 Vector2 vel = Player.Rb.velocity;
                 //Wall Jump
                 if (bWallSliding && !rayCastController.Down) {
+                    // EHitDirection wallDirection = rayCastController.Left?EHitDirection.LEFT : EHitDirection.RIGHT;
+                    // vel.x = wallDirection == EHitDirection.LEFT?stats.WallJumpVel: -stats.WallJumpVel;
                     EHitDirection wallDirection = rayCastController.Left?EHitDirection.LEFT : EHitDirection.RIGHT;
                     // from left wall to right wall
-                    if (inputValue.x > 0f && wallDirection == EHitDirection.LEFT)
+                    if (inputValue.x >= 0f && wallDirection == EHitDirection.LEFT)
                         vel.x = stats.WallJumpVel;
                     // from right wall to left wall
-                    else if (inputValue.x < 0f && wallDirection == EHitDirection.RIGHT)
+                    else if (inputValue.x <= 0f && wallDirection == EHitDirection.RIGHT)
                         vel.x = -stats.WallJumpVel;
                     else
                         return;
@@ -155,6 +174,7 @@ namespace CJStudio.Dash.Player {
                 }
             }
 
+            //if touches the wall and not on the ground set wall climbing
             if ((rayCastController.Left || rayCastController.Right) && !rayCastController.Down) {
                 foreach (HitResult o in rayCastController.Result) {
                     if (o.detailPos.y == 0) {
@@ -166,6 +186,16 @@ namespace CJStudio.Dash.Player {
                         break;
                     }
                 }
+            }
+
+            //eliminate horizontal velocity when it toucheds the wall
+            if (externalHoriVel > 0f && rayCastController.Right) {
+                externalHoriVel = 0f;
+                bExternalVel = false;
+            }
+            else if (externalHoriVel < 0f && rayCastController.Left) {
+                externalHoriVel = 0f;
+                bExternalVel = false;
             }
 
             if (rayCastController.Down) {
@@ -220,6 +250,7 @@ namespace CJStudio.Dash.Player {
         public float WallJumpVel = 7.5f;
         public float FallGravityMultiplier = 1.5f;
         public float WallSlidingGravityMultiplier = 0.02f;
+        public float AirFriction = 50f;
     }
     enum EPlayerState {
         NORMAL,
