@@ -322,6 +322,7 @@ namespace CJStudio.Dash.Player {
         override public void Init ( ) {
             player.Rb.velocity = Vector2.zero;
             attr.bCanJump = true;
+            attr.externalHoriVel = 0f;
             bJumping = false;
             jumpVel = 0f;
         }

@@ -9,7 +9,6 @@
     public class Stage : MonoBehaviour {
         [SerializeField] GameObject recoverObjectParent = null;
         [SerializeField] bool CanRecoverSeveral = false;
-        bool bRecovered = false;
         public GameObject RecoverObjectParent => recoverObjectParent;
         public List<AMapObject> stageObjects = new List<AMapObject> ( );
         public Vector2 StagePosition => transform.position;
@@ -22,11 +21,6 @@
                 foreach (AMapObject o in stageObjects)
                     o.Init ( );
             }
-            else if (!bRecovered) {
-                foreach (AMapObject o in stageObjects)
-                    o.Init ( );
-            }
-            bRecovered = true;
         }
 
         void OnTriggerEnter2D (Collider2D other) {
