@@ -9401,10 +9401,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deltaText: {fileID: 763969816}
   movement:
-    spaceMove:
-      timer:
-        remain: 0
-        bFinished: 0
     attr:
       inputValue: {x: 0, y: 0}
       externalHoriVel: 0

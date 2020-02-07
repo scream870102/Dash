@@ -23,7 +23,7 @@
         [ReadOnly, SerializeField]
 #endif
         EGameState state = EGameState.PLAYING;
-        PlayerControl Control => GameManager.Instance.Control;
+        PlayerControl Control => GameManager.Instance == null?null : GameManager.Instance.Control;
         void Awake ( ) {
             stageController = new StageController (initStage);
             DomainEvents.Raise (new OnGameStarted ( ));
@@ -41,9 +41,11 @@
         }
         void OnDisable ( ) {
             DomainEvents.UnRegister<OnGoalReached> (OnGoalReached);
-            Control.UI.Confirm.started -= OnConfirmPressed;
-            Control.UI.Cancel.started -= OnCancelPressed;
-            Control.Disable ( );
+            if (Control != null) {
+                Control.UI.Confirm.started -= OnConfirmPressed;
+                Control.UI.Cancel.started -= OnCancelPressed;
+                Control.Disable ( );
+            }
         }
 
         void OnGoalReached (OnGoalReached e) {

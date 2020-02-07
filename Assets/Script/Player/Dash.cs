@@ -112,7 +112,7 @@
                 Player.GameController.CameraController.ShakeCamera (stats.DashShakeProps);
                 Player.Rb.velocity = Vector2.zero;
                 Player.Trail.enabled = true;
-                GamepadController.VibrateController (EVibrateDuration.NORMAL, EVibrateStrength.NORMAL);
+                GamepadController.VibrateController (EVibrateDuration.NORMAL, EVibrateStrength.STRONG);
 
             }
         }
