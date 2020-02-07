@@ -5,7 +5,6 @@ namespace CJStudio.Dash.Player {
     using Eccentric.Utils;
     using Eccentric;
 
-    using UnityEngine.InputSystem.DualShock;
     using UnityEngine.InputSystem;
     using UnityEngine;
     [System.Serializable]
@@ -13,7 +12,11 @@ namespace CJStudio.Dash.Player {
         MovementStats stats = null;
         IMoveStrategy strategy = null;
         BasicMoveStrategy basicMove = null;
-        [SerializeField] SpaceMoveStrategy spaceMove = null;
+        SpaceMoveStrategy spaceMove = null;
+#if UNITY_EDITOR
+        [ReadOnly, SerializeField]
+#endif
+        SlideMoveStrategy slideMove = null;
         [SerializeField] AMoveAttr attr = null;
         RayCastController rayCastController = null;
 
@@ -25,6 +28,7 @@ namespace CJStudio.Dash.Player {
             attr = new AMoveAttr ( );
             basicMove = new BasicMoveStrategy (ref attr, ref stats, player);
             spaceMove = new SpaceMoveStrategy (ref attr, ref stats, player);
+            slideMove = new SlideMoveStrategy (ref attr, ref stats, player);
             strategy = basicMove;
             attr.originGravity = player.Rb.gravityScale;
         }
@@ -81,6 +85,7 @@ namespace CJStudio.Dash.Player {
             Control.GamePlay.Jump.started += OnJumpPressed;
             Control.GamePlay.Jump.canceled += OnJumpReleased;
             DomainEvents.Register<OnSpaceAreaEnter> (OnSpaceAreaEnter);
+            DomainEvents.Register<OnSlideAreaEnter> (OnSlideAreaEnter);
         }
         override public void OnDisable ( ) {
             Control.GamePlay.Move.performed -= OnMoveValueChanged;
@@ -88,6 +93,7 @@ namespace CJStudio.Dash.Player {
             Control.GamePlay.Jump.started -= OnJumpPressed;
             Control.GamePlay.Jump.canceled -= OnJumpReleased;
             DomainEvents.UnRegister<OnSpaceAreaEnter> (OnSpaceAreaEnter);
+            DomainEvents.UnRegister<OnSlideAreaEnter> (OnSlideAreaEnter);
         }
 
         void OnMoveValueChanged (InputAction.CallbackContext ctx) {
@@ -119,14 +125,23 @@ namespace CJStudio.Dash.Player {
             if (e.IsEnter) {
                 strategy = spaceMove;
                 strategy.Init ( );
-                Player.Rb.gravityScale = 0f;
                 Player.Anim.SetBool ("space", true);
             }
-            else {
+            else if (strategy == spaceMove) {
                 strategy = basicMove;
                 strategy.Init ( );
-                Player.Rb.gravityScale = attr.originGravity;
                 Player.Anim.SetBool ("space", false);
+            }
+        }
+
+        void OnSlideAreaEnter (OnSlideAreaEnter e) {
+            if (e.IsEnter) {
+                strategy = slideMove;
+                strategy.Init ( );
+            }
+            else if (strategy == slideMove) {
+                strategy = basicMove;
+                strategy.Init ( );
             }
         }
 
@@ -155,6 +170,9 @@ namespace CJStudio.Dash.Player {
     }
     class BasicMoveStrategy : IMoveStrategy {
         public BasicMoveStrategy (ref AMoveAttr attr, ref MovementStats stats, Player player) : base (ref attr, ref stats, player) { }
+        override public void Init ( ) {
+            player.Rb.gravityScale = attr.originGravity;
+        }
         override public void Move ( ) {
             Vector2 nVel = player.Rb.velocity;
             if (attr.bExternalVel && rayCastController.Down) {
@@ -322,9 +340,42 @@ namespace CJStudio.Dash.Player {
         override public void Init ( ) {
             player.Rb.velocity = Vector2.zero;
             attr.bCanJump = true;
+            player.Rb.gravityScale = 0f;
             attr.externalHoriVel = 0f;
             bJumping = false;
             jumpVel = 0f;
+        }
+    }
+
+    [System.Serializable]
+    class SlideMoveStrategy : BasicMoveStrategy {
+        Vector2 direction = Vector2.zero;
+        bool bTouchedGround = false;
+        public SlideMoveStrategy (ref AMoveAttr attr, ref MovementStats stats, Player player) : base (ref attr, ref stats, player) { }
+        override public void Move ( ) {
+            if (direction == Vector2.zero) {
+                direction = attr.inputValue;
+                direction.x = direction.x > 0f?1f : direction.x < 0f? - 1f : 0f;
+            }
+            if (bTouchedGround) {
+                direction = attr.inputValue;
+                direction.x = direction.x > 0f?1f : direction.x < 0f? - 1f : 0f;
+                bTouchedGround = false;
+            }
+            Vector2 nVel = player.Rb.velocity;
+            nVel.x = direction.x * stats.NormalVel;
+            player.Rb.velocity = nVel;
+        }
+        override public void CheckCollision ( ) {
+            attr.bWallSliding = false;
+            attr.bCanJump = rayCastController.Down;
+            bTouchedGround = (rayCastController.Left || rayCastController.Right);
+        }
+
+        override public void Init ( ) {
+            player.Rb.velocity = Vector2.zero;
+            attr.externalHoriVel = 0f;
+            bTouchedGround = true;
         }
     }
 

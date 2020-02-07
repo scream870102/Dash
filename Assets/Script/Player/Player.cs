@@ -33,7 +33,7 @@
         public ParticleSystem Particle => particle;
         public Dash Dash => components [1] as Dash;
         public Movement Movement => components [0] as Movement;
-        public PlayerControl Control => GameManager.Instance.Control;
+        public PlayerControl Control => GameManager.Instance == null?null : GameManager.Instance.Control;
         public bool IsDashing => Dash.IsDashing;
         public Collider2D PushObj { get; private set; }
         public GameController GameController {
@@ -68,9 +68,11 @@
         }
 
         void OnDisable ( ) {
-            Control.UI.Confirm.performed -= OnConfirmPressed;
-            Control.UI.Cancel.performed -= OnCancelPressed;
-            Control.Disable ( );
+            if (Control != null) {
+                Control.UI.Confirm.performed -= OnConfirmPressed;
+                Control.UI.Cancel.performed -= OnCancelPressed;
+                Control.Disable ( );
+            }
             foreach (PlayerComponent o in components)
                 o.OnDisable ( );
         }
@@ -111,7 +113,7 @@
             Movement.SetSaveData (data);
             Dash.SetSaveData (data);
             rb.velocity = Vector2.zero;
-            
+
         }
         void OnConfirmPressed (InputAction.CallbackContext ctx) {
             Control.Disable ( );
@@ -145,6 +147,13 @@
         bool bEnter;
         public bool IsEnter => bEnter;
         public OnSpaceAreaEnter (bool IsEnter) {
+            this.bEnter = IsEnter;
+        }
+    }
+    class OnSlideAreaEnter : IDomainEvent {
+        bool bEnter;
+        public bool IsEnter => bEnter;
+        public OnSlideAreaEnter (bool IsEnter) {
             this.bEnter = IsEnter;
         }
     }

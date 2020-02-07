@@ -14,6 +14,7 @@
             if (other.gameObject.tag == "Player")
                 DomainEvents.Raise<OnSpaceAreaEnter> (new OnSpaceAreaEnter (true));
         }
+
         void OnTriggerExit2D (Collider2D other) {
             if (other.gameObject.tag == "Player") {
                 DomainEvents.Raise<OnSpaceAreaEnter> (new OnSpaceAreaEnter (false));
