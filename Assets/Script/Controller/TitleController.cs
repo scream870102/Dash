@@ -13,17 +13,19 @@
         [SerializeField] Color activeColor;
         [SerializeField] Color deactiveColor;
         [SerializeField] GameObject tutorialObject = null;
-        PlayerControl Control => GameManager.Instance.Control;
+        PlayerControl Control => GameManager.Instance == null?null : GameManager.Instance.Control;
         void Awake ( ) { }
         void OnEnable ( ) {
             buttons.ActiveOption += OnActiveOption;
             buttons.DeactiveOption += OnDeactiveOption;
             buttons.CertainAction += OnActionCertain;
             buttons.Init ( );
-            Control.UI.Choose.started += OnAxisValueChanged;
-            Control.UI.Confirm.started += OnConfirmPressed;
-            Control.Disable ( );
-            Control.UI.Enable ( );
+            if (Control != null) {
+                Control.UI.Choose.started += OnAxisValueChanged;
+                Control.UI.Confirm.started += OnConfirmPressed;
+                Control.Disable ( );
+                Control.UI.Enable ( );
+            }
             tutorialObject.SetActive (false);
         }
 
@@ -31,9 +33,11 @@
             buttons.ActiveOption -= OnActiveOption;
             buttons.DeactiveOption -= OnDeactiveOption;
             buttons.CertainAction -= OnActionCertain;
-            Control.UI.Choose.started -= OnAxisValueChanged;
-            Control.UI.Confirm.started -= OnConfirmPressed;
-            Control.Disable ( );
+            if (Control != null) {
+                Control.UI.Choose.started -= OnAxisValueChanged;
+                Control.UI.Confirm.started -= OnConfirmPressed;
+                Control.Disable ( );
+            }
         }
 
         public void OnStartPressed ( ) {

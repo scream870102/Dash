@@ -55,17 +55,6 @@ namespace CJStudio.Dash
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""640303c7-40ca-4a66-a1be-e263265ce782"",
-                    ""path"": ""<DualShockGamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""2D Vector"",
                     ""id"": ""bab8dd49-c1b0-41be-8a37-20e0627e0cf9"",
                     ""path"": ""2DVector(normalize=false)"",
@@ -122,12 +111,12 @@ namespace CJStudio.Dash
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e855a5c1-bf84-4890-8def-da124fed93df"",
-                    ""path"": ""<DualShockGamepad>/rightTrigger"",
+                    ""id"": ""66d1cd25-fd6a-449b-a581-f39bd9ac281a"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -144,8 +133,8 @@ namespace CJStudio.Dash
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8c549ea8-78c7-4af2-ab30-ea4ccb1b05ea"",
-                    ""path"": ""<DualShockGamepad>/rightShoulder"",
+                    ""id"": ""39ccf589-736f-4b56-8444-eb401f7ab95b"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -155,12 +144,12 @@ namespace CJStudio.Dash
                 },
                 {
                     ""name"": """",
-                    ""id"": ""63c87357-0184-4952-b772-1a209fdd858b"",
-                    ""path"": ""<DualShockGamepad>/rightStick"",
+                    ""id"": ""01514102-6105-431d-a479-36a5b6862b8f"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Aim"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -221,12 +210,12 @@ namespace CJStudio.Dash
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1d8d94db-8bd9-46d4-a0f1-f2ebf8f4277f"",
-                    ""path"": ""<DualShockGamepad>/leftTrigger"",
+                    ""id"": ""490ad6b3-96be-4237-b945-4971099cba31"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -243,8 +232,19 @@ namespace CJStudio.Dash
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a5d33840-e609-4029-9511-84828bf64ab6"",
-                    ""path"": ""<DualShockGamepad>/leftShoulder"",
+                    ""id"": ""4e324346-04d1-48f8-b637-d26b203d734b"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""38002041-94f2-43be-b1c1-e607b616c0a0"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -284,17 +284,6 @@ namespace CJStudio.Dash
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""edaf3a9e-edbb-4224-ae93-95ea013940b2"",
-                    ""path"": ""<DualShockGamepad>/leftStick/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Choose"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""4a3e0a8a-8782-41dc-8c1a-d156873344bc"",
@@ -341,6 +330,17 @@ namespace CJStudio.Dash
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e20565ed-4743-45c9-ade4-fb05c5429bc0"",
+                    ""path"": ""<Gamepad>/leftStick/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Choose"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""0e06676d-c917-4dba-a11a-4b8d76b6e62d"",
                     ""path"": ""<DualShockGamepad>/buttonSouth"",
                     ""interactions"": """",
@@ -363,6 +363,17 @@ namespace CJStudio.Dash
                 },
                 {
                     ""name"": """",
+                    ""id"": ""51f3ec2b-d9e0-4cad-8dbe-2b688812c40c"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""b09df8ab-8d8c-4d38-9482-d565381f34b7"",
                     ""path"": ""<DualShockGamepad>/buttonEast"",
                     ""interactions"": """",
@@ -376,6 +387,17 @@ namespace CJStudio.Dash
                     ""name"": """",
                     ""id"": ""11c40d08-4db5-4638-9773-d108023d52b4"",
                     ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45826af3-5f7c-4bcb-8a05-4a7845f515df"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

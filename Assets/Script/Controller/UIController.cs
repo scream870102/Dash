@@ -9,6 +9,7 @@ namespace CJStudio.Dash {
 
     class UIController : MonoBehaviour {
         P.Player player = null;
+        [SerializeField] SpriteRenderer targetSprite = null;
         [SerializeField] SpriteRenderer arrowSprite = null;
         [SerializeField] GameObject dashUI = null;
         [SerializeField] RectTransform energyBar = null;
@@ -31,8 +32,11 @@ namespace CJStudio.Dash {
                 dashUI.SetActive (true);
             }
             dashUI.transform.position = e.Pos;
-            arrowSprite.size = new Vector2 (e.Charge / e.MaxCharge, 1f);
-            dashUI.transform.rotation = Quaternion.Euler (0f, 0f, Math.GetDegree (e.Direction));
+            targetSprite.transform.position = e.Pos + e.Direction * e.Distance;
+            float degree = Math.GetDegree (e.Direction);
+            targetSprite.flipY = degree > 90f || degree < -90f;
+            arrowSprite.size = new Vector2 (e.Distance, 1f);
+            dashUI.transform.rotation = Quaternion.Euler (0f, 0f, degree);
         }
         void OnDashEnded ( ) {
             if (dashUI.activeSelf)

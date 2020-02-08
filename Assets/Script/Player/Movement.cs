@@ -13,15 +13,10 @@ namespace CJStudio.Dash.Player {
         IMoveStrategy strategy = null;
         BasicMoveStrategy basicMove = null;
         SpaceMoveStrategy spaceMove = null;
-#if UNITY_EDITOR
-        [ReadOnly, SerializeField]
-#endif
         SlideMoveStrategy slideMove = null;
-        [SerializeField] AMoveAttr attr = null;
+        AMoveAttr attr = null;
         RayCastController rayCastController = null;
-
         bool bFaceRight = true;
-
         public Movement (Player player, MovementStats stats) : base (player) {
             this.stats = stats;
             rayCastController = player.RayCastController;
@@ -221,10 +216,10 @@ namespace CJStudio.Dash.Player {
                     // vel.x = wallDirection == EHitDirection.LEFT?stats.WallJumpVel: -stats.WallJumpVel;
                     EHitDirection wallDirection = rayCastController.Left?EHitDirection.LEFT : EHitDirection.RIGHT;
                     // from left wall to right wall
-                    if (attr.inputValue.x >= 0f && wallDirection == EHitDirection.LEFT)
+                    if (attr.inputValue.x >= -0.1f && wallDirection == EHitDirection.LEFT)
                         vel.x = stats.WallJumpVel;
                     // from right wall to left wall
-                    else if (attr.inputValue.x <= 0f && wallDirection == EHitDirection.RIGHT)
+                    else if (attr.inputValue.x <= 0.1f && wallDirection == EHitDirection.RIGHT)
                         vel.x = -stats.WallJumpVel;
                     else
                         return;
@@ -419,7 +414,7 @@ namespace CJStudio.Dash.Player {
         #region  SPACE
         public float SpaceVel = 3f;
         public float SpaceJumpVel = 10f;
-        public float SpaceJumpDuration = 10f;
+        public float SpaceJumpDuration = 2f;
         #endregion
     }
 }

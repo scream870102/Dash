@@ -17,6 +17,7 @@
         Animator anim = null;
         SpriteRenderer rend = null;
         TrailRenderer trail = null;
+        BoxCollider2D col = null;
         ParticleSystem particle = null;
         GameController gameController = null;
         [SerializeField] RayCastController rayCastController = null;
@@ -30,6 +31,7 @@
         public Animator Anim => anim;
         public SpriteRenderer Rend => rend;
         public TrailRenderer Trail => trail;
+        public BoxCollider2D Col => col;
         public ParticleSystem Particle => particle;
         public Dash Dash => components [1] as Dash;
         public Movement Movement => components [0] as Movement;
@@ -48,6 +50,7 @@
             rend = GetComponent<SpriteRenderer> ( );
             trail = GetComponentInChildren<TrailRenderer> ( );
             particle = GetComponentInChildren<ParticleSystem> ( );
+            col = GetComponent<BoxCollider2D> ( );
             particle.Clear ( );
             particle.Stop ( );
             tf = this.transform;
@@ -157,5 +160,6 @@
             this.bEnter = IsEnter;
         }
     }
+
 
 }

@@ -28,6 +28,7 @@
         Vector2 direction = Vector2.zero;
         float normalTimeScale = 0f;
         float chargeJudge = 0f;
+        Vector2 oriColSize = Vector2.zero;
         public Dash (Player player, DashStats stats) : base (player) {
             this.stats = stats;
             energy = stats.BasicEnergy;
@@ -38,6 +39,7 @@
             props.MaxCharge = stats.MaxCharge;
             props.MaxEnergy = stats.BasicEnergy;
             chargeJudge = 0.5f * (stats.MinCharge + stats.MaxCharge) / stats.MaxCharge;
+            oriColSize = Player.Col.size;
         }
 
         override public void Tick ( ) {
@@ -89,6 +91,9 @@
             props.Charge = charge;
             props.Direction = direction;
             props.Pos = Player.Tf.position;
+            float chargeRatio = charge / stats.MaxCharge;
+            float distance = chargeRatio * (chargeRatio >= chargeJudge?stats.MaxChargeMultiplier : stats.MinChargeMultiplier);
+            props.Distance = distance;
             if (Aim != null)
                 Aim (props);
         }
@@ -102,9 +107,7 @@
         void UseDash ( ) {
             if (bAim && !bUsingDash) {
                 Time.timeScale = normalTimeScale;
-                float chargeRatio = charge / stats.MaxCharge;
-                float distance = chargeRatio * (chargeRatio >= chargeJudge?stats.MaxChargeMultiplier : stats.MinChargeMultiplier);
-                velocity = distance / stats.AnimTime;
+                velocity = props.Distance / stats.AnimTime;
                 bUsingDash = true;
                 timer.Reset (stats.AnimTime);
                 AimAnimEnded ( );
@@ -113,7 +116,7 @@
                 Player.Rb.velocity = Vector2.zero;
                 Player.Trail.enabled = true;
                 GamepadController.VibrateController (EVibrateDuration.NORMAL, EVibrateStrength.STRONG);
-
+                Player.Col.size = oriColSize * stats.DashColSizeMultiplier;
             }
         }
 
@@ -151,6 +154,7 @@
             velocity = 0f;
             direction = Vector2.zero;
             Player.GameController.CameraController.DisableCameraShake ( );
+            Player.Col.size = oriColSize;
             Time.timeScale = normalTimeScale;
             AimAnimEnded ( );
             Player.Trail.enabled = false;
@@ -210,17 +214,18 @@
     [System.Serializable]
     class DashStats : PlayerStats {
         public float BasicChargeTime => MaxCharge - MinCharge;
-        public float MinCharge = 1f;
-        public float MaxCharge = 2f;
-        public float BasicEnergy = 10f;
-        public float MaxChargeMultiplier = 10f;
-        public float MinChargeMultiplier = 5f;
-        public float AnimTime = .3f;
-        public float AimTimeScale = .01f;
+        public float MinCharge = 0f;
+        public float MaxCharge = .6f;
+        public float BasicEnergy = 3f;
+        public float MaxChargeMultiplier = 6f;
+        public float MinChargeMultiplier = 6f;
+        public float AnimTime = .15f;
+        public float AimTimeScale = .05f;
         public LayerMask BreakableItemLayer = 0;
-        public float RayForBreakableItem = 1.0f;
+        public float RayForBreakableItem = 1.25f;
         public CameraShakeProps DashShakeProps = null;
         public CameraShakeProps AimShakeProps = null;
+        public float DashColSizeMultiplier = 0.5f;
     }
     class DashProps {
         public float Charge { get; set; }
@@ -229,6 +234,7 @@
         public Vector2 Pos { get; set; }
         public float MaxCharge { get; set; }
         public float MaxEnergy { get; set; }
+        public float Distance { get; set; }
 
     }
 
