@@ -12,6 +12,7 @@
         [SerializeField] Movement movement = null;
         #endregion
         List<PlayerComponent> components = new List<PlayerComponent> ( );
+        bool bDead = false;
         Rigidbody2D rb = null;
         Transform tf = null;
         Animator anim = null;
@@ -110,6 +111,7 @@
             DomainEvents.Raise (new OnPlayerDead ( ));
             Control.Disable ( );
             Control.UI.Enable ( );
+            bDead = true;
         }
 
         public void SetSaveData (SaveData data) {
@@ -119,9 +121,12 @@
 
         }
         void OnConfirmPressed (InputAction.CallbackContext ctx) {
-            Control.Disable ( );
-            Control.GamePlay.Enable ( );
-            DomainEvents.Raise (new OnStageReset ( ));
+            if (bDead) {
+                Control.Disable ( );
+                Control.GamePlay.Enable ( );
+                DomainEvents.Raise (new OnStageReset ( ));
+                bDead = false;
+            }
         }
         void OnCancelPressed (InputAction.CallbackContext ctx) {
             Control.Disable ( );
@@ -160,6 +165,5 @@
             this.bEnter = IsEnter;
         }
     }
-
 
 }

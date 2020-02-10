@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 969164384914264597}
   m_Layer: 0
-  m_Name: Stage1
+  m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,6 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 969164385910931277}
+  - component: {fileID: 3256007855875949337}
   m_Layer: 0
   m_Name: RecoverableObject
   m_TagString: Untagged
@@ -62,6 +63,18 @@ Transform:
   m_Father: {fileID: 969164384914264597}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!156049354 &3256007855875949337
+Grid:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969164385910931278}
+  m_Enabled: 1
+  m_CellSize: {x: 1, y: 1, z: 1}
+  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellLayout: 0
+  m_CellSwizzle: 0
 --- !u!1 &969164386388194431
 GameObject:
   m_ObjectHideFlags: 0

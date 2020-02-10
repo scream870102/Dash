@@ -27,12 +27,15 @@
                 timer.Reset ( );
                 bPlus = !bPlus;
             }
-            if (bPlus) {
-                transform.position += (Vector3)velocity * Time.deltaTime;
-            }
             else {
-                transform.position -= (Vector3)velocity * Time.deltaTime;
+                if (bPlus) {
+                    transform.position += (Vector3)velocity * Time.deltaTime;
+                }
+                else {
+                    transform.position -= (Vector3)velocity * Time.deltaTime;
+                }
             }
+
         }
 
         override protected void CollisionEnter (Collision2D other) {
@@ -57,7 +60,7 @@
         override public void Init ( ) {
             base.Init ( );
             this.transform.position = initPos;
-            bPlus = true;
+            bPlus = false;
             timer.Reset ( );
         }
     }
