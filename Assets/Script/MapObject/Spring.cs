@@ -5,11 +5,8 @@
     class Spring : AMapObject {
         [SerializeField] Vector2 force = Vector2.zero;
         [SerializeField] ESpringDirection direction = ESpringDirection.UP;
-        override protected void Awake ( ) {
-            base.Awake ( );
-        }
 
-        void OnCollisionEnter2D (Collision2D other) {
+        override protected void CollisionEnter (Collision2D other) {
             if (other.gameObject.tag == "Player") {
                 List<ContactPoint2D> contacts = new List<ContactPoint2D> ( );
                 col.GetContacts (contacts);

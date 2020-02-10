@@ -1,5 +1,4 @@
-﻿﻿
-namespace CJStudio.Dash.MapObject {
+﻿namespace CJStudio.Dash.MapObject {
     using Eccentric.Utils;
 
     using UnityEngine;
@@ -19,12 +18,11 @@ namespace CJStudio.Dash.MapObject {
             velocity = moveRange / time;
         }
 
-        void Start ( ) {
+        override protected void Start ( ) {
             timer = new ScaledTimer (time);
-            Init ( );
         }
 
-        void Update ( ) {
+        override protected void Tick ( ) {
             if (timer.IsFinished) {
                 timer.Reset ( );
                 bPlus = !bPlus;
@@ -36,26 +34,28 @@ namespace CJStudio.Dash.MapObject {
                 transform.position -= (Vector3)velocity * Time.deltaTime;
             }
         }
-        void OnCollisionEnter2D (Collision2D other) {
+
+        override protected void CollisionEnter (Collision2D other) {
             if ((1 << other.gameObject.layer) == passengerLayer.value) {
                 passenger = other.transform;
                 passenger.SetParent (transform);
             }
         }
-        void OnCollisionExit2D (Collision2D other) {
+        override protected void CollisionExit (Collision2D other) {
             if (other.transform == passenger) {
                 passenger.SetParent (null);
                 passenger = null;
             }
         }
-        private void OnDisable ( ) {
+        void OnDisable ( ) {
             if (passenger && passenger.parent == this.transform) {
                 passenger.SetParent (null);
             }
             passenger = null;
-
         }
+
         override public void Init ( ) {
+            base.Init ( );
             this.transform.position = initPos;
             bPlus = true;
             timer.Reset ( );

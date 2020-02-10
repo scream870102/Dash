@@ -10,12 +10,12 @@
             col.isTrigger = true;
             gameObject.layer = LayerMask.NameToLayer ("Default");
         }
-        void OnTriggerEnter2D (Collider2D other) {
+        override protected void TriggerEnter (Collider2D other) {
             if (other.gameObject.tag == "Player")
                 DomainEvents.Raise<OnSpaceAreaEnter> (new OnSpaceAreaEnter (true));
         }
 
-        void OnTriggerExit2D (Collider2D other) {
+        override protected void TriggerExit (Collider2D other) {
             if (other.gameObject.tag == "Player") {
                 DomainEvents.Raise<OnSpaceAreaEnter> (new OnSpaceAreaEnter (false));
             }

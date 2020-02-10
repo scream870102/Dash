@@ -24,7 +24,7 @@
             }
         }
 
-        void OnCollisionEnter2D (Collision2D other) {
+        override protected void CollisionEnter (Collision2D other) {
             if (other.gameObject.tag == "Player") {
                 List<ContactPoint2D> contacts = new List<ContactPoint2D> ( );
                 col.GetContacts (contacts);
@@ -38,7 +38,7 @@
 
         }
 
-        void OnCollisionStay2D (Collision2D other) {
+        override protected void CollisionStay (Collision2D other) {
             if (other.gameObject.tag == "Player") {
                 List<ContactPoint2D> contacts = new List<ContactPoint2D> ( );
                 col.GetContacts (contacts);
@@ -49,7 +49,7 @@
             }
         }
 
-        void OnCollisionExit2D (Collision2D other) {
+        override protected void CollisionExit (Collision2D other) {
             rb.constraints = (RigidbodyConstraints2D.FreezeRotation);
             if (player) {
                 player.SetPushObj (null);

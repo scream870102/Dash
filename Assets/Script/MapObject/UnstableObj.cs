@@ -8,11 +8,12 @@
         ScaledTimer timer = null;
         SpriteRenderer rend = null;
         bool bDisappear = false;
-        void Start ( ) {
+        override protected void Start ( ) {
+            base.Start ( );
             timer = new ScaledTimer (stateDuration);
             rend = GetComponent<SpriteRenderer> ( );
         }
-        void Update ( ) {
+        override protected void Tick ( ) {
             if (timer.IsFinished) {
                 timer.Reset ( );
                 bDisappear = !bDisappear;

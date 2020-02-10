@@ -1,4 +1,4 @@
-﻿namespace CJStudio.Dash.MapObject {
+﻿namespace CJStudio.Dash {
     using P = Player;
     using UnityEngine;
     class InteractableObj : MonoBehaviour {
