@@ -216,13 +216,17 @@ namespace CJStudio.Dash.Player {
                     // vel.x = wallDirection == EHitDirection.LEFT?stats.WallJumpVel: -stats.WallJumpVel;
                     EHitDirection wallDirection = rayCastController.Left?EHitDirection.LEFT : EHitDirection.RIGHT;
                     // from left wall to right wall
-                    if (attr.inputValue.x >= -0.1f && wallDirection == EHitDirection.LEFT)
+                    if (wallDirection == EHitDirection.LEFT)
                         vel.x = stats.WallJumpVel;
-                    // from right wall to left wall
-                    else if (attr.inputValue.x <= 0.1f && wallDirection == EHitDirection.RIGHT)
-                        vel.x = -stats.WallJumpVel;
                     else
-                        return;
+                        vel.x = -stats.WallJumpVel;
+                    // if (attr.inputValue.x >= -0.1f && wallDirection == EHitDirection.LEFT)
+                    //     vel.x = stats.WallJumpVel;
+                    // // from right wall to left wall
+                    // else if (attr.inputValue.x <= 0.1f && wallDirection == EHitDirection.RIGHT)
+                    //     vel.x = -stats.WallJumpVel;
+                    // else
+                    //     return;
                 }
                 vel.y = stats.JumpVel;
                 player.Rb.velocity = vel;

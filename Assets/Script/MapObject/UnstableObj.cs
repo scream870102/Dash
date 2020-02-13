@@ -4,36 +4,41 @@
     using UnityEngine;
     class UnstableObj : AMapObject {
         [SerializeField] float stateDuration = 0f;
-        [SerializeField] Color disableColor = Color.black;
         [SerializeField] bool IsDisappearAtFirst = false;
+        [SerializeField] AnimationClip InAnim = null;
+        [SerializeField] AnimationClip OutAnim = null;
+        Animation anim = null;
         ScaledTimer timer = null;
         SpriteRenderer rend = null;
         bool bDisappear = false;
         override protected void Start ( ) {
             base.Start ( );
-            timer = new ScaledTimer (stateDuration);
+            anim = GetComponent<Animation> ( );
+            timer = new ScaledTimer (stateDuration, false);
             rend = GetComponent<SpriteRenderer> ( );
             bDisappear = IsDisappearAtFirst;
+            rend.color = bDisappear?new Color (1f, 1f, 1f, .25f) : Color.white;
+            col.enabled = !bDisappear;
         }
         override protected void Tick ( ) {
+            if (Mathf.Abs (timer.Remain - anim.clip.length) < 0.01f) {
+                anim.Play (bDisappear?InAnim.name : OutAnim.name);
+            }
             if (timer.IsFinished) {
                 timer.Reset ( );
                 bDisappear = !bDisappear;
-                if (bDisappear) {
-                    col.enabled = false;
-                    rend.color = disableColor;
-                }
-                else {
-                    col.enabled = true;
-                    rend.color = Color.white;
-                }
+                col.enabled = !bDisappear;
             }
         }
         override public void Init ( ) {
             base.Init ( );
+            anim.Stop ( );
             bDisappear = IsDisappearAtFirst;
+            rend.color = bDisappear?new Color (1f, 1f, 1f, .25f) : Color.white;
             timer.Reset ( );
+            col.enabled = !bDisappear;
         }
+
     }
 
 }

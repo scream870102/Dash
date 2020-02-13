@@ -112,6 +112,7 @@
             Control.Disable ( );
             Control.UI.Enable ( );
             bDead = true;
+            Anim.ResetTrigger ("die");
         }
 
         public void SetSaveData (SaveData data) {

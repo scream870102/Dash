@@ -282,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12856685}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 119, y: 0, z: 0}
+  m_LocalPosition: {x: 119.00003, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1390632883}
@@ -681,6 +681,7 @@ GameObject:
   - component: {fileID: 171411941}
   - component: {fileID: 171411940}
   - component: {fileID: 171411939}
+  - component: {fileID: 171411943}
   m_Layer: 0
   m_Name: UnStable (5)
   m_TagString: Untagged
@@ -701,8 +702,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateDuration: 3
-  disableColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
   IsDisappearAtFirst: 0
+  InAnim: {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  OutAnim: {fileID: 7400000, guid: 42ad86bc5ac9bd64dbfb9352083f1528, type: 2}
 --- !u!61 &171411940
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -769,7 +771,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1f355e756836d414bba0aedd1963b974, type: 3}
-  m_Color: {r: 0.5137255, g: 0.6657203, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -793,6 +795,23 @@ Transform:
   m_Father: {fileID: 1033733421}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &171411943
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171411938}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  - {fileID: 7400000, guid: 42ad86bc5ac9bd64dbfb9352083f1528, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &198602331
 GameObject:
   m_ObjectHideFlags: 0
@@ -18621,7 +18640,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: -10}
+  m_LocalPosition: {x: 119.00003, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -19404,6 +19423,7 @@ GameObject:
   - component: {fileID: 722149516}
   - component: {fileID: 722149515}
   - component: {fileID: 722149514}
+  - component: {fileID: 722149517}
   m_Layer: 0
   m_Name: UnStable (4)
   m_TagString: Untagged
@@ -19438,8 +19458,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateDuration: 3
-  disableColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
   IsDisappearAtFirst: 1
+  InAnim: {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  OutAnim: {fileID: 7400000, guid: 42ad86bc5ac9bd64dbfb9352083f1528, type: 2}
 --- !u!61 &722149515
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19506,7 +19527,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1f355e756836d414bba0aedd1963b974, type: 3}
-  m_Color: {r: 1, g: 0.5137255, b: 0.5137255, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -19516,6 +19537,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &722149517
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722149512}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  - {fileID: 7400000, guid: 42ad86bc5ac9bd64dbfb9352083f1528, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &763969814
 GameObject:
   m_ObjectHideFlags: 0
@@ -19800,7 +19838,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910805343}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19, y: -1.0000005, z: 0}
+  m_LocalPosition: {x: 106, y: -0.00000047683716, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1123451618}
@@ -26112,6 +26150,7 @@ GameObject:
   - component: {fileID: 1429831154}
   - component: {fileID: 1429831153}
   - component: {fileID: 1429831152}
+  - component: {fileID: 1429831155}
   m_Layer: 0
   m_Name: UnStable (2)
   m_TagString: Untagged
@@ -26146,8 +26185,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateDuration: 3
-  disableColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
   IsDisappearAtFirst: 1
+  InAnim: {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  OutAnim: {fileID: 7400000, guid: 42ad86bc5ac9bd64dbfb9352083f1528, type: 2}
 --- !u!61 &1429831153
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -26214,7 +26254,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1f355e756836d414bba0aedd1963b974, type: 3}
-  m_Color: {r: 1, g: 0.514151, b: 0.514151, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -26224,6 +26264,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &1429831155
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429831150}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  - {fileID: 7400000, guid: 42ad86bc5ac9bd64dbfb9352083f1528, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &1456984240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26815,6 +26872,7 @@ GameObject:
   - component: {fileID: 1741210313}
   - component: {fileID: 1741210312}
   - component: {fileID: 1741210311}
+  - component: {fileID: 1741210314}
   m_Layer: 0
   m_Name: UnStable
   m_TagString: Untagged
@@ -26849,8 +26907,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateDuration: 3
-  disableColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
   IsDisappearAtFirst: 1
+  InAnim: {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  OutAnim: {fileID: 7400000, guid: 42ad86bc5ac9bd64dbfb9352083f1528, type: 2}
 --- !u!61 &1741210312
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -26917,7 +26976,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1f355e756836d414bba0aedd1963b974, type: 3}
-  m_Color: {r: 1, g: 0.514151, b: 0.514151, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -26927,6 +26986,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &1741210314
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741210309}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  - {fileID: 7400000, guid: 42ad86bc5ac9bd64dbfb9352083f1528, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1764863632
 GameObject:
   m_ObjectHideFlags: 0
@@ -27474,7 +27550,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875100339}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19, y: -4, z: 0}
+  m_LocalPosition: {x: 106, y: -3, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 1347008234}
@@ -27692,6 +27768,7 @@ GameObject:
   - component: {fileID: 2023460533}
   - component: {fileID: 2023460532}
   - component: {fileID: 2023460531}
+  - component: {fileID: 2023460534}
   m_Layer: 0
   m_Name: UnStable (1)
   m_TagString: Untagged
@@ -27726,8 +27803,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateDuration: 3
-  disableColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
   IsDisappearAtFirst: 0
+  InAnim: {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  OutAnim: {fileID: 7400000, guid: 42ad86bc5ac9bd64dbfb9352083f1528, type: 2}
 --- !u!61 &2023460532
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -27794,7 +27872,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1f355e756836d414bba0aedd1963b974, type: 3}
-  m_Color: {r: 0.5137255, g: 0.6657203, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -27804,6 +27882,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &2023460534
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023460529}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: ff8ab97ccf0182a488924dd9d8348dbb, type: 2}
+  - {fileID: 7400000, guid: 42ad86bc5ac9bd64dbfb9352083f1528, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &2024869198
 GameObject:
   m_ObjectHideFlags: 0

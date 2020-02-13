@@ -1,6 +1,5 @@
 ﻿namespace CJStudio.Dash.MapObject {
     using System.Collections.Generic;
-
     using UnityEngine;
     using P = CJStudio.Dash.Player;
     class PushableObj : AMapObject {
