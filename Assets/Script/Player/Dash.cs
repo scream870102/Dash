@@ -4,11 +4,13 @@
 
     using Eccentric.Input;
     using Eccentric.Utils;
+    using Eccentric;
 
     using UnityEngine.InputSystem;
     using UnityEngine;
     [System.Serializable]
     class Dash : PlayerComponent {
+        const float DEG_FOR_CHECK = 5f;
         public event System.Action<DashProps> Aim = null;
         public event System.Action AimEnded = null;
         public event System.Action<DashProps> EnergyChange = null;
@@ -105,10 +107,11 @@
 
         //Call this method when player press use button to reset related value
         void UseDash ( ) {
-            if (bAim && !bUsingDash) {
+            if (bAim && !bUsingDash && bCanDash) {
                 Time.timeScale = normalTimeScale;
                 velocity = props.Distance / stats.AnimTime;
                 bUsingDash = true;
+                bCanDash = false;
                 timer.Reset (stats.AnimTime);
                 AimAnimEnded ( );
                 Player.Anim.SetBool ("dash", true);
@@ -124,18 +127,20 @@
             if (timer.IsFinished) {
                 ResetState ( );
                 bUsingDash = false;
-                bCanDash = false;
+                //bCanDash = false;
                 Player.Anim.SetBool ("dash", false);
             }
             // if touch breakable object reset the state and can using dash again
             #region CHECK_BREAKABLE_OBJECT
             RaycastHit2D result = Physics2D.Raycast (Player.Tf.position, direction, stats.RayForBreakableItem, stats.BreakableItemLayer);
+            if (result.collider == null)result = Physics2D.Raycast (Player.Tf.position, Math.GetDirectionFromDeg (Math.GetDegree (direction) + DEG_FOR_CHECK), stats.RayForBreakableItem, stats.BreakableItemLayer);
+            if (result.collider == null)result = Physics2D.Raycast (Player.Tf.position, Math.GetDirectionFromDeg (Math.GetDegree (direction) - DEG_FOR_CHECK), stats.RayForBreakableItem, stats.BreakableItemLayer);
             if (result.collider != null && result.collider.tag == "Breakable") {
                 result.collider.GetComponent<BreakableObj> ( ).Break ( );
-                ResetState ( );
-                bUsingDash = false;
                 bCanDash = true;
-                Player.Anim.SetBool ("dash", false);
+                // ResetState ( );
+                // bUsingDash = false;
+                // Player.Anim.SetBool ("dash", false);
             }
             #endregion
             if (direction.x != 0f) {
@@ -162,8 +167,8 @@
 
         //Check if player bomb into any collider which can reset its dash state
         void CheckCollision ( ) {
-            if (Player.RayCastController.IsCollide)
-                bCanDash = true;
+            if (!bUsingDash && !bCanDash)
+                bCanDash = Player.RayCastController.IsCollide;
         }
 
         override public void SetSaveData (SaveData data) {

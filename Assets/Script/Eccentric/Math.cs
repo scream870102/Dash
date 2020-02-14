@@ -98,5 +98,12 @@ namespace Eccentric {
         public static float GetDegree (Vector2 direction) {
             return Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
         }
+        public static Vector2 GetDirectionFromRad (float radian) {
+            return new Vector2 (Mathf.Cos (radian), Mathf.Sin (radian)).normalized;
+        }
+        /// <summary>return the vector2 in normalize from degree</summary>
+        public static Vector2 GetDirectionFromDeg (float degree) {
+            return GetDirectionFromRad (degree * Mathf.Deg2Rad).normalized;
+        }
     }
 }

@@ -4,10 +4,12 @@
     public class AMapObject : MonoBehaviour {
         bool bEnableAtFirst = false;
         protected Collider2D col = null;
+        Vector2 initObjPos = Vector2.zero;
         virtual protected void Awake ( ) {
             gameObject.layer = LayerMask.NameToLayer ("Ground");
             bEnableAtFirst = this.enabled;
             col = GetComponent<Collider2D> ( );
+            initObjPos = transform.position;
         }
         virtual protected void Start ( ) {
             col = GetComponent<Collider2D> ( );
@@ -15,6 +17,7 @@
 
         public virtual void Init ( ) {
             this.enabled = bEnableAtFirst;
+            transform.position = initObjPos;
             SetActive (true);
         }
 

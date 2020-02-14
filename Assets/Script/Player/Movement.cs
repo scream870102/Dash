@@ -54,10 +54,11 @@ namespace CJStudio.Dash.Player {
                 Render.ChangeDirectionXWithSpriteRender (bFaceRight, Player.Rend, true);
             }
             #endregion
+#if UNITY_EDITOR
             #region TEST
-            Player.deltaText.text = "fps:" + (1f / Time.unscaledDeltaTime).ToString ("0") + "\nVel:" + Player.Rb.velocity.x.ToString ("0.00") + "\nInput:" + attr.inputValue.x.ToString ("0.00");
+            Player.deltaText.text = "fps:" + (1f / Time.unscaledDeltaTime).ToString ("0") + "\nVel:" + Player.Rb.velocity.x.ToString ("0.00");
             #endregion
-
+#endif
         }
 
         override public void FixedTick ( ) { }

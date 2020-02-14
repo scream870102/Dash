@@ -9,7 +9,7 @@
     class Player : MonoBehaviour {
         #region TEST
         public Text deltaText = null;
-        [SerializeField] Movement movement = null;
+        [SerializeField] Dash dash = null;
         #endregion
         List<PlayerComponent> components = new List<PlayerComponent> ( );
         bool bDead = false;
@@ -58,7 +58,7 @@
             components.Add (new Movement (this, movementStats));
             components.Add (new Dash (this, dashStats));
 #if UNITY_EDITOR
-            movement = components [0] as Movement;
+            dash = components [1] as Dash;
 #endif
         }
 
