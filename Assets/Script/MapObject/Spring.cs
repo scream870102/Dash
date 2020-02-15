@@ -5,7 +5,11 @@
     class Spring : AMapObject {
         [SerializeField] Vector2 force = Vector2.zero;
         [SerializeField] ESpringDirection direction = ESpringDirection.UP;
-
+        Animator animator = null;
+        override protected void Start ( ) {
+            base.Start ( );
+            animator = GetComponent<Animator> ( );
+        }
         override protected void CollisionEnter (Collision2D other) {
             if (other.gameObject.tag == "Player") {
                 List<ContactPoint2D> contacts = new List<ContactPoint2D> ( );
@@ -22,6 +26,7 @@
                                 p.AddHoriVelocity (force.x);
                             else if (direction == ESpringDirection.RIGHT && o.normal.x == -1)
                                 p.AddHoriVelocity (force.x);
+                            animator.SetTrigger ("Pop");
                             break;
                         }
                     }
