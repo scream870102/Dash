@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6219498347009671960
+--- !u!1 &3140959814914379139
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7048445615627990849}
-  - component: {fileID: 2624102765145670873}
-  - component: {fileID: 4271457465812822969}
-  - component: {fileID: 7715063906783460872}
-  - component: {fileID: 4475058730309670189}
+  - component: {fileID: 2024347645387078106}
+  - component: {fileID: 6461637472936479298}
+  - component: {fileID: 5080541326520165666}
+  - component: {fileID: 1645959264786215059}
+  - component: {fileID: 4889902801305852854}
+  - component: {fileID: 3140959814914379138}
   m_Layer: 0
-  m_Name: Spring
+  m_Name: SpringWithCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7048445615627990849
+--- !u!4 &2024347645387078106
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6219498347009671960}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 3140959814914379139}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 142, y: 24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2624102765145670873
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!212 &6461637472936479298
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6219498347009671960}
+  m_GameObject: {fileID: 3140959814914379139}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -84,13 +85,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4271457465812822969
+--- !u!61 &5080541326520165666
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6219498347009671960}
+  m_GameObject: {fileID: 3140959814914379139}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -110,28 +111,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7715063906783460872
+--- !u!114 &1645959264786215059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6219498347009671960}
+  m_GameObject: {fileID: 3140959814914379139}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec5ee3d9381f7c544bb877802104a3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: {x: 30, y: 30}
-  direction: 0
---- !u!95 &4475058730309670189
+  force: {x: 67.5, y: 30}
+  direction: 3
+--- !u!95 &4889902801305852854
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6219498347009671960}
+  m_GameObject: {fileID: 3140959814914379139}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a575278a54212a34ba8d0bb84a89d6a7, type: 2}
@@ -143,3 +144,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &3140959814914379138
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3140959814914379139}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.5000001, y: 0.33177945}
+  serializedVersion: 2
+  m_Radius: 0.33177945

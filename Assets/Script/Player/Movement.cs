@@ -111,8 +111,9 @@ namespace CJStudio.Dash.Player {
             attr.bExternalVelPositive = attr.externalHoriVel > 0f;
         }
 
-        public void AddVertVelocity (float vel) {
+        public void AddVertVelocity (float vel, bool IsResetVel = false) {
             Vector2 nVel = Player.Rb.velocity;
+            if (IsResetVel)nVel.y = 0f;
             nVel.y += vel;
             Player.Rb.velocity = nVel;
         }

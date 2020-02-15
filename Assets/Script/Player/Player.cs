@@ -138,8 +138,8 @@
             Movement.AddHoriVelocity (vel);
         }
 
-        public void AddVertVelocity (float vel) {
-            Movement.AddVertVelocity (vel);
+        public void AddVertVelocity (float vel, bool IsResetVel = false) {
+            Movement.AddVertVelocity (vel, IsResetVel);
         }
 
         public void SetPushObj (Collider2D obj = null) {
