@@ -14,9 +14,11 @@ namespace CJStudio.Dash.Player {
         BasicMoveStrategy basicMove = null;
         SpaceMoveStrategy spaceMove = null;
         SlideMoveStrategy slideMove = null;
+#if UNITY_EDITOR
+        [ReadOnly, SerializeField]
+#endif
         AMoveAttr attr = null;
         RayCastController rayCastController = null;
-        bool bFaceRight = true;
         public Movement (Player player, MovementStats stats) : base (player) {
             this.stats = stats;
             rayCastController = player.RayCastController;
@@ -33,12 +35,8 @@ namespace CJStudio.Dash.Player {
             Move ( );
             Jump ( );
             #region WALL_SLIDE_VFX
-            if (attr.bWallSliding)
-                Player.Particle.Play ( );
-            else {
-                Player.Particle.Clear ( );
-                Player.Particle.Pause ( );
-            }
+            if (attr.bWallSliding)Player.FX.PlayVFX (EVFXType.GRAB, attr.bFaceRight);
+            else Player.FX.StopVFX (EVFXType.GRAB, attr.bFaceRight);
             #endregion
             #region ANIMATOR_PAPAMETER
             Player.Anim.SetFloat ("velX", Mathf.Abs (attr.inputValue.x));
@@ -48,10 +46,10 @@ namespace CJStudio.Dash.Player {
             #region SPRITE_RENDER_DIRECTION
             if (!Player.IsDashing && Player.Rb.velocity.x != 0f) {
                 if (attr.bWallSliding)
-                    bFaceRight = rayCastController.Right;
+                    attr.bFaceRight = rayCastController.Right;
                 else
-                    bFaceRight = Player.Rb.velocity.x > 0f;
-                Render.ChangeDirectionXWithSpriteRender (bFaceRight, Player.Rend, true);
+                    attr.bFaceRight = Player.Rb.velocity.x > 0f;
+                Render.ChangeDirectionXWithSpriteRender (attr.bFaceRight, Player.Rend, true);
             }
             #endregion
 #if UNITY_EDITOR
@@ -214,26 +212,18 @@ namespace CJStudio.Dash.Player {
                 Vector2 vel = player.Rb.velocity;
                 //Wall Jump
                 if (attr.bWallSliding && !rayCastController.Down) {
-                    // EHitDirection wallDirection = rayCastController.Left?EHitDirection.LEFT : EHitDirection.RIGHT;
-                    // vel.x = wallDirection == EHitDirection.LEFT?stats.WallJumpVel: -stats.WallJumpVel;
                     EHitDirection wallDirection = rayCastController.Left?EHitDirection.LEFT : EHitDirection.RIGHT;
                     // from left wall to right wall
                     if (wallDirection == EHitDirection.LEFT)
                         vel.x = stats.WallJumpVel;
                     else
                         vel.x = -stats.WallJumpVel;
-                    // if (attr.inputValue.x >= -0.1f && wallDirection == EHitDirection.LEFT)
-                    //     vel.x = stats.WallJumpVel;
-                    // // from right wall to left wall
-                    // else if (attr.inputValue.x <= 0.1f && wallDirection == EHitDirection.RIGHT)
-                    //     vel.x = -stats.WallJumpVel;
-                    // else
-                    //     return;
                 }
                 vel.y = stats.JumpVel;
                 player.Rb.velocity = vel;
                 attr.bCanJump = false;
                 player.Anim.SetTrigger ("jump");
+                player.FX.PlayVFX (EVFXType.DUST, attr.bFaceRight);
             }
             #region CHANGE_GRAVITY_SCALE
             if (player.Rb.velocity.y <= 0f && !attr.bWallSliding)
@@ -391,6 +381,7 @@ namespace CJStudio.Dash.Player {
         public bool bExternalVel = false;
         public bool bExternalVelPositive = false;
         public float originGravity = 0f;
+        public bool bFaceRight = false;
         #region LERP
         public const float smoothTime = .1f;
         public float velocityXSmoothing;

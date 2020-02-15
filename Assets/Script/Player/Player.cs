@@ -9,7 +9,7 @@
     class Player : MonoBehaviour {
         #region TEST
         public Text deltaText = null;
-        [SerializeField] Dash dash = null;
+        [SerializeField] Movement move = null;
         #endregion
         List<PlayerComponent> components = new List<PlayerComponent> ( );
         bool bDead = false;
@@ -17,25 +17,24 @@
         Transform tf = null;
         Animator anim = null;
         SpriteRenderer rend = null;
-        TrailRenderer trail = null;
         BoxCollider2D col = null;
-        ParticleSystem particle = null;
+        Transform dustTf = null;
         GameController gameController = null;
         [SerializeField] RayCastController rayCastController = null;
         #region STATS
         [SerializeField] MovementStats movementStats = null;
         [SerializeField] DashStats dashStats = null;
+        [SerializeField] FXStats fXStats = null;
         #endregion
         public RayCastController RayCastController => rayCastController;
         public Rigidbody2D Rb => rb;
         public Transform Tf => tf;
         public Animator Anim => anim;
         public SpriteRenderer Rend => rend;
-        public TrailRenderer Trail => trail;
         public BoxCollider2D Col => col;
-        public ParticleSystem Particle => particle;
-        public Dash Dash => components [1] as Dash;
         public Movement Movement => components [0] as Movement;
+        public Dash Dash => components [1] as Dash;
+        public FX FX => components [2] as FX;
         public PlayerControl Control => GameManager.Instance == null?null : GameManager.Instance.Control;
         public bool IsDashing => Dash.IsDashing;
         public Collider2D PushObj { get; private set; }
@@ -49,16 +48,13 @@
             rb = GetComponent<Rigidbody2D> ( );
             anim = GetComponent<Animator> ( );
             rend = GetComponent<SpriteRenderer> ( );
-            trail = GetComponentInChildren<TrailRenderer> ( );
-            particle = GetComponentInChildren<ParticleSystem> ( );
             col = GetComponent<BoxCollider2D> ( );
-            particle.Clear ( );
-            particle.Stop ( );
             tf = this.transform;
             components.Add (new Movement (this, movementStats));
             components.Add (new Dash (this, dashStats));
+            components.Add (new FX (this, fXStats));
 #if UNITY_EDITOR
-            dash = components [1] as Dash;
+            move = components [0] as Movement;
 #endif
         }
 

@@ -117,7 +117,7 @@
                 Player.Anim.SetBool ("dash", true);
                 Player.GameController.CameraController.ShakeCamera (stats.DashShakeProps);
                 Player.Rb.velocity = Vector2.zero;
-                Player.Trail.enabled = true;
+                Player.FX.PlayVFX (EVFXType.TRAIL);
                 GamepadController.VibrateController (EVibrateDuration.NORMAL, EVibrateStrength.STRONG);
                 Player.Col.size = oriColSize * stats.DashColSizeMultiplier;
             }
@@ -127,7 +127,6 @@
             if (timer.IsFinished) {
                 ResetState ( );
                 bUsingDash = false;
-                //bCanDash = false;
                 Player.Anim.SetBool ("dash", false);
             }
             // if touch breakable object reset the state and can using dash again
@@ -138,9 +137,6 @@
             if (result.collider != null && result.collider.tag == "Breakable") {
                 result.collider.GetComponent<BreakableObj> ( ).Break ( );
                 bCanDash = true;
-                // ResetState ( );
-                // bUsingDash = false;
-                // Player.Anim.SetBool ("dash", false);
             }
             #endregion
             if (direction.x != 0f) {
@@ -162,7 +158,7 @@
             Player.Col.size = oriColSize;
             Time.timeScale = normalTimeScale;
             AimAnimEnded ( );
-            Player.Trail.enabled = false;
+            Player.FX.StopVFX (EVFXType.TRAIL);
         }
 
         //Check if player bomb into any collider which can reset its dash state
