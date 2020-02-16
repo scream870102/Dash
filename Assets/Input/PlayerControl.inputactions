@@ -139,6 +139,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "48505670-d1f2-48f8-9354-d67774276c96",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "2D Vector",
                     "id": "caac4a72-9494-4b70-914a-3b854359c3da",
                     "path": "2DVector",

@@ -209,10 +209,11 @@
             Control.GamePlay.Aim.canceled -= OnAimBtnCanceled;
         }
 
-        public void ForceStopDash ( ) {
+        public void ForceStopDash (bool IsResetDash = false) {
             ResetState ( );
             bUsingDash = false;
             Player.Anim.SetBool ("dash", false);
+            if (IsResetDash)bCanDash = true;
         }
     }
 

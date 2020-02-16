@@ -143,8 +143,8 @@
             Anim.SetBool ("push", obj != null);
         }
 
-        public void ForceStopDash ( ) {
-            Dash.ForceStopDash ( );
+        public void ForceStopDash (bool IsResetDash = false) {
+            Dash.ForceStopDash (IsResetDash );
         }
 
     }

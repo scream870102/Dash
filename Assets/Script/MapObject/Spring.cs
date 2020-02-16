@@ -11,11 +11,12 @@
         override protected void Start ( ) {
             base.Start ( );
             animator = GetComponent<Animator> ( );
+            gameObject.layer = LayerMask.NameToLayer ("Default");
         }
         override protected void TriggerEnter (Collider2D other) {
             if (other.gameObject.tag == "Player") {
                 P.Player p = GameManager.Instance.Player;
-                if (p.IsDashing)p.ForceStopDash ( );
+                if (p.IsDashing)p.ForceStopDash (true);
                 if (direction == ESpringDirection.UP)
                     p.AddVertVelocity (force.y, true);
                 else if (direction == ESpringDirection.DOWN)
