@@ -130,8 +130,8 @@
             GameManager.Instance.LoadScene ("TitleScene");
         }
 
-        public void AddHoriVelocity (float vel) {
-            Movement.AddHoriVelocity (vel);
+        public void AddHoriVelocity (float vel, bool IsResetVel = false) {
+            Movement.AddHoriVelocity (vel, IsResetVel);
         }
 
         public void AddVertVelocity (float vel, bool IsResetVel = false) {
@@ -141,6 +141,10 @@
         public void SetPushObj (Collider2D obj = null) {
             this.PushObj = obj;
             Anim.SetBool ("push", obj != null);
+        }
+
+        public void ForceStopDash ( ) {
+            Dash.ForceStopDash ( );
         }
 
     }

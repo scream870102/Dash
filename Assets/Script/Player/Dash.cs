@@ -125,9 +125,7 @@
 
         void UsingDash ( ) {
             if (timer.IsFinished) {
-                ResetState ( );
-                bUsingDash = false;
-                Player.Anim.SetBool ("dash", false);
+                ForceStopDash ( );
             }
             // if touch breakable object reset the state and can using dash again
             #region CHECK_BREAKABLE_OBJECT
@@ -209,6 +207,12 @@
             Control.GamePlay.Aim.started -= OnAimBtnStarted;
             Control.GamePlay.Aim.performed -= OnAimBtnPerformed;
             Control.GamePlay.Aim.canceled -= OnAimBtnCanceled;
+        }
+
+        public void ForceStopDash ( ) {
+            ResetState ( );
+            bUsingDash = false;
+            Player.Anim.SetBool ("dash", false);
         }
     }
 

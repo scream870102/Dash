@@ -21,12 +21,6 @@ namespace CJStudio.Dash {
 
         [MenuItem ("GameObject/Stage/Add New Stage")]
         static void NewStage ( ) {
-            // GameObject parent = new GameObject ("Stage");
-            // GameObject recoverObjectParent = new GameObject ("RecoverObjectParent");
-            // recoverObjectParent.transform.parent = parent.transform;
-            // GameObject savePoint = GameObject.Instantiate (PrefabUtility.LoadPrefabContents ("Assets/Prefab/SavePoint.prefab"));
-            // savePoint.name = "SavePoint";
-            // savePoint.transform.parent = parent.transform;
             GameObject stage = GameObject.Instantiate (PrefabUtility.LoadPrefabContents ("Assets/Prefab/Stage.prefab"));
             stage.name = "Stage";
         }
