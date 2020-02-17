@@ -211,7 +211,7 @@ namespace CJStudio.Dash.Player {
         }
 
         override public void Jump ( ) {
-            if (attr.bCanJump && attr.bJumpPressed) {
+            if (attr.bCanJump && attr.bJumpPressed && !player.IsDashing) {
                 Vector2 vel = player.Rb.velocity;
                 //Wall Jump
                 if (attr.bWallSliding && !rayCastController.Down) {

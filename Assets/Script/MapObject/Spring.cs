@@ -11,7 +11,7 @@
         override protected void Start ( ) {
             base.Start ( );
             animator = GetComponent<Animator> ( );
-            gameObject.layer = LayerMask.NameToLayer ("Default");
+            gameObject.layer = LayerMask.NameToLayer ("Spring");
         }
         override protected void TriggerEnter (Collider2D other) {
             if (other.gameObject.tag == "Player") {

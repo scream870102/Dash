@@ -144,7 +144,7 @@
         }
 
         public void ForceStopDash (bool IsResetDash = false) {
-            Dash.ForceStopDash (IsResetDash );
+            Dash.ForceStopDash (IsResetDash);
         }
 
     }

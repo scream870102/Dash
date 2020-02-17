@@ -172,15 +172,18 @@
         }
 
         void OnAimBtnStarted (InputAction.CallbackContext ctx) {
-            if (!bUsingDash && bCanDash) {
-                ResetState ( );
-                bAim = true;
-                Player.GameController.CameraController.SetCameraShake (stats.AimShakeProps);
-                Player.Anim.SetBool ("aim", true);
-                timer.Reset (stats.BasicChargeTime);
+            if (bAim && !bUsingDash) {
                 direction = ctx.ReadValue<Vector2> ( ).normalized;
-                Time.timeScale = stats.AimTimeScale;
             }
+            // if (!bUsingDash && bCanDash) {
+            //     ResetState ( );
+            //     bAim = true;
+            //     Player.GameController.CameraController.SetCameraShake (stats.AimShakeProps);
+            //     Player.Anim.SetBool ("aim", true);
+            //     timer.Reset (stats.BasicChargeTime);
+            //     direction = ctx.ReadValue<Vector2> ( ).normalized;
+            //     Time.timeScale = stats.AimTimeScale;
+            // }
         }
         void OnAimBtnPerformed (InputAction.CallbackContext ctx) {
             if (bAim && !bUsingDash) {
@@ -188,15 +191,38 @@
             }
         }
         void OnAimBtnCanceled (InputAction.CallbackContext ctx) {
+            // if (!bUsingDash) {
+            //     ResetState ( );
+            // }
+        }
+        void OnJumpBtnPressed (InputAction.CallbackContext ctx) {
+            UseDash ( );
+        }
+        void OnDashBtnPressed (InputAction.CallbackContext ctx) {
+            if (!bUsingDash && bCanDash) {
+                ResetState ( );
+                bAim = true;
+                Player.GameController.CameraController.SetCameraShake (stats.AimShakeProps);
+                Player.Anim.SetBool ("aim", true);
+                timer.Reset (stats.BasicChargeTime);
+                //direction = Vector2.right;
+                direction = Control.GamePlay.Aim.ReadValue<Vector2> ( ).normalized;
+                Time.timeScale = stats.AimTimeScale;
+            }
+            //UseDash ( );
+        }
+
+        void OnDashBtnCanceled (InputAction.CallbackContext ctx) {
+            //UseDash ( );
             if (!bUsingDash) {
                 ResetState ( );
             }
         }
-        void OnDashBtnPressed (InputAction.CallbackContext ctx) {
-            UseDash ( );
-        }
+
         override public void OnEnable ( ) {
             Control.GamePlay.Dash.started += OnDashBtnPressed;
+            Control.GamePlay.Dash.canceled += OnDashBtnCanceled;
+            Control.GamePlay.Jump.started += OnJumpBtnPressed;
             Control.GamePlay.Aim.started += OnAimBtnStarted;
             Control.GamePlay.Aim.performed += OnAimBtnPerformed;
             Control.GamePlay.Aim.canceled += OnAimBtnCanceled;
@@ -204,6 +230,8 @@
 
         override public void OnDisable ( ) {
             Control.GamePlay.Dash.started -= OnDashBtnPressed;
+            Control.GamePlay.Dash.canceled -= OnDashBtnCanceled;
+            Control.GamePlay.Jump.started -= OnJumpBtnPressed;
             Control.GamePlay.Aim.started -= OnAimBtnStarted;
             Control.GamePlay.Aim.performed -= OnAimBtnPerformed;
             Control.GamePlay.Aim.canceled -= OnAimBtnCanceled;
