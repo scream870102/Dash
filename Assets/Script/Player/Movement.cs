@@ -74,33 +74,33 @@ namespace CJStudio.Dash.Player {
         }
 
         override public void OnEnable ( ) {
-            Control.GamePlay.Move.performed += OnMoveValueChanged;
-            Control.GamePlay.Move.canceled += OnMoveValueReleased;
-            Control.GamePlay.Jump.started += OnJumpPressed;
-            Control.GamePlay.Jump.canceled += OnJumpReleased;
+            Control.GamePlay.Move.performed += OnMoveBtnPerformed;
+            Control.GamePlay.Move.canceled += OnMoveBtnCanceled;
+            Control.GamePlay.Jump.started += OnJumpBtnStarted;
+            Control.GamePlay.Jump.canceled += OnJumpBtnCanceled;
             DomainEvents.Register<OnSpaceAreaEnter> (OnSpaceAreaEnter);
             DomainEvents.Register<OnSlideAreaEnter> (OnSlideAreaEnter);
         }
         override public void OnDisable ( ) {
-            Control.GamePlay.Move.performed -= OnMoveValueChanged;
-            Control.GamePlay.Move.canceled -= OnMoveValueReleased;
-            Control.GamePlay.Jump.started -= OnJumpPressed;
-            Control.GamePlay.Jump.canceled -= OnJumpReleased;
+            Control.GamePlay.Move.performed -= OnMoveBtnPerformed;
+            Control.GamePlay.Move.canceled -= OnMoveBtnCanceled;
+            Control.GamePlay.Jump.started -= OnJumpBtnStarted;
+            Control.GamePlay.Jump.canceled -= OnJumpBtnCanceled;
             DomainEvents.UnRegister<OnSpaceAreaEnter> (OnSpaceAreaEnter);
             DomainEvents.UnRegister<OnSlideAreaEnter> (OnSlideAreaEnter);
         }
 
-        void OnMoveValueChanged (InputAction.CallbackContext ctx) {
+        void OnMoveBtnPerformed (InputAction.CallbackContext ctx) {
             attr.inputValue = ctx.ReadValue<Vector2> ( );
         }
-        void OnMoveValueReleased (InputAction.CallbackContext ctx) {
+        void OnMoveBtnCanceled (InputAction.CallbackContext ctx) {
             attr.inputValue = Vector2.zero;
         }
 
-        void OnJumpPressed (InputAction.CallbackContext ctx) {
+        void OnJumpBtnStarted (InputAction.CallbackContext ctx) {
             attr.bJumpPressed = true;
         }
-        void OnJumpReleased (InputAction.CallbackContext ctx) {
+        void OnJumpBtnCanceled (InputAction.CallbackContext ctx) {
             attr.bJumpPressed = false;
         }
 
@@ -225,6 +225,7 @@ namespace CJStudio.Dash.Player {
                 vel.y = stats.JumpVel;
                 player.Rb.velocity = vel;
                 attr.bCanJump = false;
+                attr.bJumpPressed = false;
                 player.Anim.SetTrigger ("jump");
                 player.FX.PlayVFX (EVFXType.DUST, attr.bFaceRight);
             }

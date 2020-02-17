@@ -27,6 +27,9 @@
                     stats.TrailVFX.enabled = true;
                     stats.TrailParticle.Play ( );
                     break;
+                case EVFXType.CHARGE:
+                    stats.ChargeParticle.Play ( );
+                    break;
             }
         }
 
@@ -41,6 +44,9 @@
                 case EVFXType.TRAIL:
                     stats.TrailVFX.enabled = false;
                     stats.TrailParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
+                    break;
+                case EVFXType.CHARGE:
+                    stats.ChargeParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
                     break;
             }
         }
@@ -57,6 +63,7 @@
         public ParticleSystem DustVFX = null;
         public TrailRenderer TrailVFX = null;
         public ParticleSystem TrailParticle = null;
+        public ParticleSystem ChargeParticle = null;
         public Transform GrabTF { get; set; }
         public Transform DustTF { get; set; }
     }
@@ -64,5 +71,6 @@
         GRAB,
         DUST,
         TRAIL,
+        CHARGE,
     }
 }

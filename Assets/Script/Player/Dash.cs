@@ -96,6 +96,7 @@
             float chargeRatio = charge / stats.MaxCharge;
             float distance = chargeRatio * (chargeRatio >= chargeJudge?stats.MaxChargeMultiplier : stats.MinChargeMultiplier);
             props.Distance = distance;
+            props.MaxDistance = stats.MaxChargeMultiplier;
             if (Aim != null)
                 Aim (props);
         }
@@ -146,6 +147,7 @@
 
         //Call this method to reset all vars before a new Dash
         void ResetState ( ) {
+            Player.FX.StopVFX (EVFXType.CHARGE);
             bAim = false;
             Player.Anim.SetBool ("aim", false);
             bUsingEnergy = false;
@@ -175,66 +177,49 @@
             if (bAim && !bUsingDash) {
                 direction = ctx.ReadValue<Vector2> ( ).normalized;
             }
-            // if (!bUsingDash && bCanDash) {
-            //     ResetState ( );
-            //     bAim = true;
-            //     Player.GameController.CameraController.SetCameraShake (stats.AimShakeProps);
-            //     Player.Anim.SetBool ("aim", true);
-            //     timer.Reset (stats.BasicChargeTime);
-            //     direction = ctx.ReadValue<Vector2> ( ).normalized;
-            //     Time.timeScale = stats.AimTimeScale;
-            // }
         }
         void OnAimBtnPerformed (InputAction.CallbackContext ctx) {
             if (bAim && !bUsingDash) {
                 direction = ctx.ReadValue<Vector2> ( ).normalized;
             }
         }
-        void OnAimBtnCanceled (InputAction.CallbackContext ctx) {
-            // if (!bUsingDash) {
-            //     ResetState ( );
-            // }
-        }
-        void OnJumpBtnPressed (InputAction.CallbackContext ctx) {
+        void OnJumpBtnStarted (InputAction.CallbackContext ctx) {
             UseDash ( );
         }
-        void OnDashBtnPressed (InputAction.CallbackContext ctx) {
+        void OnDashBtnStarted (InputAction.CallbackContext ctx) {
             if (!bUsingDash && bCanDash) {
                 ResetState ( );
                 bAim = true;
                 Player.GameController.CameraController.SetCameraShake (stats.AimShakeProps);
                 Player.Anim.SetBool ("aim", true);
                 timer.Reset (stats.BasicChargeTime);
-                //direction = Vector2.right;
-                direction = Control.GamePlay.Aim.ReadValue<Vector2> ( ).normalized;
+                Vector2 tmp = Control.GamePlay.Aim.ReadValue<Vector2> ( ).normalized;
+                direction = tmp == Vector2.zero?Vector2.right : tmp;
                 Time.timeScale = stats.AimTimeScale;
+                Player.FX.PlayVFX (EVFXType.CHARGE);
             }
-            //UseDash ( );
         }
 
         void OnDashBtnCanceled (InputAction.CallbackContext ctx) {
-            //UseDash ( );
             if (!bUsingDash) {
                 ResetState ( );
             }
         }
 
         override public void OnEnable ( ) {
-            Control.GamePlay.Dash.started += OnDashBtnPressed;
+            Control.GamePlay.Dash.started += OnDashBtnStarted;
             Control.GamePlay.Dash.canceled += OnDashBtnCanceled;
-            Control.GamePlay.Jump.started += OnJumpBtnPressed;
+            Control.GamePlay.Jump.started += OnJumpBtnStarted;
             Control.GamePlay.Aim.started += OnAimBtnStarted;
             Control.GamePlay.Aim.performed += OnAimBtnPerformed;
-            Control.GamePlay.Aim.canceled += OnAimBtnCanceled;
         }
 
         override public void OnDisable ( ) {
-            Control.GamePlay.Dash.started -= OnDashBtnPressed;
+            Control.GamePlay.Dash.started -= OnDashBtnStarted;
             Control.GamePlay.Dash.canceled -= OnDashBtnCanceled;
-            Control.GamePlay.Jump.started -= OnJumpBtnPressed;
+            Control.GamePlay.Jump.started -= OnJumpBtnStarted;
             Control.GamePlay.Aim.started -= OnAimBtnStarted;
             Control.GamePlay.Aim.performed -= OnAimBtnPerformed;
-            Control.GamePlay.Aim.canceled -= OnAimBtnCanceled;
         }
 
         public void ForceStopDash (bool IsResetDash = false) {
@@ -269,6 +254,7 @@
         public float MaxCharge { get; set; }
         public float MaxEnergy { get; set; }
         public float Distance { get; set; }
+        public float MaxDistance { get; set; }
 
     }
 

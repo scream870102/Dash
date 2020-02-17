@@ -32,10 +32,9 @@ namespace CJStudio.Dash {
                 dashUI.SetActive (true);
             }
             dashUI.transform.position = e.Pos;
-            targetSprite.transform.position = e.Pos + e.Direction * e.Distance;
             float degree = Math.GetDegree (e.Direction);
-            targetSprite.flipY = degree > 90f || degree < -90f;
-            arrowSprite.size = new Vector2 (e.Distance, 1f);
+            targetSprite.size = new Vector2 ((e.Distance + .99f), 1f);
+            arrowSprite.size = new Vector2 (e.MaxDistance + 1f, 1f);
             dashUI.transform.rotation = Quaternion.Euler (0f, 0f, degree);
         }
         void OnDashEnded ( ) {
