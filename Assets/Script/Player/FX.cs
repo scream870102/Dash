@@ -7,6 +7,7 @@
             this.stats = stats;
             stats.GrabTF = stats.GrabVFX.transform;
             stats.DustTF = stats.DustVFX.transform;
+            stats.DashTF = stats.DashVFX.transform;
         }
         public void PlayVFX (EVFXType type, bool IsFacingRight = true) {
             switch (type) {
@@ -26,9 +27,16 @@
                 case EVFXType.TRAIL:
                     stats.TrailVFX.enabled = true;
                     stats.TrailParticle.Play ( );
+                    Vector3 dashS = stats.DashTF.localScale;
+                    dashS.x = IsFacingRight?1f: -1f;
+                    stats.DashTF.localScale = dashS;
+                    stats.DashVFX.Play ( );
                     break;
                 case EVFXType.CHARGE:
                     stats.ChargeParticle.Play ( );
+                    break;
+                case EVFXType.AURA:
+                    stats.AuraParticle.Play ( );
                     break;
             }
         }
@@ -44,9 +52,13 @@
                 case EVFXType.TRAIL:
                     stats.TrailVFX.enabled = false;
                     stats.TrailParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
+                    stats.DashVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
                     break;
                 case EVFXType.CHARGE:
                     stats.ChargeParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
+                    break;
+                case EVFXType.AURA:
+                    stats.AuraParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
                     break;
             }
         }
@@ -64,6 +76,9 @@
         public TrailRenderer TrailVFX = null;
         public ParticleSystem TrailParticle = null;
         public ParticleSystem ChargeParticle = null;
+        public ParticleSystem AuraParticle = null;
+        public ParticleSystem DashVFX = null;
+        public Transform DashTF { get; set; }
         public Transform GrabTF { get; set; }
         public Transform DustTF { get; set; }
     }
@@ -72,5 +87,6 @@
         DUST,
         TRAIL,
         CHARGE,
+        AURA,
     }
 }

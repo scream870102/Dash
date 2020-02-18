@@ -19,6 +19,7 @@ namespace CJStudio.Dash.Player {
 #endif
         AMoveAttr attr = null;
         RayCastController rayCastController = null;
+        public bool IsFacingRight => attr.bFaceRight;
         public Movement (Player player, MovementStats stats) : base (player) {
             this.stats = stats;
             rayCastController = player.RayCastController;

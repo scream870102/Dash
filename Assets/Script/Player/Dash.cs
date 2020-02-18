@@ -45,6 +45,8 @@
         }
 
         override public void Tick ( ) {
+            if (bCanDash)Player.FX.PlayVFX (EVFXType.AURA);
+            else Player.FX.StopVFX (EVFXType.AURA);
             CheckCollision ( );
             if (bAim && !bUsingDash) {
 #if UNITY_EDITOR
@@ -118,7 +120,7 @@
                 Player.Anim.SetBool ("dash", true);
                 Player.GameController.CameraController.ShakeCamera (stats.DashShakeProps);
                 Player.Rb.velocity = Vector2.zero;
-                Player.FX.PlayVFX (EVFXType.TRAIL);
+                Player.FX.PlayVFX (EVFXType.TRAIL, Player.IsFacingRight);
                 GamepadController.VibrateController (EVibrateDuration.NORMAL, EVibrateStrength.STRONG);
                 Player.Col.size = oriColSize * stats.DashColSizeMultiplier;
             }

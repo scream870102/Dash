@@ -37,6 +37,7 @@
         public FX FX => components [2] as FX;
         public PlayerControl Control => GameManager.Instance == null?null : GameManager.Instance.Control;
         public bool IsDashing => Dash.IsDashing;
+        public bool IsFacingRight => Movement.IsFacingRight;
         public Collider2D PushObj { get; private set; }
         public GameController GameController {
             get {
