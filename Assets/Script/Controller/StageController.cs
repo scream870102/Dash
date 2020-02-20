@@ -21,11 +21,11 @@ namespace CJStudio.Dash {
         }
 
         public void SetSavePoint (Stage stage, P.Player player) {
+            DomainEvents.Raise<OnStageChange> (new OnStageChange (stage, currentStage));
             currentStage = stage;
             //get player data
             this.player = player;
             playerData = new SaveData (player.Dash.Energy, player.Dash.CanDash);
-            DomainEvents.Raise<OnStageChange> (new OnStageChange (stage));
 
         }
         void LoadSavePoint ( ) {
@@ -52,9 +52,12 @@ namespace CJStudio.Dash {
     }
     class OnStageChange : IDomainEvent {
         Stage activeStage;
+        Stage prevStage;
         public Stage ActiveStage => activeStage;
-        public OnStageChange (Stage stage) {
+        public Stage PrevStage => prevStage;
+        public OnStageChange (Stage stage, Stage prevStage) {
             this.activeStage = stage;
+            this.prevStage = prevStage;
         }
     }
 }

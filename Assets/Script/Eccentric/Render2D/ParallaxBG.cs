@@ -13,6 +13,7 @@ namespace Eccentric.Render2D {
         [Range (0f, 1000f)]
         [SerializeField] float factor = 1f;
         [SerializeField] new Transform camera = null;
+        [SerializeField] bool isInvert = false;
         Vector3 prevCamPos = Vector3.zero;
         float [] parallaxScales = null;
 
@@ -21,7 +22,7 @@ namespace Eccentric.Render2D {
             prevCamPos = camera.position;
             parallaxScales = new float [bgS.Length];
             for (int i = 0; i < bgS.Length; i++)
-                parallaxScales [i] = bgS [i].position.z * -1f;
+                parallaxScales [i] = bgS [i].position.z * (isInvert?1f: -1f);
         }
 
         // Update is called once per frame

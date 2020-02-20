@@ -121,6 +121,7 @@
                 Player.GameController.CameraController.ShakeCamera (stats.DashShakeProps);
                 Player.Rb.velocity = Vector2.zero;
                 Player.FX.PlayVFX (EVFXType.TRAIL, Player.IsFacingRight);
+                Player.FX.PlaySFX (ESFXType.DASH);
                 GamepadController.VibrateController (EVibrateDuration.NORMAL, EVibrateStrength.STRONG);
                 Player.Col.size = oriColSize * stats.DashColSizeMultiplier;
             }
@@ -138,6 +139,7 @@
             if (result.collider != null && result.collider.tag == "Breakable") {
                 result.collider.GetComponent<BreakableObj> ( ).Break ( );
                 bCanDash = true;
+                Player.FX.PlaySFX (ESFXType.RESET_DASH);
             }
             #endregion
             if (direction.x != 0f) {
@@ -165,8 +167,11 @@
 
         //Check if player bomb into any collider which can reset its dash state
         void CheckCollision ( ) {
-            if (!bUsingDash && !bCanDash)
+            if (!bUsingDash && !bCanDash) {
                 bCanDash = Player.RayCastController.IsCollide;
+                if (bCanDash)
+                    Player.FX.PlaySFX (ESFXType.RESET_DASH);
+            }
         }
 
         override public void SetSaveData (SaveData data) {
@@ -228,7 +233,10 @@
             ResetState ( );
             bUsingDash = false;
             Player.Anim.SetBool ("dash", false);
-            if (IsResetDash)bCanDash = true;
+            if (IsResetDash) {
+                bCanDash = true;
+                Player.FX.PlaySFX (ESFXType.RESET_DASH);
+            }
         }
     }
 

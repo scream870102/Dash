@@ -229,6 +229,7 @@ namespace CJStudio.Dash.Player {
                 attr.bJumpPressed = false;
                 player.Anim.SetTrigger ("jump");
                 player.FX.PlayVFX (EVFXType.DUST, attr.bFaceRight);
+                player.FX.PlaySFX (ESFXType.JUMP);
             }
             #region CHANGE_GRAVITY_SCALE
             if (player.Rb.velocity.y <= 0f && !attr.bWallSliding)

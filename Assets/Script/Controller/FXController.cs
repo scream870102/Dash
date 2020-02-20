@@ -9,33 +9,57 @@
 
     using UnityEngine;
     class FXController : MonoBehaviour {
+        [SerializeField] new AudioSource audio = null;
         [SerializeField] Transform fxParent = null;
         [SerializeField] VFXPool explosionFX = null;
         [SerializeField] VFXPool ringFX = null;
+        [SerializeField] List<SFXClip> SFXClips = new List<SFXClip> ( );
+        Dictionary<ESFXType, AudioClip> clips = new Dictionary<ESFXType, AudioClip> ( );
+        Dictionary<ESFXType, float> volumes = new Dictionary<ESFXType, float> ( );
 
         void Start ( ) {
             explosionFX.Init (fxParent);
             ringFX.Init (fxParent);
+            foreach (SFXClip o in SFXClips) {
+                clips.Add (o.type, o.clip);
+                volumes.Add (o.type, o.volume);
+            }
         }
 
-        void OnExplosionVFX (OnExplosionVFX e) {
+        void OnExplosionFX (OnExplosionVFX e) {
             ParticleSystem obj = explosionFX.Ask ( );
             obj.transform.position = e.Pos;
             obj.Play ( );
+            audio.PlayOneShot (clips [ESFXType.EXPLOSION], volumes [ESFXType.EXPLOSION]);
         }
-        void OnRingVFX (OnRingVFX e) {
+        void OnRingFX (OnRingVFX e) {
             ParticleSystem obj = ringFX.Ask ( );
             obj.transform.position = e.Pos;
             obj.Play ( );
+            audio.PlayOneShot (clips [ESFXType.SPRING], volumes [ESFXType.SPRING]);
+        }
+
+        void OnStageChange (OnStageChange e) {
+            if (e.ActiveStage != e.PrevStage)
+                audio.PlayOneShot (clips [ESFXType.FIRE_LIT], volumes [ESFXType.FIRE_LIT]);
         }
 
         void OnEnable ( ) {
-            DomainEvents.Register<OnExplosionVFX> (OnExplosionVFX);
-            DomainEvents.Register<OnRingVFX> (OnRingVFX);
+            DomainEvents.Register<OnExplosionVFX> (OnExplosionFX);
+            DomainEvents.Register<OnRingVFX> (OnRingFX);
+            DomainEvents.Register<OnStageChange> (OnStageChange);
         }
         void OnDisable ( ) {
-            DomainEvents.UnRegister<OnExplosionVFX> (OnExplosionVFX);
-            DomainEvents.UnRegister<OnRingVFX> (OnRingVFX);
+            DomainEvents.UnRegister<OnExplosionVFX> (OnExplosionFX);
+            DomainEvents.UnRegister<OnRingVFX> (OnRingFX);
+            DomainEvents.UnRegister<OnStageChange> (OnStageChange);
+        }
+
+        [System.Serializable]
+        class SFXClip {
+            public ESFXType type;
+            public AudioClip clip;
+            public float volume = 1f;
         }
 
         [System.Serializable]
@@ -99,5 +123,10 @@
             this.pos = pos;
             this.direction = direction;
         }
+    }
+    enum ESFXType {
+        EXPLOSION,
+        SPRING,
+        FIRE_LIT
     }
 }

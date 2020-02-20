@@ -96,6 +96,8 @@
 
         public void AddEnergy (float supplement) {
             Dash.AddEnergy (supplement);
+            FX.PlayVFX (EVFXType.HEAL);
+            FX.PlaySFX (ESFXType.HEAL);
         }
         void OnTriggerEnter2D (Collider2D other) {
             if (other.gameObject.layer == (int)LayerMask.NameToLayer ("DeadZone")) {
