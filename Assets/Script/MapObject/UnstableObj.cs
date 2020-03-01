@@ -1,6 +1,5 @@
 ﻿namespace CJStudio.Dash.MapObject {
     using Eccentric.Utils;
-
     using UnityEngine;
     class UnstableObj : AMapObject {
         [SerializeField] float stateDuration = 0f;
@@ -17,12 +16,12 @@
             timer = new ScaledTimer (stateDuration, false);
             rend = GetComponent<SpriteRenderer> ( );
             bDisappear = IsDisappearAtFirst;
-            rend.color = bDisappear?new Color (1f, 1f, 1f, .25f) : Color.white;
+            rend.color = bDisappear ? new Color (1f, 1f, 1f, .25f) : Color.white;
             col.enabled = !bDisappear;
         }
         override protected void Tick ( ) {
             if (Mathf.Abs (timer.Remain - anim.clip.length) < 0.01f) {
-                anim.Play (bDisappear?InAnim.name : OutAnim.name);
+                anim.Play (bDisappear ? InAnim.name : OutAnim.name);
             }
             if (timer.IsFinished) {
                 timer.Reset ( );
@@ -34,7 +33,7 @@
             base.Init ( );
             anim.Stop ( );
             bDisappear = IsDisappearAtFirst;
-            rend.color = bDisappear?new Color (1f, 1f, 1f, .25f) : Color.white;
+            rend.color = bDisappear ? new Color (1f, 1f, 1f, .25f) : Color.white;
             timer.Reset ( );
             col.enabled = !bDisappear;
         }
