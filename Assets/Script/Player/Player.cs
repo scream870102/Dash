@@ -1,8 +1,6 @@
 ﻿namespace CJStudio.Dash.Player {
     using System.Collections.Generic;
-
     using Eccentric;
-
     using UnityEngine.InputSystem;
     using UnityEngine.UI;
     using UnityEngine;
@@ -12,7 +10,7 @@
         [SerializeField] Movement move = null;
         #endregion
         List<PlayerComponent> components = new List<PlayerComponent> ( );
-        bool bDead = false;
+        //bool bDead = false;
         Rigidbody2D rb = null;
         Transform tf = null;
         Animator anim = null;
@@ -32,17 +30,17 @@
         public Animator Anim => anim;
         public SpriteRenderer Rend => rend;
         public BoxCollider2D Col => col;
-        public Movement Movement => components [0] as Movement;
-        public Dash Dash => components [1] as Dash;
-        public FX FX => components [2] as FX;
+        public Movement Movement => components[0] as Movement;
+        public Dash Dash => components[1] as Dash;
+        public FX FX => components[2] as FX;
         public PlayerControl Control => GameManager.Instance == null?null : GameManager.Instance.Control;
         public bool IsDashing => Dash.IsDashing;
         public bool IsFacingRight => Movement.IsFacingRight;
         public Collider2D PushObj { get; private set; }
         public GameController GameController {
             get {
-                if (gameController)return gameController;
-                return gameController = GameObject.FindObjectOfType<GameController> ( )as GameController;
+                if (gameController) return gameController;
+                return gameController = GameObject.FindObjectOfType<GameController> ( ) as GameController;
             }
         }
         void Awake ( ) {
@@ -55,13 +53,11 @@
             components.Add (new Dash (this, dashStats));
             components.Add (new FX (this, fXStats));
 #if UNITY_EDITOR
-            move = components [0] as Movement;
+            move = components[0] as Movement;
 #endif
         }
 
         void OnEnable ( ) {
-            Control.UI.Confirm.performed += OnConfirmPressed;
-            Control.UI.Cancel.performed += OnCancelPressed;
             Control.Disable ( );
             Control.GamePlay.Enable ( );
             foreach (PlayerComponent o in components)
@@ -69,11 +65,6 @@
         }
 
         void OnDisable ( ) {
-            if (Control != null) {
-                Control.UI.Confirm.performed -= OnConfirmPressed;
-                Control.UI.Cancel.performed -= OnCancelPressed;
-                Control.Disable ( );
-            }
             foreach (PlayerComponent o in components)
                 o.OnDisable ( );
         }
@@ -100,7 +91,7 @@
             FX.PlaySFX (ESFXType.HEAL);
         }
         void OnTriggerEnter2D (Collider2D other) {
-            if (other.gameObject.layer == (int)LayerMask.NameToLayer ("DeadZone")) {
+            if (other.gameObject.layer == (int) LayerMask.NameToLayer ("DeadZone")) {
                 Anim.SetTrigger ("die");
                 Control.Disable ( );
             }
@@ -108,9 +99,6 @@
 
         public void OnDieAnimFined ( ) {
             DomainEvents.Raise (new OnPlayerDead ( ));
-            Control.Disable ( );
-            Control.UI.Enable ( );
-            bDead = true;
             Anim.ResetTrigger ("die");
         }
 
@@ -119,18 +107,6 @@
             Dash.SetSaveData (data);
             rb.velocity = Vector2.zero;
 
-        }
-        void OnConfirmPressed (InputAction.CallbackContext ctx) {
-            if (bDead) {
-                Control.Disable ( );
-                Control.GamePlay.Enable ( );
-                DomainEvents.Raise (new OnStageReset ( ));
-                bDead = false;
-            }
-        }
-        void OnCancelPressed (InputAction.CallbackContext ctx) {
-            Control.Disable ( );
-            GameManager.Instance.LoadScene ("TitleScene");
         }
 
         public void AddHoriVelocity (float vel, bool IsResetVel = false) {

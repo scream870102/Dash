@@ -1,61 +1,50 @@
-﻿namespace CJStudio.Dash
-{
+﻿namespace CJStudio.Dash {
     using System.Collections.Generic;
-
     using MapObject;
     using P = Player;
     using Eccentric;
-
     using UnityEngine;
-    [RequireComponent(typeof(Collider2D))]
-    public class Stage : MonoBehaviour
-    {
+    [RequireComponent (typeof (Collider2D))]
+    public class Stage : MonoBehaviour {
+        [SerializeField] ELevel level = ELevel.LEVEL1;
         [SerializeField] GameObject recoverObjectParent = null;
         [SerializeField] bool CanRecoverSeveral = false;
         [SerializeField] Sprite activeSprite = null;
         Sprite deactiveSprite = null;
         SpriteRenderer rend = null;
         public GameObject RecoverObjectParent => recoverObjectParent;
-        public List<AMapObject> stageObjects = new List<AMapObject>();
+        public List<AMapObject> stageObjects = new List<AMapObject> ( );
         public Vector2 StagePosition => transform.position;
-        void Awake()
-        {
+        public ELevel Level => level;
+        void Awake ( ) {
             this.gameObject.tag = "Stage";
-            GetComponent<Collider2D>().isTrigger = true;
-            rend = GetComponent<SpriteRenderer>();
+            GetComponent<Collider2D> ( ).isTrigger = true;
+            rend = GetComponent<SpriteRenderer> ( );
             deactiveSprite = rend.sprite;
         }
-        void OnEnable()
-        {
-            DomainEvents.Register<OnStageChange>(OnStageChange);
+        void OnEnable ( ) {
+            DomainEvents.Register<OnStageChange> (OnStageChange);
         }
-        void OnDisable()
-        {
-            DomainEvents.UnRegister<OnStageChange>(OnStageChange);
+        void OnDisable ( ) {
+            DomainEvents.UnRegister<OnStageChange> (OnStageChange);
         }
 
-        void OnStageChange(OnStageChange e)
-        {
+        void OnStageChange (OnStageChange e) {
             if (e.ActiveStage == this)
                 rend.sprite = activeSprite;
             else
                 rend.sprite = deactiveSprite;
         }
-        public void EnableStage()
-        {
-            if (CanRecoverSeveral)
-            {
+        public void EnableStage ( ) {
+            if (CanRecoverSeveral) {
                 foreach (AMapObject o in stageObjects)
-                    o.Init();
+                    o.Init ( );
             }
         }
 
-        void OnTriggerEnter2D(Collider2D other)
-        {
+        void OnTriggerEnter2D (Collider2D other) {
             if (other.gameObject.tag == "Player")
-            {
-                GameManager.Instance.Player.GameController.StageController.SetSavePoint(this, other.GetComponent<P.Player>());
-            }
+                GameManager.Instance.Player.GameController.StageController.SetSavePoint (this, other.GetComponent<P.Player> ( ));
         }
     }
 

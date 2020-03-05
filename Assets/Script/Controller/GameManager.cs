@@ -1,9 +1,8 @@
 namespace CJStudio.Dash {
+    using System.Threading.Tasks;
     using System;
-
     using Eccentric.Utils;
     using Eccentric;
-
     using UnityEngine.SceneManagement;
     using UnityEngine;
     class GameManager : TSingletonMonoBehavior<GameManager> {
@@ -13,7 +12,7 @@ namespace CJStudio.Dash {
         public Player.Player Player {
             get {
                 if (player == null)
-                    player = GameObject.FindObjectOfType (typeof (Player.Player))as Player.Player;
+                    player = GameObject.FindObjectOfType (typeof (Player.Player)) as Player.Player;
                 return player;
             }
             private set { player = value; }
@@ -36,8 +35,21 @@ namespace CJStudio.Dash {
             GameObject.FindObjectOfType<GameController> ( ).GameEnded -= OnGameEnded;
             SceneManager.LoadScene ("TitleScene");
         }
-        public void LoadScene (string name) {
-            SceneManager.LoadScene (name);
+        public async void LoadLevel (ELevel level, SaveData data = null) {
+            AsyncOperation operation = SceneManager.LoadSceneAsync ((int) level, LoadSceneMode.Single);
+            operation.allowSceneActivation = false;
+            while (!operation.isDone) {
+                if (operation.progress == .9f)
+                    break;
+                await Task.Delay (10);
+            }
+            operation.allowSceneActivation = true;
+            while (!operation.isDone)
+                await Task.Delay (10);
+            if (data == null) return;
+            GameController obj = GameObject.Find ("GameController").GetComponent<GameController> ( );
+            if (obj != null)
+                obj.StageController.SetStage (data.Pos, data.EnergyRemain, data.CanUseDash, data.ElapsedTime);
         }
 
     }

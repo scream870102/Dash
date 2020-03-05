@@ -1,9 +1,7 @@
 ﻿namespace CJStudio.Dash {
     using System.Collections.Generic;
     using System.Collections;
-
     using Eccentric.Utils;
-
     using UnityEngine.InputSystem;
     using UnityEngine.SceneManagement;
     using UnityEngine.UI;
@@ -13,8 +11,13 @@
         [SerializeField] Color activeColor;
         [SerializeField] Color deactiveColor;
         [SerializeField] GameObject tutorialObject = null;
+        [SerializeField] Text continueButton = null;
         PlayerControl Control => GameManager.Instance == null?null : GameManager.Instance.Control;
         void Awake ( ) { }
+        void Start ( ) {
+            if (SLController.Load ( ) == null)
+                continueButton.gameObject.SetActive (false);
+        }
         void OnEnable ( ) {
             buttons.ActiveOption += OnActiveOption;
             buttons.DeactiveOption += OnDeactiveOption;
@@ -40,8 +43,12 @@
             }
         }
 
-        public void OnStartPressed ( ) {
-            SceneManager.LoadScene ("GameScene");
+        public void OnNewGamePressed ( ) {
+            GameManager.Instance.LoadLevel (ELevel.LEVEL1);
+        }
+        public void OnContinuePressed ( ) {
+            SaveData data = SLController.Load ( );
+            GameManager.Instance.LoadLevel (data.Level, data);
         }
         public void OnTutorialPressed ( ) {
             tutorialObject.SetActive (true);
