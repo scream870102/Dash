@@ -5,10 +5,10 @@
     using UnityEngine.UI;
     using UnityEngine;
     class Player : MonoBehaviour {
-        #region TEST
+#region TEST
         public Text deltaText = null;
         [SerializeField] Movement move = null;
-        #endregion
+#endregion
         List<PlayerComponent> components = new List<PlayerComponent> ( );
         //bool bDead = false;
         Rigidbody2D rb = null;
@@ -19,11 +19,11 @@
         Transform dustTf = null;
         GameController gameController = null;
         [SerializeField] RayCastController rayCastController = null;
-        #region STATS
+#region STATS
         [SerializeField] MovementStats movementStats = null;
         [SerializeField] DashStats dashStats = null;
         [SerializeField] FXStats fXStats = null;
-        #endregion
+#endregion
         public RayCastController RayCastController => rayCastController;
         public Rigidbody2D Rb => rb;
         public Transform Tf => tf;

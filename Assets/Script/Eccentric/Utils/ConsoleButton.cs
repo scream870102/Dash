@@ -1,7 +1,6 @@
 namespace Eccentric.Utils {
     using System.Collections.Generic;
     using System;
-
     using UnityEngine.Events;
     using UnityEngine.UI;
     using UnityEngine;
@@ -35,20 +34,24 @@ namespace Eccentric.Utils {
             InvokeEvent ( );
         }
         public void Invoke (int index) {
-            buttons [index].Action.Invoke ( );
+            buttons[index].Action.Invoke ( );
             ActionPressed ( );
         }
         public void Invoke ( ) {
-            buttons [CurrentIndex].Action.Invoke ( );
+            buttons[CurrentIndex].Action.Invoke ( );
             ActionPressed ( );
         }
         public void PlusIndex ( ) {
             currentIndex++;
+            while (currentIndex < buttons.Count && currentIndex >= 0 && !buttons[currentIndex].Text.gameObject.activeSelf)
+                currentIndex++;
             CheckRange ( );
             InvokeEvent ( );
         }
         public void MinusIndex ( ) {
             currentIndex--;
+            while (currentIndex < buttons.Count && currentIndex >= 0 && !buttons[currentIndex].Text.gameObject.activeSelf)
+                currentIndex--;
             CheckRange ( );
             InvokeEvent ( );
         }
@@ -64,12 +67,12 @@ namespace Eccentric.Utils {
             for (int i = 0; i < buttons.Count; i++) {
                 if (i == currentIndex) {
                     if (ActiveOption != null) {
-                        ActiveOption (buttons [i].Text);
+                        ActiveOption (buttons[i].Text);
                     }
                 }
                 else {
                     if (DeactiveOption != null)
-                        DeactiveOption (buttons [i].Text);
+                        DeactiveOption (buttons[i].Text);
                 }
             }
         }

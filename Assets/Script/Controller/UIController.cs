@@ -3,7 +3,6 @@ namespace CJStudio.Dash {
 
     using P = Player;
     using Player;
-
     using UnityEngine.UI;
     using UnityEngine;
 
@@ -17,6 +16,7 @@ namespace CJStudio.Dash {
         [SerializeField] GameObject endObject = null;
         [SerializeField] Text elapsedTimeText = null;
         [SerializeField] Text timeText = null;
+        [SerializeField] GameObject pauseObj = null;
         float energyBarMaxHeight = 0f;
         void Awake ( ) {
             if (energyBar)
@@ -24,6 +24,7 @@ namespace CJStudio.Dash {
             player = GameManager.Instance.Player;
             noobImage.SetActive (false);
             endObject.SetActive (false);
+            pauseObj.SetActive (false);
 
         }
 
@@ -60,6 +61,14 @@ namespace CJStudio.Dash {
             noobImage.SetActive (false);
         }
 
+        void OnGamePaused (OnGamePaused e) {
+            pauseObj.SetActive (true);
+        }
+
+        void OnGameResumed (OnGameResumed e) {
+            pauseObj.SetActive (false);
+        }
+
         void OnGoalReached (float time) {
             endObject.SetActive (true);
             timeText.text = time.ToString ("0.00");
@@ -71,6 +80,8 @@ namespace CJStudio.Dash {
             player.Dash.EnergyChange += OnEnergyChange;
             DomainEvents.Register<OnPlayerDead> (OnPlayerDead);
             DomainEvents.Register<OnStageReset> (OnStageReset);
+            DomainEvents.Register<OnGamePaused> (OnGamePaused);
+            DomainEvents.Register<OnGameResumed> (OnGameResumed);
             GameController gameController = GameObject.FindObjectOfType<GameController> ( );
             if (gameController) {
                 gameController.GoalReached += OnGoalReached;
@@ -84,6 +95,8 @@ namespace CJStudio.Dash {
             player.Dash.EnergyChange -= OnEnergyChange;
             DomainEvents.UnRegister<OnPlayerDead> (OnPlayerDead);
             DomainEvents.UnRegister<OnStageReset> (OnStageReset);
+            DomainEvents.UnRegister<OnGamePaused> (OnGamePaused);
+            DomainEvents.UnRegister<OnGameResumed> (OnGameResumed);
             GameController gameController = GameObject.FindObjectOfType<GameController> ( );
             if (gameController) {
                 gameController.GoalReached -= OnGoalReached;

@@ -26,6 +26,7 @@
             if (Control != null) {
                 Control.UI.Choose.started += OnAxisValueChanged;
                 Control.UI.Confirm.started += OnConfirmPressed;
+                Control.UI.Cancel.started += OnCancelPressed;
                 Control.Disable ( );
                 Control.UI.Enable ( );
             }
@@ -39,6 +40,7 @@
             if (Control != null) {
                 Control.UI.Choose.started -= OnAxisValueChanged;
                 Control.UI.Confirm.started -= OnConfirmPressed;
+                Control.UI.Cancel.started -= OnCancelPressed;
                 Control.Disable ( );
             }
         }
@@ -76,9 +78,11 @@
         }
 
         void OnConfirmPressed (InputAction.CallbackContext ctx) {
-            if (!tutorialObject.activeInHierarchy)
+            if (!tutorialObject.activeSelf)
                 buttons.Invoke ( );
-            else
+        }
+        void OnCancelPressed (InputAction.CallbackContext ctx) {
+            if (tutorialObject.activeSelf)
                 tutorialObject.SetActive (false);
         }
     }
