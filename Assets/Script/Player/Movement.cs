@@ -1,10 +1,8 @@
 namespace CJStudio.Dash.Player {
     using System.Collections.Generic;
     using System;
-
     using Eccentric.Utils;
     using Eccentric;
-
     using UnityEngine.InputSystem;
     using UnityEngine;
     [System.Serializable]
@@ -35,16 +33,16 @@ namespace CJStudio.Dash.Player {
             CheckCollision ( );
             Move ( );
             Jump ( );
-            #region WALL_SLIDE_VFX
-            if (attr.bWallSliding)Player.FX.PlayVFX (EVFXType.GRAB, attr.bFaceRight);
+#region WALL_SLIDE_VFX
+            if (attr.bWallSliding) Player.FX.PlayVFX (EVFXType.GRAB, attr.bFaceRight);
             else Player.FX.StopVFX (EVFXType.GRAB, attr.bFaceRight);
-            #endregion
-            #region ANIMATOR_PAPAMETER
+#endregion
+#region ANIMATOR_PAPAMETER
             Player.Anim.SetFloat ("velX", Mathf.Abs (attr.inputValue.x));
             Player.Anim.SetFloat ("velY", Player.Rb.velocity.y);
             Player.Anim.SetBool ("wallSlide", attr.bWallSliding);
-            #endregion
-            #region SPRITE_RENDER_DIRECTION
+#endregion
+#region SPRITE_RENDER_DIRECTION
             if (!Player.IsDashing && Player.Rb.velocity.x != 0f) {
                 if (attr.bWallSliding)
                     attr.bFaceRight = rayCastController.Right;
@@ -52,11 +50,11 @@ namespace CJStudio.Dash.Player {
                     attr.bFaceRight = Player.Rb.velocity.x > 0f;
                 Render.ChangeDirectionXWithSpriteRender (attr.bFaceRight, Player.Rend, true);
             }
-            #endregion
+#endregion
 #if UNITY_EDITOR
-            #region TEST
+#region TEST
             Player.deltaText.text = "fps:" + (1f / Time.unscaledDeltaTime).ToString ("0") + "\nVel:" + Player.Rb.velocity.x.ToString ("0.00");
-            #endregion
+#endregion
 #endif
         }
 
@@ -107,7 +105,7 @@ namespace CJStudio.Dash.Player {
 
         public void AddHoriVelocity (float vel, bool IsResetVel = false) {
             Vector2 nVel = Player.Rb.velocity;
-            if (IsResetVel)nVel.y = 0f;
+            if (IsResetVel) nVel.y = 0f;
             Player.Rb.velocity = nVel;
             attr.externalHoriVel += vel;
             attr.bExternalVelPositive = attr.externalHoriVel > 0f;
@@ -115,7 +113,7 @@ namespace CJStudio.Dash.Player {
 
         public void AddVertVelocity (float vel, bool IsResetVel = false) {
             Vector2 nVel = Player.Rb.velocity;
-            if (IsResetVel)nVel.y = 0f;
+            if (IsResetVel) nVel.y = 0f;
             nVel.y += vel;
             Player.Rb.velocity = nVel;
         }
@@ -212,6 +210,7 @@ namespace CJStudio.Dash.Player {
         }
 
         override public void Jump ( ) {
+
             if (attr.bCanJump && attr.bJumpPressed && !player.IsDashing) {
                 Vector2 vel = player.Rb.velocity;
                 //Wall Jump
@@ -231,14 +230,22 @@ namespace CJStudio.Dash.Player {
                 player.FX.PlayVFX (EVFXType.DUST, attr.bFaceRight);
                 player.FX.PlaySFX (ESFXType.JUMP);
             }
-            #region CHANGE_GRAVITY_SCALE
+#region WALL_SLIDE_DOWN_VEL
+            if (attr.bWallSliding) {
+                Vector2 vel = player.Rb.velocity;
+                float input = attr.inputValue.y > 0f?0f : attr.inputValue.y;
+                vel.y += input * stats.WallSlideVel;
+                player.Rb.velocity = vel;
+            }
+#endregion
+#region CHANGE_GRAVITY_SCALE
             if (player.Rb.velocity.y <= 0f && !attr.bWallSliding)
                 player.Rb.gravityScale = attr.originGravity * stats.FallGravityMultiplier;
             else if (attr.bWallSliding && player.Rb.velocity.y <= 0f)
                 player.Rb.gravityScale = attr.originGravity * stats.WallSlidingGravityMultiplier;
             else
                 player.Rb.gravityScale = attr.originGravity;
-            #endregion
+#endregion
         }
 
         override public void CheckCollision ( ) {
@@ -388,10 +395,10 @@ namespace CJStudio.Dash.Player {
         public bool bExternalVelPositive = false;
         public float originGravity = 0f;
         public bool bFaceRight = false;
-        #region LERP
+#region LERP
         public const float smoothTime = .1f;
         public float velocityXSmoothing;
-        #endregion
+#endregion
 
         public void Init ( ) {
             inputValue = Vector2.zero;
@@ -411,13 +418,14 @@ namespace CJStudio.Dash.Player {
         public float AirVel = 5.25f;
         public float JumpVel = 15f;
         public float WallJumpVel = 5f;
+        public float WallSlideVel = .3f;
         public float FallGravityMultiplier = 1.5f;
         public float WallSlidingGravityMultiplier = 0.02f;
         public float AirFriction = 50f;
-        #region  SPACE
+#region  SPACE
         public float SpaceVel = 3f;
         public float SpaceJumpVel = 10f;
         public float SpaceJumpDuration = 2f;
-        #endregion
+#endregion
     }
 }

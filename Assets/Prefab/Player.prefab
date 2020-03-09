@@ -9831,6 +9831,7 @@ MonoBehaviour:
     AirVel: 5.25
     JumpVel: 15
     WallJumpVel: 5
+    WallSlideVel: 0.3
     FallGravityMultiplier: 1.5
     WallSlidingGravityMultiplier: 0.02
     AirFriction: 50

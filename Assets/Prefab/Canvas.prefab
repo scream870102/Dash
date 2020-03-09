@@ -659,6 +659,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DieCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4196306093488085049, guid: bcf0396cd39f7954e82f39381f4dafa8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4196306093488085053, guid: bcf0396cd39f7954e82f39381f4dafa8,
         type: 3}
       propertyPath: m_LocalPosition.x
