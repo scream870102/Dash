@@ -1,8 +1,10 @@
 ﻿namespace CJStudio.Dash {
+    using System.Collections.Generic;
     using System;
     using Camera;
     using Eccentric.Utils;
     using Eccentric;
+    using Firebase.Firestore;
     using Player;
     using UnityEngine.InputSystem;
     using UnityEngine;
@@ -58,6 +60,18 @@
         void OnGoalReached (OnGoalReached e) {
             if (GoalReached != null)
                 GoalReached (elapsedTime);
+            //抵達Level終點
+#region  SCORE
+            CollectionReference colRef = GameManager.Instance.Db.Collection ("ScoreBoard");
+            Dictionary<string, object> user = new Dictionary<string, object> { { "Time", System.DateTime.Now.ToShortDateString ( ) + " " + System.DateTime.Now.ToShortTimeString ( ) },
+                { "Score", elapsedTime },
+                { "User", SLController.GetUserName ( ) },
+                { "Level", "Level " + (int) (GameManager.Instance.CurrentLevel) }
+            };
+            colRef.Document ( ).SetAsync (user).ContinueWith (t => {
+                Debug.Log ("Finish add data to firebase");
+            });
+#endregion
             state = EGameState.COUNT;
             nextLevel = e.NextLevel;
             Control.Disable ( );

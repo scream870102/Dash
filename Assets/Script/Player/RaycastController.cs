@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-
 using Eccentric.Utils;
-
 using UnityEngine;
 [System.Serializable]
 class RayCastController {
@@ -19,7 +17,7 @@ class RayCastController {
     float vertSpace = 0f;
     [SerializeField] LayerMask layers = -1;
     [SerializeField] Vector2 rayNums = new Vector2 (3f, 3f);
-    [SerializeField] [Range (-.5f, .5f)] float offset = -.015f;
+    [SerializeField][Range (-.5f, .5f)] float offset = -.015f;
     [SerializeField] float rayLength = .5f;
     public bool Up => info.up;
     public bool Down => info.down;
@@ -62,7 +60,7 @@ class RayCastController {
         info.Reset ( );
         // Update all horizontal ray and save result
         for (int i = 0; i < rayNums.x; i++) {
-            #region UPDATE_RIGHT
+#region UPDATE_RIGHT
             Vector2 originPoint = points.topRight;
             originPoint.y -= vertSpace * i;
             RaycastHit2D hit = Physics2D.Raycast (originPoint, Vector2.right, rayLength, layers);
@@ -73,8 +71,8 @@ class RayCastController {
 #if UNITY_EDITOR
             Debug.DrawRay (originPoint, Vector2.right * rayLength, Color.red);
 #endif
-            #endregion
-            #region UPDATE_LEFT
+#endregion
+#region UPDATE_LEFT
             originPoint = points.topLeft;
             originPoint.y -= vertSpace * i;
             hit = Physics2D.Raycast (originPoint, Vector2.left, rayLength, layers);
@@ -85,11 +83,11 @@ class RayCastController {
 #if UNITY_EDITOR
             Debug.DrawRay (originPoint, Vector2.left * rayLength, Color.red);
 #endif
-            #endregion
+#endregion
         }
         //Update all vertical ray and save result
         for (int i = 0; i < rayNums.y; i++) {
-            #region UPDATE_UP
+#region UPDATE_UP
             Vector2 originPoint = points.topLeft;
             originPoint.x += horiSpace * i;
             RaycastHit2D hit = Physics2D.Raycast (originPoint, Vector2.up, rayLength, layers);
@@ -100,8 +98,8 @@ class RayCastController {
 #if UNITY_EDITOR
             Debug.DrawRay (originPoint, Vector2.up * rayLength, Color.green);
 #endif
-            #endregion
-            #region UPDATE_DOWN
+#endregion
+#region UPDATE_DOWN
             originPoint = points.bottomLeft;
             originPoint.x += horiSpace * i;
             hit = Physics2D.Raycast (originPoint, Vector2.down, rayLength, layers);
@@ -112,7 +110,7 @@ class RayCastController {
 #if UNITY_EDITOR
             Debug.DrawRay (originPoint, Vector2.down * rayLength, Color.green);
 #endif
-            #endregion
+#endregion
         }
         result.Clear ( );
         if (results.Count != 0)

@@ -1,11 +1,14 @@
 namespace CJStudio.Dash {
     using System.Threading.Tasks;
-    using System;
     using Eccentric.Utils;
     using Eccentric;
+    using Firebase.Firestore;
     using UnityEngine.SceneManagement;
     using UnityEngine;
+
     class GameManager : TSingletonMonoBehavior<GameManager> {
+        ELevel currentLevel = ELevel.TITLE;
+        public ELevel CurrentLevel => currentLevel;
         PlayerControl control = null;
         public PlayerControl Control => control;
         Player.Player player = null;
@@ -17,9 +20,25 @@ namespace CJStudio.Dash {
             }
             private set { player = value; }
         }
+        FirebaseFirestore db = null;
+        public FirebaseFirestore Db => db;
         override protected void Awake ( ) {
             base.Awake ( );
-            control = new PlayerControl ( );
+            if (Instance == this) {
+                control = new PlayerControl ( );
+                SLController.WriteLog ("Start check firebase instance");
+                var task = Firebase.FirebaseApp.CheckAndFixDependenciesAsync ( );
+                task.Wait ( );
+                Firebase.DependencyStatus obj = task.Result;
+                if (obj == Firebase.DependencyStatus.Available) {
+                    db = FirebaseFirestore.DefaultInstance;
+                    SLController.WriteLog ("Finish check firebase instance");
+                }
+                else {
+                    Debug.LogError (System.String.Format ("Could not resolve all Firebase dependencies: {0}", obj));
+                }
+            }
+
         }
         void OnEnable ( ) {
             DomainEvents.Register<OnGameStarted> (OnGameStarted);
@@ -36,6 +55,7 @@ namespace CJStudio.Dash {
             SceneManager.LoadScene ("TitleScene");
         }
         public async void LoadLevel (ELevel level, SaveData data = null) {
+            currentLevel = level;
             AsyncOperation operation = SceneManager.LoadSceneAsync ((int) level, LoadSceneMode.Single);
             operation.allowSceneActivation = false;
             while (!operation.isDone) {
