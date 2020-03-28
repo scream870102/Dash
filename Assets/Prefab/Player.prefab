@@ -9826,7 +9826,7 @@ MonoBehaviour:
     rayNums: {x: 3, y: 3}
     offset: -0.015
     rayLength: 0.05
-  movementStats:
+  movementAttr:
     NormalVel: 7.5
     AirVel: 5.25
     JumpVel: 15
@@ -9838,7 +9838,7 @@ MonoBehaviour:
     SpaceVel: 3
     SpaceJumpVel: 10
     SpaceJumpDuration: 2
-  dashStats:
+  dashAttr:
     MinCharge: 0.3
     MaxCharge: 0.8
     BasicEnergy: 3
@@ -9859,7 +9859,8 @@ MonoBehaviour:
       frequency: 1
       shakeDuration: 0
     DashColSizeMultiplier: 0.5
-  fXStats:
+    RecoverRate: 0.1
+  fxRefs:
     GrabVFX: {fileID: 8105157757910455776}
     DustVFX: {fileID: 8105157757344988053}
     TrailVFX: {fileID: 8105157758638964527}

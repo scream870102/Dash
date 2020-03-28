@@ -16,6 +16,6 @@ namespace CJStudio.Dash.Player {
         public virtual void SetSaveData (SaveData data) { }
 
     }
-    public abstract class PlayerStats { }
+    public abstract class PlayerAttr { }
 
 }

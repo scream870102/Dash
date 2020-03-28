@@ -7,7 +7,7 @@ namespace CJStudio.Dash.Player {
     using UnityEngine;
     [System.Serializable]
     class Movement : PlayerComponent {
-        MovementStats stats = null;
+        MovementAttr stats = null;
         IMoveStrategy strategy = null;
         BasicMoveStrategy basicMove = null;
         SpaceMoveStrategy spaceMove = null;
@@ -15,13 +15,13 @@ namespace CJStudio.Dash.Player {
 #if UNITY_EDITOR
         [ReadOnly, SerializeField]
 #endif
-        AMoveAttr attr = null;
+        MovementProps attr = null;
         RayCastController rayCastController = null;
         public bool IsFacingRight => attr.bFaceRight;
-        public Movement (Player player, MovementStats stats) : base (player) {
+        public Movement (Player player, MovementAttr stats) : base (player) {
             this.stats = stats;
             rayCastController = player.RayCastController;
-            attr = new AMoveAttr ( );
+            attr = new MovementProps ( );
             basicMove = new BasicMoveStrategy (ref attr, ref stats, player);
             spaceMove = new SpaceMoveStrategy (ref attr, ref stats, player);
             slideMove = new SlideMoveStrategy (ref attr, ref stats, player);
@@ -149,15 +149,15 @@ namespace CJStudio.Dash.Player {
     }
 
     abstract class IMoveStrategy {
-        protected MovementStats stats = null;
-        protected AMoveAttr attr;
+        protected MovementAttr attr = null;
+        protected MovementProps props;
         protected Player player = null;
         protected RayCastController rayCastController;
-        public IMoveStrategy (ref AMoveAttr attr, ref MovementStats stats, Player player) {
-            this.attr = attr;
+        public IMoveStrategy (ref MovementProps props, ref MovementAttr attr, Player player) {
+            this.props = props;
             this.player = player;
             this.rayCastController = player.RayCastController;
-            this.stats = stats;
+            this.attr = attr;
         }
 
         abstract public void Move ( );
@@ -166,102 +166,102 @@ namespace CJStudio.Dash.Player {
         virtual public void Init ( ) { }
     }
     class BasicMoveStrategy : IMoveStrategy {
-        public BasicMoveStrategy (ref AMoveAttr attr, ref MovementStats stats, Player player) : base (ref attr, ref stats, player) { }
+        public BasicMoveStrategy (ref MovementProps props, ref MovementAttr attr, Player player) : base (ref props, ref attr, player) { }
         override public void Init ( ) {
-            player.Rb.gravityScale = attr.originGravity;
+            player.Rb.gravityScale = props.originGravity;
         }
         override public void Move ( ) {
             Vector2 nVel = player.Rb.velocity;
-            if (attr.bExternalVel && rayCastController.Down) {
-                nVel.x = attr.inputValue.x * stats.NormalVel + attr.externalHoriVel;
-                if (attr.externalHoriVel > 0f) {
-                    attr.externalHoriVel -= attr.frictionAccumulation * Time.deltaTime;
+            if (props.bExternalVel && rayCastController.Down) {
+                nVel.x = props.inputValue.x * attr.NormalVel + props.externalHoriVel;
+                if (props.externalHoriVel > 0f) {
+                    props.externalHoriVel -= props.frictionAccumulation * Time.deltaTime;
                 }
-                else if (attr.externalHoriVel < 0f) {
-                    attr.externalHoriVel += attr.frictionAccumulation * Time.deltaTime;
+                else if (props.externalHoriVel < 0f) {
+                    props.externalHoriVel += props.frictionAccumulation * Time.deltaTime;
                 }
-                if ((attr.externalHoriVel >= 0f && !attr.bExternalVelPositive) || (attr.externalHoriVel <= 0f && attr.bExternalVelPositive)) {
-                    attr.bExternalVel = false;
-                    attr.externalHoriVel = 0f;
+                if ((props.externalHoriVel >= 0f && !props.bExternalVelPositive) || (props.externalHoriVel <= 0f && props.bExternalVelPositive)) {
+                    props.bExternalVel = false;
+                    props.externalHoriVel = 0f;
                 }
             }
-            else if (attr.bExternalVel) {
-                nVel.x = attr.inputValue.x * stats.AirVel + attr.externalHoriVel;
-                if (attr.externalHoriVel > 0f) {
-                    attr.externalHoriVel -= stats.AirFriction * Time.deltaTime;
+            else if (props.bExternalVel) {
+                nVel.x = props.inputValue.x * attr.AirVel + props.externalHoriVel;
+                if (props.externalHoriVel > 0f) {
+                    props.externalHoriVel -= attr.AirFriction * Time.deltaTime;
                 }
-                else if (attr.externalHoriVel < 0f) {
-                    attr.externalHoriVel += stats.AirFriction * Time.deltaTime;
+                else if (props.externalHoriVel < 0f) {
+                    props.externalHoriVel += attr.AirFriction * Time.deltaTime;
                 }
-                if ((attr.externalHoriVel >= 0f && !attr.bExternalVelPositive) || (attr.externalHoriVel <= 0f && attr.bExternalVelPositive)) {
-                    attr.bExternalVel = false;
-                    attr.externalHoriVel = 0f;
+                if ((props.externalHoriVel >= 0f && !props.bExternalVelPositive) || (props.externalHoriVel <= 0f && props.bExternalVelPositive)) {
+                    props.bExternalVel = false;
+                    props.externalHoriVel = 0f;
                 }
             }
             else if (rayCastController.Down) {
-                nVel.x = attr.inputValue.x * stats.NormalVel;
+                nVel.x = props.inputValue.x * attr.NormalVel;
             }
             else {
-                nVel.x += attr.inputValue.x * stats.AirVel;
-                nVel.x = Mathf.Clamp (nVel.x, -stats.NormalVel, stats.NormalVel);
-                nVel.x = Mathf.SmoothDamp (player.Rb.velocity.x, nVel.x, ref attr.velocityXSmoothing, AMoveAttr.smoothTime);
+                nVel.x += props.inputValue.x * attr.AirVel;
+                nVel.x = Mathf.Clamp (nVel.x, -attr.NormalVel, attr.NormalVel);
+                nVel.x = Mathf.SmoothDamp (player.Rb.velocity.x, nVel.x, ref props.velocityXSmoothing, MovementProps.smoothTime);
             }
             player.Rb.velocity = nVel;
         }
 
         override public void Jump ( ) {
 
-            if (attr.bCanJump && attr.bJumpPressed && !player.IsDashing) {
+            if (props.bCanJump && props.bJumpPressed && !player.IsDashing) {
                 Vector2 vel = player.Rb.velocity;
                 //Wall Jump
-                if (attr.bWallSliding && !rayCastController.Down) {
+                if (props.bWallSliding && !rayCastController.Down) {
                     EHitDirection wallDirection = rayCastController.Left?EHitDirection.LEFT : EHitDirection.RIGHT;
                     // from left wall to right wall
                     if (wallDirection == EHitDirection.LEFT)
-                        vel.x = stats.WallJumpVel;
+                        vel.x = attr.WallJumpVel;
                     else
-                        vel.x = -stats.WallJumpVel;
+                        vel.x = -attr.WallJumpVel;
                 }
-                vel.y = stats.JumpVel;
+                vel.y = attr.JumpVel;
                 player.Rb.velocity = vel;
-                attr.bCanJump = false;
-                attr.bJumpPressed = false;
+                props.bCanJump = false;
+                props.bJumpPressed = false;
                 player.Anim.SetTrigger ("jump");
-                player.FX.PlayVFX (EVFXType.DUST, attr.bFaceRight);
+                player.FX.PlayVFX (EVFXType.DUST, props.bFaceRight);
                 player.FX.PlaySFX (ESFXType.JUMP);
             }
 #region WALL_SLIDE_DOWN_VEL
-            if (attr.bWallSliding) {
+            if (props.bWallSliding) {
                 Vector2 vel = player.Rb.velocity;
-                float input = attr.inputValue.y > 0f?0f : attr.inputValue.y;
-                vel.y += input * stats.WallSlideVel;
+                float input = props.inputValue.y > 0f?0f : props.inputValue.y;
+                vel.y += input * attr.WallSlideVel;
                 player.Rb.velocity = vel;
             }
 #endregion
 #region CHANGE_GRAVITY_SCALE
-            if (player.Rb.velocity.y <= 0f && !attr.bWallSliding)
-                player.Rb.gravityScale = attr.originGravity * stats.FallGravityMultiplier;
-            else if (attr.bWallSliding && player.Rb.velocity.y <= 0f)
-                player.Rb.gravityScale = attr.originGravity * stats.WallSlidingGravityMultiplier;
+            if (player.Rb.velocity.y <= 0f && !props.bWallSliding)
+                player.Rb.gravityScale = props.originGravity * attr.FallGravityMultiplier;
+            else if (props.bWallSliding && player.Rb.velocity.y <= 0f)
+                player.Rb.gravityScale = props.originGravity * attr.WallSlidingGravityMultiplier;
             else
-                player.Rb.gravityScale = attr.originGravity;
+                player.Rb.gravityScale = props.originGravity;
 #endregion
         }
 
         override public void CheckCollision ( ) {
-            bool preWallSlide = attr.bWallSliding;
-            attr.bCanJump = false;
-            attr.bWallSliding = false;
-            attr.bExternalVel = false;
+            bool preWallSlide = props.bWallSliding;
+            props.bCanJump = false;
+            props.bWallSliding = false;
+            props.bExternalVel = false;
 
             //if there is external Vel exist calculate the friction accumulation
             //and in only will affect by one collider
-            if (attr.externalHoriVel != 0f) {
-                attr.bExternalVel = true;
-                attr.frictionAccumulation = 0f;
+            if (props.externalHoriVel != 0f) {
+                props.bExternalVel = true;
+                props.frictionAccumulation = 0f;
                 foreach (HitResult o in rayCastController.Result) {
                     if (o.direction == EHitDirection.DOWN) {
-                        attr.frictionAccumulation = o.hit2D.collider.friction;
+                        props.frictionAccumulation = o.hit2D.collider.friction;
                         break;
                     }
                 }
@@ -274,53 +274,52 @@ namespace CJStudio.Dash.Player {
                         //Check if this first time to grab the wall
                         if (!preWallSlide)
                             player.Rb.velocity = new Vector2 (player.Rb.velocity.x, 0f);
-                        attr.bWallSliding = true;
-                        attr.bCanJump = true;
+                        props.bWallSliding = true;
+                        props.bCanJump = true;
                         break;
                     }
                 }
             }
 
             //eliminate horizontal velocity when it toucheds the wall
-            if (attr.externalHoriVel > 0f && rayCastController.Right) {
-                attr.externalHoriVel = 0f;
-                attr.bExternalVel = false;
+            if (props.externalHoriVel > 0f && rayCastController.Right) {
+                props.externalHoriVel = 0f;
+                props.bExternalVel = false;
             }
-            else if (attr.externalHoriVel < 0f && rayCastController.Left) {
-                attr.externalHoriVel = 0f;
-                attr.bExternalVel = false;
+            else if (props.externalHoriVel < 0f && rayCastController.Left) {
+                props.externalHoriVel = 0f;
+                props.bExternalVel = false;
             }
 
             if (rayCastController.Down) {
-                attr.bCanJump = true;
+                props.bCanJump = true;
             }
         }
     }
 
-    [System.Serializable]
     class SpaceMoveStrategy : IMoveStrategy {
         [SerializeField] ScaledTimer timer = null;
         float jumpFadeVel = 0f;
         bool bJumping = false;
         Vector2 direction = Vector2.zero;
         float jumpVel = 0f;
-        public SpaceMoveStrategy (ref AMoveAttr attr, ref MovementStats stats, Player player) : base (ref attr, ref stats, player) {
-            timer = new ScaledTimer (stats.SpaceJumpDuration);
-            jumpFadeVel = stats.SpaceJumpVel / stats.SpaceJumpDuration;
+        public SpaceMoveStrategy (ref MovementProps props, ref MovementAttr attr, Player player) : base (ref props, ref attr, player) {
+            timer = new ScaledTimer (attr.SpaceJumpDuration);
+            jumpFadeVel = attr.SpaceJumpVel / attr.SpaceJumpDuration;
         }
         override public void Move ( ) {
             Vector2 nVel = player.Rb.velocity;
-            nVel.x = attr.inputValue.x * stats.SpaceVel;
-            nVel.y = attr.inputValue.y * stats.SpaceVel;
+            nVel.x = props.inputValue.x * attr.SpaceVel;
+            nVel.y = props.inputValue.y * attr.SpaceVel;
             player.Rb.velocity = nVel;
         }
         override public void Jump ( ) {
-            if (attr.bCanJump && attr.bJumpPressed) {
-                timer.Reset (stats.SpaceJumpDuration);
+            if (props.bCanJump && props.bJumpPressed) {
+                timer.Reset (attr.SpaceJumpDuration);
                 bJumping = true;
-                attr.bCanJump = false;
-                direction = attr.inputValue;
-                jumpVel = stats.SpaceJumpVel;
+                props.bCanJump = false;
+                direction = props.inputValue;
+                jumpVel = attr.SpaceJumpVel;
                 player.Anim.SetTrigger ("spaceJump");
             }
             if (bJumping && !timer.IsFinished && jumpVel > 0f) {
@@ -331,60 +330,58 @@ namespace CJStudio.Dash.Player {
             }
             else if (bJumping && timer.IsFinished) {
                 bJumping = false;
-                attr.bCanJump = true;
+                props.bCanJump = true;
             }
         }
 
         override public void CheckCollision ( ) {
             if (rayCastController.IsCollide)
                 jumpVel = 0f;
-
         }
 
         override public void Init ( ) {
             player.Rb.velocity = Vector2.zero;
-            attr.bCanJump = true;
+            props.bCanJump = true;
             player.Rb.gravityScale = 0f;
-            attr.externalHoriVel = 0f;
+            props.externalHoriVel = 0f;
             bJumping = false;
             jumpVel = 0f;
         }
     }
 
-    [System.Serializable]
     class SlideMoveStrategy : BasicMoveStrategy {
         Vector2 direction = Vector2.zero;
         bool bTouchedGround = false;
-        public SlideMoveStrategy (ref AMoveAttr attr, ref MovementStats stats, Player player) : base (ref attr, ref stats, player) { }
+        public SlideMoveStrategy (ref MovementProps props, ref MovementAttr attr, Player player) : base (ref props, ref attr, player) { }
         override public void Move ( ) {
             if (direction == Vector2.zero) {
-                direction = attr.inputValue;
+                direction = props.inputValue;
                 direction.x = direction.x > 0f?1f : direction.x < 0f? - 1f : 0f;
             }
             if (bTouchedGround) {
-                direction = attr.inputValue;
+                direction = props.inputValue;
                 direction.x = direction.x > 0f?1f : direction.x < 0f? - 1f : 0f;
                 bTouchedGround = false;
             }
             Vector2 nVel = player.Rb.velocity;
-            nVel.x = direction.x * stats.NormalVel;
+            nVel.x = direction.x * attr.NormalVel;
             player.Rb.velocity = nVel;
         }
         override public void CheckCollision ( ) {
-            attr.bWallSliding = false;
-            attr.bCanJump = rayCastController.Down;
+            props.bWallSliding = false;
+            props.bCanJump = rayCastController.Down;
             bTouchedGround = (rayCastController.Left || rayCastController.Right);
         }
 
         override public void Init ( ) {
             player.Rb.velocity = Vector2.zero;
-            attr.externalHoriVel = 0f;
+            props.externalHoriVel = 0f;
             bTouchedGround = true;
         }
     }
 
     [System.Serializable]
-    class AMoveAttr {
+    class MovementProps {
         public Vector2 inputValue = Vector2.zero;
         public float externalHoriVel = 0f;
         public float frictionAccumulation = 0f;
@@ -413,7 +410,7 @@ namespace CJStudio.Dash.Player {
     }
 
     [System.Serializable]
-    class MovementStats : PlayerStats {
+    class MovementAttr : PlayerAttr {
         public float NormalVel = 7.5f;
         public float AirVel = 5.25f;
         public float JumpVel = 15f;

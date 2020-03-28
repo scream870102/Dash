@@ -1,11 +1,9 @@
 ﻿namespace CJStudio.Dash.Player {
     using CJStudio.Dash.Camera;
     using CJStudio.Dash.MapObject;
-
     using Eccentric.Input;
     using Eccentric.Utils;
     using Eccentric;
-
     using UnityEngine.InputSystem;
     using UnityEngine;
     [System.Serializable]
@@ -19,11 +17,12 @@
         public bool CanDash => bCanDash;
         DashProps props = null;
         UnscaledTimer timer = null;
-        DashStats stats = null;
+        DashAttr attr = null;
         bool bUsingDash = false;
         bool bCanDash = false;
         bool bAim = false;
         bool bUsingEnergy = false;
+        bool bInSpaceArea = false;
         float energy = 0f;
         float charge = 0f;
         float velocity = 0f;
@@ -31,26 +30,32 @@
         float normalTimeScale = 0f;
         float chargeJudge = 0f;
         Vector2 oriColSize = Vector2.zero;
-        public Dash (Player player, DashStats stats) : base (player) {
-            this.stats = stats;
-            energy = stats.BasicEnergy;
+        public Dash (Player player, DashAttr attr) : base (player) {
+            this.attr = attr;
+            energy = attr.BasicEnergy;
             timer = new UnscaledTimer ( );
             normalTimeScale = Time.timeScale;
             props = new DashProps ( );
             EnergyChanging ( );
-            props.MaxCharge = stats.MaxCharge;
-            props.MaxEnergy = stats.BasicEnergy;
-            chargeJudge = 0.5f * (stats.MinCharge + stats.MaxCharge) / stats.MaxCharge;
+            props.MaxCharge = attr.MaxCharge;
+            props.MaxEnergy = attr.BasicEnergy;
+            chargeJudge = 0.5f * (attr.MinCharge + attr.MaxCharge) / attr.MaxCharge;
             oriColSize = Player.Col.size;
         }
 
         override public void Tick ( ) {
-            if (bCanDash)Player.FX.PlayVFX (EVFXType.AURA);
-            else Player.FX.StopVFX (EVFXType.AURA);
+            energy += attr.RecoverRate * Time.unscaledDeltaTime;
+            if (energy > attr.BasicEnergy)
+                energy = attr.BasicEnergy;
+            EnergyChanging ( );
+            if (bCanDash)
+                Player.FX.PlayVFX (EVFXType.AURA);
+            else
+                Player.FX.StopVFX (EVFXType.AURA);
             CheckCollision ( );
             if (bAim && !bUsingDash) {
 #if UNITY_EDITOR
-                Debug.DrawRay (Player.Tf.position, direction * stats.RayForBreakableItem, Color.blue);
+                Debug.DrawRay (Player.Tf.position, direction * attr.RayForBreakableItem, Color.blue);
 #endif
                 if (bUsingEnergy) {
                     energy -= Time.unscaledDeltaTime;
@@ -62,8 +67,8 @@
                 }
                 if (timer.IsFinished) {
                     bUsingEnergy = true;
-                    timer.Reset (stats.BasicChargeTime);
-                    charge = stats.MinCharge;
+                    timer.Reset (attr.BasicChargeTime);
+                    charge = attr.MinCharge;
                 }
                 charge += Time.unscaledDeltaTime;
                 Aiming ( );
@@ -80,7 +85,7 @@
 
         public void AddEnergy (float supplement) {
             float newEnergy = this.energy + supplement;
-            energy = Mathf.Clamp (newEnergy, 0f, stats.BasicEnergy);
+            energy = Mathf.Clamp (newEnergy, 0f, attr.BasicEnergy);
             EnergyChanging ( );
 
         }
@@ -95,10 +100,10 @@
             props.Charge = charge;
             props.Direction = direction;
             props.Pos = Player.Tf.position;
-            float chargeRatio = charge / stats.MaxCharge;
-            float distance = chargeRatio * (chargeRatio >= chargeJudge?stats.MaxChargeMultiplier : stats.MinChargeMultiplier);
+            float chargeRatio = charge / attr.MaxCharge;
+            float distance = chargeRatio * (chargeRatio >= chargeJudge?attr.MaxChargeMultiplier : attr.MinChargeMultiplier);
             props.Distance = distance;
-            props.MaxDistance = stats.MaxChargeMultiplier;
+            props.MaxDistance = attr.MaxChargeMultiplier;
             if (Aim != null)
                 Aim (props);
         }
@@ -112,18 +117,18 @@
         void UseDash ( ) {
             if (bAim && !bUsingDash && bCanDash) {
                 Time.timeScale = normalTimeScale;
-                velocity = props.Distance / stats.AnimTime;
+                velocity = props.Distance / attr.AnimTime;
                 bUsingDash = true;
-                bCanDash = false;
-                timer.Reset (stats.AnimTime);
+                bCanDash = bInSpaceArea;
+                timer.Reset (attr.AnimTime);
                 AimAnimEnded ( );
                 Player.Anim.SetBool ("dash", true);
-                Player.GameController.CameraController.ShakeCamera (stats.DashShakeProps);
+                Player.GameController.CameraController.ShakeCamera (attr.DashShakeProps);
                 Player.Rb.velocity = Vector2.zero;
                 Player.FX.PlayVFX (EVFXType.TRAIL, Player.IsFacingRight);
                 Player.FX.PlaySFX (ESFXType.DASH);
                 GamepadController.VibrateController (EVibrateDuration.NORMAL, EVibrateStrength.STRONG);
-                Player.Col.size = oriColSize * stats.DashColSizeMultiplier;
+                Player.Col.size = oriColSize * attr.DashColSizeMultiplier;
             }
         }
 
@@ -132,16 +137,16 @@
                 ForceStopDash ( );
             }
             // if touch breakable object reset the state and can using dash again
-            #region CHECK_BREAKABLE_OBJECT
-            RaycastHit2D result = Physics2D.Raycast (Player.Tf.position, direction, stats.RayForBreakableItem, stats.BreakableItemLayer);
-            if (result.collider == null)result = Physics2D.Raycast (Player.Tf.position, Math.GetDirectionFromDeg (Math.GetDegree (direction) + DEG_FOR_CHECK), stats.RayForBreakableItem, stats.BreakableItemLayer);
-            if (result.collider == null)result = Physics2D.Raycast (Player.Tf.position, Math.GetDirectionFromDeg (Math.GetDegree (direction) - DEG_FOR_CHECK), stats.RayForBreakableItem, stats.BreakableItemLayer);
+#region CHECK_BREAKABLE_OBJECT
+            RaycastHit2D result = Physics2D.Raycast (Player.Tf.position, direction, attr.RayForBreakableItem, attr.BreakableItemLayer);
+            if (result.collider == null) result = Physics2D.Raycast (Player.Tf.position, Math.GetDirectionFromDeg (Math.GetDegree (direction) + DEG_FOR_CHECK), attr.RayForBreakableItem, attr.BreakableItemLayer);
+            if (result.collider == null) result = Physics2D.Raycast (Player.Tf.position, Math.GetDirectionFromDeg (Math.GetDegree (direction) - DEG_FOR_CHECK), attr.RayForBreakableItem, attr.BreakableItemLayer);
             if (result.collider != null && result.collider.tag == "Breakable") {
                 result.collider.GetComponent<BreakableObj> ( ).Break ( );
                 bCanDash = true;
                 Player.FX.PlaySFX (ESFXType.RESET_DASH);
             }
-            #endregion
+#endregion
             if (direction.x != 0f) {
                 bool bFaceRight = direction.x > 0f;
                 Render.ChangeDirectionXWithSpriteRender (bFaceRight, Player.Rend, true);
@@ -155,12 +160,13 @@
             bAim = false;
             Player.Anim.SetBool ("aim", false);
             bUsingEnergy = false;
-            charge = stats.MinCharge;
+            charge = attr.MinCharge;
             velocity = 0f;
             direction = Vector2.zero;
             Player.GameController.CameraController.DisableCameraShake ( );
             Player.Col.size = oriColSize;
             Time.timeScale = normalTimeScale;
+            DomainEvents.Raise<OnAiming> (new OnAiming (false));
             AimAnimEnded ( );
             Player.FX.StopVFX (EVFXType.TRAIL);
         }
@@ -197,13 +203,14 @@
             if (!bUsingDash && bCanDash) {
                 ResetState ( );
                 bAim = true;
-                Player.GameController.CameraController.SetCameraShake (stats.AimShakeProps);
+                Player.GameController.CameraController.SetCameraShake (attr.AimShakeProps);
                 Player.Anim.SetBool ("aim", true);
-                timer.Reset (stats.BasicChargeTime);
+                timer.Reset (attr.BasicChargeTime);
                 Vector2 tmp = Control.GamePlay.Aim.ReadValue<Vector2> ( ).normalized;
                 direction = tmp == Vector2.zero?Vector2.right : tmp;
-                Time.timeScale = stats.AimTimeScale;
+                Time.timeScale = attr.AimTimeScale;
                 Player.FX.PlayVFX (EVFXType.CHARGE);
+                DomainEvents.Raise<OnAiming> (new OnAiming (true));
             }
         }
 
@@ -213,12 +220,24 @@
             }
         }
 
+        void OnSpaceAreaEnter (OnSpaceAreaEnter e) {
+            if (e.IsEnter) {
+                bInSpaceArea = true;
+                bCanDash = true;
+            }
+            else {
+                bInSpaceArea = false;
+            }
+
+        }
+
         override public void OnEnable ( ) {
             Control.GamePlay.Dash.started += OnDashBtnStarted;
             Control.GamePlay.Dash.canceled += OnDashBtnCanceled;
             Control.GamePlay.Jump.started += OnJumpBtnStarted;
             Control.GamePlay.Aim.started += OnAimBtnStarted;
             Control.GamePlay.Aim.performed += OnAimBtnPerformed;
+            DomainEvents.Register<OnSpaceAreaEnter> (OnSpaceAreaEnter);
         }
 
         override public void OnDisable ( ) {
@@ -227,6 +246,7 @@
             Control.GamePlay.Jump.started -= OnJumpBtnStarted;
             Control.GamePlay.Aim.started -= OnAimBtnStarted;
             Control.GamePlay.Aim.performed -= OnAimBtnPerformed;
+            DomainEvents.UnRegister<OnSpaceAreaEnter> (OnSpaceAreaEnter);
         }
 
         public void ForceStopDash (bool IsResetDash = false) {
@@ -241,10 +261,10 @@
     }
 
     [System.Serializable]
-    class DashStats : PlayerStats {
+    class DashAttr : PlayerAttr {
         public float BasicChargeTime => MaxCharge - MinCharge;
-        public float MinCharge = 0f;
-        public float MaxCharge = .6f;
+        public float MinCharge = .3f;
+        public float MaxCharge = .8f;
         public float BasicEnergy = 3f;
         public float MaxChargeMultiplier = 6f;
         public float MinChargeMultiplier = 6f;
@@ -255,6 +275,7 @@
         public CameraShakeProps DashShakeProps = null;
         public CameraShakeProps AimShakeProps = null;
         public float DashColSizeMultiplier = 0.5f;
+        public float RecoverRate = .1f;
     }
     class DashProps {
         public float Charge { get; set; }

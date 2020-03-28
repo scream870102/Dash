@@ -173,6 +173,17 @@ namespace CJStudio.Dash
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""fb8e1e39-7f4c-4716-9ce8-b56371b4eafa"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""2D Vector"",
                     ""id"": ""caac4a72-9494-4b70-914a-3b854359c3da"",
                     ""path"": ""2DVector"",
@@ -524,6 +535,17 @@ namespace CJStudio.Dash
                     ""name"": """",
                     ""id"": ""b330d845-7e7b-4ccf-8984-1047ac837c44"",
                     ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Option"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""502369b4-ac86-4ae0-8e93-91d7bde79e48"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

@@ -148,7 +148,7 @@
                     data.Add (o.ToDictionary ( ));
                 }
                 for (int i = 0; i < task.Result.Count; i++) {
-                    this.datas.Add (new ScoreData (data[i]["User"].ToString ( ), data[i]["Score"].ToString ( ), data[i]["Time"].ToString ( ), data[i]["Level"].ToString ( )));
+                    this.datas.Add (new ScoreData (data[i]["User"].ToString ( ), float.Parse (data[i]["Score"].ToString ( )).ToString ("F2"), data[i]["Time"].ToString ( ), data[i]["Level"].ToString ( )));
                 }
                 bSocreGet = true;
                 SLController.WriteLog ("Alreay get the score");

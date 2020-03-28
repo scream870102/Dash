@@ -19,10 +19,11 @@
         Transform dustTf = null;
         GameController gameController = null;
         [SerializeField] RayCastController rayCastController = null;
-#region STATS
-        [SerializeField] MovementStats movementStats = null;
-        [SerializeField] DashStats dashStats = null;
-        [SerializeField] FXStats fXStats = null;
+#region ATTR
+        [Header ("Set attribution for all action")]
+        [SerializeField] MovementAttr movementAttr = null;
+        [SerializeField] DashAttr dashAttr = null;
+        [SerializeField] FXRef fxRefs = null;
 #endregion
         public RayCastController RayCastController => rayCastController;
         public Rigidbody2D Rb => rb;
@@ -49,9 +50,9 @@
             rend = GetComponent<SpriteRenderer> ( );
             col = GetComponent<BoxCollider2D> ( );
             tf = this.transform;
-            components.Add (new Movement (this, movementStats));
-            components.Add (new Dash (this, dashStats));
-            components.Add (new FX (this, fXStats));
+            components.Add (new Movement (this, movementAttr));
+            components.Add (new Dash (this, dashAttr));
+            components.Add (new FX (this, fxRefs));
 #if UNITY_EDITOR
             move = components[0] as Movement;
 #endif
@@ -143,6 +144,14 @@
         public bool IsEnter => bEnter;
         public OnSlideAreaEnter (bool IsEnter) {
             this.bEnter = IsEnter;
+        }
+    }
+
+    class OnAiming : IDomainEvent {
+        bool bStart;
+        public bool IsStart => bStart;
+        public OnAiming (bool IsStart) {
+            this.bStart = IsStart;
         }
     }
 

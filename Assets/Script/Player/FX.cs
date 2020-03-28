@@ -4,15 +4,15 @@
     using UnityEngine;
     [System.Serializable]
     class FX : PlayerComponent {
-        FXStats stats = null;
+        FXRef refs = null;
         Dictionary<ESFXType, AudioClip> clips = new Dictionary<ESFXType, AudioClip> ( );
         Dictionary<ESFXType, float> volumes = new Dictionary<ESFXType, float> ( );
-        public FX (Player player, FXStats stats) : base (player) {
-            this.stats = stats;
-            stats.GrabTF = stats.GrabVFX.transform;
-            stats.DustTF = stats.DustVFX.transform;
-            stats.DashTF = stats.DashVFX.transform;
-            foreach (SFXClip o in stats.SFXClips) {
+        public FX (Player player, FXRef refs) : base (player) {
+            this.refs = refs;
+            refs.GrabTF = refs.GrabVFX.transform;
+            refs.DustTF = refs.DustVFX.transform;
+            refs.DashTF = refs.DashVFX.transform;
+            foreach (SFXClip o in refs.SFXClips) {
                 clips.Add (o.type, o.clip);
                 volumes.Add (o.type, o.volume);
             }
@@ -20,34 +20,34 @@
         public void PlayVFX (EVFXType type, bool IsFacingRight = true) {
             switch (type) {
                 case EVFXType.DUST:
-                    Vector3 dustS = stats.DustTF.localScale;
+                    Vector3 dustS = refs.DustTF.localScale;
                     dustS.x = IsFacingRight?1f: -1f;
-                    stats.DustTF.localScale = dustS;
-                    stats.DustVFX.Play ( );
+                    refs.DustTF.localScale = dustS;
+                    refs.DustVFX.Play ( );
                     break;
                 case EVFXType.GRAB:
-                    if (stats.GrabVFX.isPlaying)return;
-                    Vector3 grabP = stats.GrabTF.localPosition;
+                    if (refs.GrabVFX.isPlaying)return;
+                    Vector3 grabP = refs.GrabTF.localPosition;
                     grabP.x = IsFacingRight? Mathf.Abs (grabP.x): -Mathf.Abs (grabP.x);
-                    stats.GrabTF.localPosition = grabP;
-                    stats.GrabVFX.Play ( );
+                    refs.GrabTF.localPosition = grabP;
+                    refs.GrabVFX.Play ( );
                     break;
                 case EVFXType.TRAIL:
-                    stats.TrailVFX.enabled = true;
-                    stats.TrailParticle.Play ( );
-                    Vector3 dashS = stats.DashTF.localScale;
+                    refs.TrailVFX.enabled = true;
+                    refs.TrailParticle.Play ( );
+                    Vector3 dashS = refs.DashTF.localScale;
                     dashS.x = IsFacingRight?1f: -1f;
-                    stats.DashTF.localScale = dashS;
-                    stats.DashVFX.Play ( );
+                    refs.DashTF.localScale = dashS;
+                    refs.DashVFX.Play ( );
                     break;
                 case EVFXType.CHARGE:
-                    stats.ChargeParticle.Play ( );
+                    refs.ChargeParticle.Play ( );
                     break;
                 case EVFXType.AURA:
-                    stats.AuraParticle.Play ( );
+                    refs.AuraParticle.Play ( );
                     break;
                 case EVFXType.HEAL:
-                    stats.HealVFX.Play ( );
+                    refs.HealVFX.Play ( );
                     break;
             }
         }
@@ -55,34 +55,34 @@
         public void StopVFX (EVFXType type, bool IsFacingRight = true) {
             switch (type) {
                 case EVFXType.DUST:
-                    stats.DustVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
+                    refs.DustVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
                     break;
                 case EVFXType.GRAB:
-                    stats.GrabVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
+                    refs.GrabVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
                     break;
                 case EVFXType.TRAIL:
-                    stats.TrailVFX.enabled = false;
-                    stats.TrailParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
-                    stats.DashVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
+                    refs.TrailVFX.enabled = false;
+                    refs.TrailParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
+                    refs.DashVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
                     break;
                 case EVFXType.CHARGE:
-                    stats.ChargeParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
+                    refs.ChargeParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
                     break;
                 case EVFXType.AURA:
-                    stats.AuraParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
+                    refs.AuraParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
                     break;
                 case EVFXType.HEAL:
-                    stats.HealVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
+                    refs.HealVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
                     break;
             }
         }
 
         public void PlaySFX (ESFXType type) {
-            stats.audio.PlayOneShot (clips [type], volumes [type]);
+            refs.audio.PlayOneShot (clips [type], volumes [type]);
         }
 
         public void StopAllSFX ( ) {
-            stats.audio.Stop ( );
+            refs.audio.Stop ( );
         }
 
         override public void Tick ( ) { }
@@ -93,7 +93,7 @@
     }
 
     [System.Serializable]
-    class FXStats : PlayerStats {
+    class FXRef : PlayerAttr {
         public ParticleSystem GrabVFX = null;
         public ParticleSystem DustVFX = null;
         public TrailRenderer TrailVFX = null;

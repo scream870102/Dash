@@ -35,7 +35,10 @@ namespace CJStudio.Dash {
                     SLController.WriteLog ("Finish check firebase instance");
                 }
                 else {
+                    SLController.WriteLog (System.String.Format ("Could not resolve all Firebase dependencies: {0}", obj));
+#if UNITY_EDITOR
                     Debug.LogError (System.String.Format ("Could not resolve all Firebase dependencies: {0}", obj));
+#endif
                 }
             }
 
