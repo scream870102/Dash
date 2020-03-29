@@ -1,6 +1,6 @@
 ﻿namespace CJStudio.Dash.Player {
     using System.Collections.Generic;
-
+    using System.Threading.Tasks;
     using UnityEngine;
     [System.Serializable]
     class FX : PlayerComponent {
@@ -26,7 +26,7 @@
                     refs.DustVFX.Play ( );
                     break;
                 case EVFXType.GRAB:
-                    if (refs.GrabVFX.isPlaying)return;
+                    if (refs.GrabVFX.isPlaying) return;
                     Vector3 grabP = refs.GrabTF.localPosition;
                     grabP.x = IsFacingRight? Mathf.Abs (grabP.x): -Mathf.Abs (grabP.x);
                     refs.GrabTF.localPosition = grabP;
@@ -42,6 +42,7 @@
                     break;
                 case EVFXType.CHARGE:
                     refs.ChargeParticle.Play ( );
+                    refs.RingVFX.Play ( );
                     break;
                 case EVFXType.AURA:
                     refs.AuraParticle.Play ( );
@@ -67,6 +68,7 @@
                     break;
                 case EVFXType.CHARGE:
                     refs.ChargeParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
+                    refs.RingVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
                     break;
                 case EVFXType.AURA:
                     refs.AuraParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
@@ -78,11 +80,21 @@
         }
 
         public void PlaySFX (ESFXType type) {
-            refs.audio.PlayOneShot (clips [type], volumes [type]);
+            refs.audio.PlayOneShot (clips[type], volumes[type]);
         }
 
         public void StopAllSFX ( ) {
             refs.audio.Stop ( );
+        }
+
+        public void PlayLoopSFX (ESFXType type) {
+            refs.loopAudio.clip = clips[type];
+            refs.loopAudio.volume = volumes[type];
+            refs.loopAudio.Play ( );
+        }
+
+        public void StopLoopSFX ( ) {
+            refs.loopAudio.Stop ( );
         }
 
         override public void Tick ( ) { }
@@ -102,11 +114,13 @@
         public ParticleSystem AuraParticle = null;
         public ParticleSystem DashVFX = null;
         public ParticleSystem HealVFX = null;
+        public ParticleSystem RingVFX = null;
         public Transform DashTF { get; set; }
         public Transform GrabTF { get; set; }
         public Transform DustTF { get; set; }
         public AudioSource audio;
-        public SFXClip [] SFXClips;
+        public AudioSource loopAudio;
+        public SFXClip[ ] SFXClips;
     }
 
     [System.Serializable]
@@ -128,6 +142,7 @@
         RESET_DASH,
         HEAL,
         DASH,
-        JUMP
+        JUMP,
+        CHARGE
     }
 }

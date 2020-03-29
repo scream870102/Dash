@@ -17,6 +17,7 @@ namespace CJStudio.Dash {
         [SerializeField] Text elapsedTimeText = null;
         [SerializeField] Text timeText = null;
         [SerializeField] GameObject pauseObj = null;
+        [SerializeField] Animation anim = null;
         float energyBarMaxHeight = 0f;
         void Awake ( ) {
             if (energyBar)
@@ -69,6 +70,16 @@ namespace CJStudio.Dash {
             pauseObj.SetActive (false);
         }
 
+        void OnAiming (OnAiming e) {
+            if (e.IsStart) {
+                float speed = 1f / Time.timeScale;
+                anim[anim.clip.name].speed = speed;
+                anim.Play ( );
+            }
+            else
+                anim.Stop ( );
+        }
+
         void OnGoalReached (float time) {
             endObject.SetActive (true);
             timeText.text = time.ToString ("0.00");
@@ -82,6 +93,7 @@ namespace CJStudio.Dash {
             DomainEvents.Register<OnStageReset> (OnStageReset);
             DomainEvents.Register<OnGamePaused> (OnGamePaused);
             DomainEvents.Register<OnGameResumed> (OnGameResumed);
+            DomainEvents.Register<OnAiming> (OnAiming);
             GameController gameController = GameObject.FindObjectOfType<GameController> ( );
             if (gameController) {
                 gameController.GoalReached += OnGoalReached;
@@ -97,6 +109,7 @@ namespace CJStudio.Dash {
             DomainEvents.UnRegister<OnStageReset> (OnStageReset);
             DomainEvents.UnRegister<OnGamePaused> (OnGamePaused);
             DomainEvents.UnRegister<OnGameResumed> (OnGameResumed);
+            DomainEvents.UnRegister<OnAiming> (OnAiming);
             GameController gameController = GameObject.FindObjectOfType<GameController> ( );
             if (gameController) {
                 gameController.GoalReached -= OnGoalReached;

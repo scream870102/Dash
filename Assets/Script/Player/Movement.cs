@@ -7,7 +7,7 @@ namespace CJStudio.Dash.Player {
     using UnityEngine;
     [System.Serializable]
     class Movement : PlayerComponent {
-        MovementAttr stats = null;
+        MovementAttr attr = null;
         IMoveStrategy strategy = null;
         BasicMoveStrategy basicMove = null;
         SpaceMoveStrategy spaceMove = null;
@@ -15,18 +15,18 @@ namespace CJStudio.Dash.Player {
 #if UNITY_EDITOR
         [ReadOnly, SerializeField]
 #endif
-        MovementProps attr = null;
+        MovementProps props = null;
         RayCastController rayCastController = null;
-        public bool IsFacingRight => attr.bFaceRight;
+        public bool IsFacingRight => props.bFaceRight;
         public Movement (Player player, MovementAttr stats) : base (player) {
-            this.stats = stats;
+            this.attr = stats;
             rayCastController = player.RayCastController;
-            attr = new MovementProps ( );
-            basicMove = new BasicMoveStrategy (ref attr, ref stats, player);
-            spaceMove = new SpaceMoveStrategy (ref attr, ref stats, player);
-            slideMove = new SlideMoveStrategy (ref attr, ref stats, player);
+            props = new MovementProps ( );
+            basicMove = new BasicMoveStrategy (ref props, ref stats, player);
+            spaceMove = new SpaceMoveStrategy (ref props, ref stats, player);
+            slideMove = new SlideMoveStrategy (ref props, ref stats, player);
             strategy = basicMove;
-            attr.originGravity = player.Rb.gravityScale;
+            props.originGravity = player.Rb.gravityScale;
         }
 
         override public void Tick ( ) {
@@ -34,21 +34,21 @@ namespace CJStudio.Dash.Player {
             Move ( );
             Jump ( );
 #region WALL_SLIDE_VFX
-            if (attr.bWallSliding) Player.FX.PlayVFX (EVFXType.GRAB, attr.bFaceRight);
-            else Player.FX.StopVFX (EVFXType.GRAB, attr.bFaceRight);
+            if (props.bWallSliding) Player.FX.PlayVFX (EVFXType.GRAB, props.bFaceRight);
+            else Player.FX.StopVFX (EVFXType.GRAB, props.bFaceRight);
 #endregion
 #region ANIMATOR_PAPAMETER
-            Player.Anim.SetFloat ("velX", Mathf.Abs (attr.inputValue.x));
+            Player.Anim.SetFloat ("velX", Mathf.Abs (props.inputValue.x));
             Player.Anim.SetFloat ("velY", Player.Rb.velocity.y);
-            Player.Anim.SetBool ("wallSlide", attr.bWallSliding);
+            Player.Anim.SetBool ("wallSlide", props.bWallSliding);
 #endregion
 #region SPRITE_RENDER_DIRECTION
             if (!Player.IsDashing && Player.Rb.velocity.x != 0f) {
-                if (attr.bWallSliding)
-                    attr.bFaceRight = rayCastController.Right;
+                if (props.bWallSliding)
+                    props.bFaceRight = rayCastController.Right;
                 else
-                    attr.bFaceRight = Player.Rb.velocity.x > 0f;
-                Render.ChangeDirectionXWithSpriteRender (attr.bFaceRight, Player.Rend, true);
+                    props.bFaceRight = Player.Rb.velocity.x > 0f;
+                Render.ChangeDirectionXWithSpriteRender (props.bFaceRight, Player.Rend);
             }
 #endregion
 #if UNITY_EDITOR
@@ -90,25 +90,25 @@ namespace CJStudio.Dash.Player {
         }
 
         void OnMoveBtnPerformed (InputAction.CallbackContext ctx) {
-            attr.inputValue = ctx.ReadValue<Vector2> ( );
+            props.inputValue = ctx.ReadValue<Vector2> ( );
         }
         void OnMoveBtnCanceled (InputAction.CallbackContext ctx) {
-            attr.inputValue = Vector2.zero;
+            props.inputValue = Vector2.zero;
         }
 
         void OnJumpBtnStarted (InputAction.CallbackContext ctx) {
-            attr.bJumpPressed = true;
+            props.bJumpPressed = true;
         }
         void OnJumpBtnCanceled (InputAction.CallbackContext ctx) {
-            attr.bJumpPressed = false;
+            props.bJumpPressed = false;
         }
 
         public void AddHoriVelocity (float vel, bool IsResetVel = false) {
             Vector2 nVel = Player.Rb.velocity;
             if (IsResetVel) nVel.y = 0f;
             Player.Rb.velocity = nVel;
-            attr.externalHoriVel += vel;
-            attr.bExternalVelPositive = attr.externalHoriVel > 0f;
+            props.externalHoriVel += vel;
+            props.bExternalVelPositive = props.externalHoriVel > 0f;
         }
 
         public void AddVertVelocity (float vel, bool IsResetVel = false) {
@@ -144,7 +144,7 @@ namespace CJStudio.Dash.Player {
 
         override public void SetSaveData (SaveData data) {
             base.SetSaveData (data);
-            attr.Init ( );
+            props.Init ( );
         }
     }
 
@@ -210,7 +210,10 @@ namespace CJStudio.Dash.Player {
         }
 
         override public void Jump ( ) {
-
+            //如果角色在Dash的途中仍然沒有放開Jump Button 將其判定改為沒有按住
+            if (props.bJumpPressed && player.IsDashing) {
+                props.bJumpPressed = false;
+            }
             if (props.bCanJump && props.bJumpPressed && !player.IsDashing) {
                 Vector2 vel = player.Rb.velocity;
                 //Wall Jump

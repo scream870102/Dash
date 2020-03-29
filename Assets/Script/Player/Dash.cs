@@ -149,7 +149,7 @@
 #endregion
             if (direction.x != 0f) {
                 bool bFaceRight = direction.x > 0f;
-                Render.ChangeDirectionXWithSpriteRender (bFaceRight, Player.Rend, true);
+                Render.ChangeDirectionXWithSpriteRender (bFaceRight, Player.Rend);
             }
             Player.Rb.MovePosition (Player.Rb.position + direction * velocity * Time.fixedDeltaTime);
         }
@@ -157,6 +157,7 @@
         //Call this method to reset all vars before a new Dash
         void ResetState ( ) {
             Player.FX.StopVFX (EVFXType.CHARGE);
+            Player.FX.StopLoopSFX ( );
             bAim = false;
             Player.Anim.SetBool ("aim", false);
             bUsingEnergy = false;
@@ -210,6 +211,7 @@
                 direction = tmp == Vector2.zero?Vector2.right : tmp;
                 Time.timeScale = attr.AimTimeScale;
                 Player.FX.PlayVFX (EVFXType.CHARGE);
+                Player.FX.PlayLoopSFX (ESFXType.CHARGE);
                 DomainEvents.Raise<OnAiming> (new OnAiming (true));
             }
         }

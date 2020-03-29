@@ -136,8 +136,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 11, y: -67}
-  m_SizeDelta: {x: -57.559937, y: 100}
+  m_AnchoredPosition: {x: 45, y: -110}
+  m_SizeDelta: {x: -90, y: 140}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3624457934038156788
 CanvasRenderer:
@@ -167,12 +167,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: a764d9c3af112f64689a4c5b31464273, type: 3}
-    m_FontSize: 80
-    m_FontStyle: 0
+    m_FontSize: 85
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 8
-    m_MaxSize: 90
-    m_Alignment: 5
+    m_MinSize: 1
+    m_MaxSize: 120
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -206,15 +206,15 @@ RectTransform:
   m_GameObject: {fileID: 3624457934311238490}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 3624457933739504392}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 694, y: 500}
-  m_SizeDelta: {x: -1820, y: 256}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 20, y: 480}
+  m_SizeDelta: {x: 100, y: 302.5}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &3624457934311238489
 CanvasRenderer:
@@ -237,12 +237,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2783019, g: 1, b: 0.88337815, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9c6beca1cd34546458ca2e71858400d3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88c8f51e938a30f45963e1ec0682e6bc, type: 3}
   m_Type: 2
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -284,11 +284,11 @@ RectTransform:
   m_Father: {fileID: 3624457933739504392}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 135.59998, y: 100}
-  m_Pivot: {x: 0, y: 1}
+  m_SizeDelta: {x: 135.6001, y: 100}
+  m_Pivot: {x: 1, y: 1}
 --- !u!222 &3624457934594637635
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -322,13 +322,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 90
-    m_Alignment: 3
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 12123123123123123123
 --- !u!1 &3624457935007307736
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,15 +356,15 @@ RectTransform:
   m_GameObject: {fileID: 3624457935007307736}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 3624457933739504392}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 694, y: 500}
-  m_SizeDelta: {x: -1820, y: 256}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 20, y: 480}
+  m_SizeDelta: {x: 100, y: 302.5}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &3624457935007307743
 CanvasRenderer:
@@ -387,12 +387,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.45747736, g: 0.41998932, b: 0.6226415, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9c6beca1cd34546458ca2e71858400d3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88c8f51e938a30f45963e1ec0682e6bc, type: 3}
   m_Type: 2
   m_PreserveAspect: 0
   m_FillCenter: 1

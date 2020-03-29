@@ -6,9 +6,9 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Aim
+  m_Name: AimTimeText
   serializedVersion: 6
-  m_Legacy: 0
+  m_Legacy: 1
   m_Compressed: 0
   m_UseHighQualityCurve: 1
   m_RotationCurves: []
@@ -22,7 +22,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.7
+        value: -110
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -30,8 +30,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.175
-        value: 0.7
+        time: 0.083333336
+        value: -100
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -39,8 +39,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.35
-        value: 0.5
+        time: 0.25
+        value: -120
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -48,8 +48,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.525
-        value: 1
+        time: 0.33333334
+        value: -110
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -59,64 +59,25 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: material._Fade
-    path: 
-    classID: 212
+    attribute: m_AnchoredPosition.y
+    path: TimeText
+    classID: 224
     script: {fileID: 0}
-  m_PPtrCurves:
-  - curve:
-    - time: 0
-      value: {fileID: 8912234751729863468, guid: dd78429bf8e145746963c907751a3009,
-        type: 3}
-    - time: 0.175
-      value: {fileID: 5612350696743038814, guid: dd78429bf8e145746963c907751a3009,
-        type: 3}
-    - time: 0.35
-      value: {fileID: 4658569431074750617, guid: dd78429bf8e145746963c907751a3009,
-        type: 3}
-    - time: 0.525
-      value: {fileID: 7361051066184924710, guid: dd78429bf8e145746963c907751a3009,
-        type: 3}
-    - time: 0.675
-      value: {fileID: 7361051066184924710, guid: dd78429bf8e145746963c907751a3009,
-        type: 3}
-    attribute: m_Sprite
-    path: 
-    classID: 212
-    script: {fileID: 0}
-  m_SampleRate: 40
-  m_WrapMode: 0
+  m_PPtrCurves: []
+  m_SampleRate: 60
+  m_WrapMode: 2
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings:
-    - serializedVersion: 2
-      path: 0
-      attribute: 2269262469
-      script: {fileID: 0}
-      typeID: 212
-      customType: 22
-      isPPtrCurve: 0
-    - serializedVersion: 2
-      path: 0
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-    pptrCurveMapping:
-    - {fileID: 8912234751729863468, guid: dd78429bf8e145746963c907751a3009, type: 3}
-    - {fileID: 5612350696743038814, guid: dd78429bf8e145746963c907751a3009, type: 3}
-    - {fileID: 4658569431074750617, guid: dd78429bf8e145746963c907751a3009, type: 3}
-    - {fileID: 7361051066184924710, guid: dd78429bf8e145746963c907751a3009, type: 3}
-    - {fileID: 7361051066184924710, guid: dd78429bf8e145746963c907751a3009, type: 3}
+    genericBindings: []
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.7
+    m_StopTime: 0.33333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -137,7 +98,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.7
+        value: -110
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -145,8 +106,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.175
-        value: 0.7
+        time: 0.083333336
+        value: -100
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -154,8 +115,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.35
-        value: 0.5
+        time: 0.25
+        value: -120
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -163,8 +124,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.525
-        value: 1
+        time: 0.33333334
+        value: -110
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -174,9 +135,9 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: material._Fade
-    path: 
-    classID: 212
+    attribute: m_AnchoredPosition.y
+    path: TimeText
+    classID: 224
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0

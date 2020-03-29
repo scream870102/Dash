@@ -46,10 +46,10 @@
         //修改這裡轉換聲音的方式 或許是播放其他的音效 或是有淡入淡出的效果
         //純粹轉換會過於突兀
         void OnAiming (OnAiming e) {
-            if (e.IsStart)
-                audio.pitch = pitchAtAim;
-            else
-                audio.pitch = 1f;
+            // if (e.IsStart)
+            //     audio.pitch = pitchAtAim;
+            // else
+            //     audio.pitch = 1f;
         }
 
         void OnEnable ( ) {
