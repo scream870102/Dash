@@ -1,7 +1,6 @@
 ﻿namespace Eccentric.Input {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
     using UnityEngine.InputSystem.DualShock;
     using UnityEngine.InputSystem;
     using UnityEngine;
@@ -13,14 +12,16 @@
             new Dictionary<EVibrateStrength, Strength> ( ) { { EVibrateStrength.SLIGHT, new Strength (.25f, .25f) }, { EVibrateStrength.NORMAL, new Strength (.5f, .5f) }, { EVibrateStrength.STRONG, new Strength (.95f, .95f) }
             };
         static async public void VibrateController (int time = 100, float lowFrequency = 0.25f, float highFrequency = 0.75f) {
+            if (Gamepad.current == null) return;
             Gamepad.current.SetMotorSpeeds (lowFrequency, highFrequency);
             await Task.Delay (time);
             Gamepad.current.SetMotorSpeeds (0f, 0f);
         }
         static async public void VibrateController (EVibrateDuration duration = EVibrateDuration.NORMAL, EVibrateStrength strength = EVibrateStrength.NORMAL) {
-            Strength s = GamepadController.strength [strength];
+            if (Gamepad.current == null) return;
+            Strength s = GamepadController.strength[strength];
             Gamepad.current.SetMotorSpeeds (s.LowFrequency, s.HighFrequency);
-            await Task.Delay (GamepadController.duration [duration]);
+            await Task.Delay (GamepadController.duration[duration]);
             Gamepad.current.SetMotorSpeeds (0f, 0f);
         }
 

@@ -125,7 +125,7 @@
                 Player.Anim.SetBool ("dash", true);
                 Player.GameController.CameraController.ShakeCamera (attr.DashShakeProps);
                 Player.Rb.velocity = Vector2.zero;
-                Player.FX.PlayVFX (EVFXType.TRAIL, Player.IsFacingRight);
+                Player.FX.PlayVFX (EVFXType.TRAIL, Player.IsFacingRight, Math.GetDegree (direction));
                 Player.FX.PlaySFX (ESFXType.DASH);
                 GamepadController.VibrateController (EVibrateDuration.NORMAL, EVibrateStrength.STRONG);
                 Player.Col.size = oriColSize * attr.DashColSizeMultiplier;

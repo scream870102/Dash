@@ -27,6 +27,7 @@ Material:
     m_Floats:
     - _Fade: 0.336
     - _Scale: 141.4
+    - _scrollSpeed: 0.5
     m_Colors:
     - Vector3_57012A50: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.4541652, g: 1.1886792, b: 1.1886792, a: 1}
