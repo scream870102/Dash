@@ -3,7 +3,6 @@
     using Eccentric.Utils;
     using Firebase.Firestore;
     using UnityEngine.InputSystem;
-    using UnityEngine.SceneManagement;
     using UnityEngine.UI;
     using UnityEngine;
     class TitleController : MonoBehaviour {
@@ -86,7 +85,7 @@
         }
 
         public void OnNewGamePressed ( ) {
-            GameManager.Instance.LoadLevel (ELevel.LEVEL1);
+            GameManager.Instance.LoadLevel (ELevel.STORY);
         }
         public void OnContinuePressed ( ) {
             SaveData data = SLController.Load ( );

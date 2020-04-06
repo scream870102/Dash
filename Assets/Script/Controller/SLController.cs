@@ -1,6 +1,5 @@
 namespace CJStudio.Dash {
     using System.IO;
-    using System;
     using UnityEngine;
 
     static class SLController {
@@ -52,7 +51,8 @@ namespace CJStudio.Dash {
 
     public enum ELevel {
         TITLE = 0,
-        LEVEL1 = 1,
-        LEVEL2 = 2,
+        STORY = 1,
+        LEVEL1 = 2,
+        LEVEL2 = 3,
     }
 }

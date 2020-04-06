@@ -53,6 +53,9 @@ void GetScore ( ) {
 ## 注意事項
 - ContinueWith中無法使用任何有關Unity的API
     - 目前無法確定為什麼 或許是執行階段的不同
+    - UnityEngine 中的操作 必須要在MainThread  
+        因此開啟另一個Thread在裡面自然無法生成物件或是執行其他有關的UnityAPI  
+        但究竟哪一些不能使用有待驗證
     - 但可以使用`Debug.Log`
 - 在Build以後有一定的機率會造成應用程式閃退
     - 理由不確定
