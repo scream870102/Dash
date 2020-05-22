@@ -22,6 +22,7 @@ namespace CJStudio.Dash {
         }
         FirebaseFirestore db = null;
         public FirebaseFirestore Db => db;
+        public GameController GameController { get; set; }
         override protected void Awake ( ) {
             base.Awake ( );
             if (Instance == this) {

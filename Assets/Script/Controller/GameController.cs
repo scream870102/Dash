@@ -30,14 +30,24 @@
             stageController = new StageController (initStage, this);
             DomainEvents.Raise (new OnGameStarted ( ));
             state = EGameState.PLAY;
+
         }
+
         void Update ( ) {
             if (state == EGameState.PLAY)
                 elapsedTime += Time.deltaTime;
             if (ElapsedTimeChange != null)
                 ElapsedTimeChange (elapsedTime);
         }
+
+        public void MinusElapsedTime (float time) {
+            elapsedTime -= time;
+            if (elapsedTime < 0f) elapsedTime = 0f;
+        }
+
         void OnEnable ( ) {
+            if (GameManager.Instance.GameController != this)
+                GameManager.Instance.GameController = this;
             DomainEvents.Register<OnGoalReached> (OnGoalReached);
             DomainEvents.Register<OnPlayerDead> (OnPlayerDead);
             Control.UI.Confirm.started += OnConfirmPressed;

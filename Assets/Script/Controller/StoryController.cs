@@ -10,6 +10,7 @@
         bool bScrolling = false;
         float direction = 0f;
 
+        //Use Update to update the scroll problem
         void Update ( ) {
             if (bScrolling) {
                 scrollbar.value = Mathf.Clamp01 (scrollbar.value + direction * Time.deltaTime);
@@ -34,7 +35,7 @@
             }
 
         }
-        
+
         void OnAxisValueStarted (InputAction.CallbackContext ctx) {
             bScrolling = true;
             direction = (ctx.ReadValue<System.Single> ( ) > 0f?1f: -1f) * scrollSpeed;
