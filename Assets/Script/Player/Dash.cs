@@ -49,9 +49,9 @@
                 energy = attr.BasicEnergy;
             EnergyChanging ( );
             if (bCanDash)
-                Player.FX.PlayVFX (EVFXType.AURA);
+                Player.FX.PlayVFX (EVFXType.FLIP_RECTANGLE);
             else
-                Player.FX.StopVFX (EVFXType.AURA);
+                Player.FX.StopVFX (EVFXType.FLIP_RECTANGLE);
             CheckCollision ( );
             if (bAim && !bUsingDash) {
 #if UNITY_EDITOR
@@ -125,7 +125,7 @@
                 Player.Anim.SetBool ("dash", true);
                 Player.GameController.CameraController.ShakeCamera (attr.DashShakeProps);
                 Player.Rb.velocity = Vector2.zero;
-                Player.FX.PlayVFX (EVFXType.TRAIL, Player.IsFacingRight, Math.GetDegree (direction));
+                Player.FX.PlayVFX (attr.DashVFX, Player.IsFacingRight, Math.GetDegree (direction), direction,attr.MaxMagicalCircleAngle);
                 Player.FX.PlaySFX (ESFXType.DASH);
                 GamepadController.VibrateController (EVibrateDuration.NORMAL, EVibrateStrength.STRONG);
                 Player.Col.size = oriColSize * attr.DashColSizeMultiplier;
@@ -149,14 +149,14 @@
 #endregion
             if (direction.x != 0f) {
                 bool bFaceRight = direction.x > 0f;
-                Render.ChangeDirectionXWithSpriteRender (bFaceRight, Player.Rend);
+                Render.ChangeDirectionXWithSpriteRender (bFaceRight, Player.Rend, Player.IsRendInvert);
             }
             Player.Rb.MovePosition (Player.Rb.position + direction * velocity * Time.fixedDeltaTime);
         }
 
         //Call this method to reset all vars before a new Dash
         void ResetState ( ) {
-            Player.FX.StopVFX (EVFXType.CHARGE);
+            Player.FX.StopVFX (EVFXType.GATHER_RECTANGLE);
             Player.FX.StopLoopSFX ( );
             bAim = false;
             Player.Anim.SetBool ("aim", false);
@@ -169,7 +169,7 @@
             Time.timeScale = normalTimeScale;
             DomainEvents.Raise<OnAiming> (new OnAiming (false));
             AimAnimEnded ( );
-            Player.FX.StopVFX (EVFXType.TRAIL);
+            Player.FX.StopVFX (attr.DashVFX);
         }
 
         //Check if player bomb into any collider which can reset its dash state
@@ -210,7 +210,7 @@
                 Vector2 tmp = Control.GamePlay.Aim.ReadValue<Vector2> ( ).normalized;
                 direction = tmp == Vector2.zero?Vector2.right : tmp;
                 Time.timeScale = attr.AimTimeScale;
-                Player.FX.PlayVFX (EVFXType.CHARGE);
+                Player.FX.PlayVFX (EVFXType.GATHER_RECTANGLE);
                 Player.FX.PlayLoopSFX (ESFXType.CHARGE);
                 DomainEvents.Raise<OnAiming> (new OnAiming (true));
             }
@@ -278,6 +278,8 @@
         public CameraShakeProps AimShakeProps = null;
         public float DashColSizeMultiplier = 0.5f;
         public float RecoverRate = .1f;
+        public EVFXType DashVFX = EVFXType.FIRE;
+        public float MaxMagicalCircleAngle = 70f;
     }
     class DashProps {
         public float Charge { get; set; }

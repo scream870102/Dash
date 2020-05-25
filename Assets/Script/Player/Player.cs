@@ -7,7 +7,6 @@
     class Player : MonoBehaviour {
 #region TEST
         public Text deltaText = null;
-        [SerializeField] Movement move = null;
 #endregion
         List<PlayerComponent> components = new List<PlayerComponent> ( );
         //bool bDead = false;
@@ -21,10 +20,12 @@
         [SerializeField] RayCastController rayCastController = null;
 #region ATTR
         [Header ("Set attribution for all action")]
+        [SerializeField] bool bRendInvert = false;
         [SerializeField] MovementAttr movementAttr = null;
         [SerializeField] DashAttr dashAttr = null;
         [SerializeField] FXRef fxRefs = null;
 #endregion
+        public Dictionary<EVFXAction, EVFXType> VFXAction { get; private set; }
         public RayCastController RayCastController => rayCastController;
         public Rigidbody2D Rb => rb;
         public Transform Tf => tf;
@@ -37,6 +38,7 @@
         public PlayerControl Control => GameManager.Instance == null?null : GameManager.Instance.Control;
         public bool IsDashing => Dash.IsDashing;
         public bool IsFacingRight => Movement.IsFacingRight;
+        public bool IsRendInvert => bRendInvert;
         public Collider2D PushObj { get; private set; }
         public GameController GameController {
             get {
@@ -53,9 +55,10 @@
             components.Add (new Movement (this, movementAttr));
             components.Add (new Dash (this, dashAttr));
             components.Add (new FX (this, fxRefs));
-#if UNITY_EDITOR
-            move = components[0] as Movement;
-#endif
+            VFXAction = new Dictionary<EVFXAction, EVFXType> ( );
+            foreach (VFXObject a in fxRefs.VFXAction)
+                VFXAction.Add (a.action, a.type);
+
         }
 
         void OnEnable ( ) {
@@ -88,7 +91,7 @@
 
         public void AddEnergy (float supplement) {
             Dash.AddEnergy (supplement);
-            FX.PlayVFX (EVFXType.HEAL);
+            FX.PlayVFX (EVFXType.GREEN_LIGHT);
             FX.PlaySFX (ESFXType.HEAL);
         }
         void OnTriggerEnter2D (Collider2D other) {

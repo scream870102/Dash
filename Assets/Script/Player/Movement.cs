@@ -34,8 +34,8 @@ namespace CJStudio.Dash.Player {
             Move ( );
             Jump ( );
 #region WALL_SLIDE_VFX
-            if (props.bWallSliding) Player.FX.PlayVFX (EVFXType.GRAB, props.bFaceRight);
-            else Player.FX.StopVFX (EVFXType.GRAB, props.bFaceRight);
+            if (props.bWallSliding) Player.FX.PlayVFX (EVFXType.UP_FLOW_RECTANGLE, props.bFaceRight);
+            else Player.FX.StopVFX (EVFXType.UP_FLOW_RECTANGLE, props.bFaceRight);
 #endregion
 #region ANIMATOR_PAPAMETER
             Player.Anim.SetFloat ("velX", Mathf.Abs (props.inputValue.x));
@@ -48,7 +48,7 @@ namespace CJStudio.Dash.Player {
                     props.bFaceRight = rayCastController.Right;
                 else
                     props.bFaceRight = Player.Rb.velocity.x > 0f;
-                Render.ChangeDirectionXWithSpriteRender (props.bFaceRight, Player.Rend);
+                Render.ChangeDirectionXWithSpriteRender (props.bFaceRight, Player.Rend,Player.IsRendInvert);
             }
 #endregion
 #if UNITY_EDITOR
