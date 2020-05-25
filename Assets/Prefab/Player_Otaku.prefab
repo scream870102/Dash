@@ -29176,17 +29176,17 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 5b87bedd004c0e64c8bbd058016b8154, type: 2}
     - {fileID: 11400000, guid: 96ed1d8e2b934f84096ec8a0f588eda3, type: 2}
     - {fileID: 11400000, guid: bfe28239511d0d94fb86d3b38c2051cb, type: 2}
-    UpFlowRectangle: {fileID: 0}
-    Dust: {fileID: 0}
-    Trail: {fileID: 0}
+    UpFlowRectangle: {fileID: 8105157757910455776}
+    Dust: {fileID: 8105157757344988053}
+    Trail: {fileID: 8105157758638964527}
     TrailParticle: {fileID: 8105157759072533017}
-    GatherParticle: {fileID: 0}
-    FlipRectangle: {fileID: 0}
-    GreenLight: {fileID: 0}
-    Ring: {fileID: 0}
-    FireVFX: {fileID: 2855386926138358097}
-    Smoke: {fileID: 0}
-    MagicalCircle: {fileID: 0}
+    Fire: {fileID: 2855386926138358097}
+    Smoke: {fileID: 1704820885771032977}
+    GatherParticle: {fileID: 8105157758589488439}
+    Ring: {fileID: 3731729843236355643}
+    FlipRectangle: {fileID: 8105157758812846404}
+    GreenLight: {fileID: 8105157757124668855}
+    MagicalCircle: {fileID: 3436614764046997117}
     audio: {fileID: 8105157757490912489}
     loopAudio: {fileID: 8010354367394952526}
     SFXClips:

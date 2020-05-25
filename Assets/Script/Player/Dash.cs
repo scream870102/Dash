@@ -49,9 +49,9 @@
                 energy = attr.BasicEnergy;
             EnergyChanging ( );
             if (bCanDash)
-                Player.FX.PlayVFX (EVFXType.FLIP_RECTANGLE);
+                Player.FX.PlayVFX (Player.VFXAction[EVFXAction.DASH_READY]);
             else
-                Player.FX.StopVFX (EVFXType.FLIP_RECTANGLE);
+                Player.FX.StopVFX (Player.VFXAction[EVFXAction.DASH_READY]);
             CheckCollision ( );
             if (bAim && !bUsingDash) {
 #if UNITY_EDITOR
@@ -125,7 +125,7 @@
                 Player.Anim.SetBool ("dash", true);
                 Player.GameController.CameraController.ShakeCamera (attr.DashShakeProps);
                 Player.Rb.velocity = Vector2.zero;
-                Player.FX.PlayVFX (attr.DashVFX, Player.IsFacingRight, Math.GetDegree (direction), direction,attr.MaxMagicalCircleAngle);
+                Player.FX.PlayVFX (Player.VFXAction[EVFXAction.DASH], Player.IsFacingRight, Math.GetDegree (direction), direction, attr.MaxMagicalCircleAngle);
                 Player.FX.PlaySFX (ESFXType.DASH);
                 GamepadController.VibrateController (EVibrateDuration.NORMAL, EVibrateStrength.STRONG);
                 Player.Col.size = oriColSize * attr.DashColSizeMultiplier;
@@ -156,7 +156,7 @@
 
         //Call this method to reset all vars before a new Dash
         void ResetState ( ) {
-            Player.FX.StopVFX (EVFXType.GATHER_RECTANGLE);
+            Player.FX.StopVFX (Player.VFXAction[EVFXAction.CHARGE]);
             Player.FX.StopLoopSFX ( );
             bAim = false;
             Player.Anim.SetBool ("aim", false);
@@ -169,7 +169,7 @@
             Time.timeScale = normalTimeScale;
             DomainEvents.Raise<OnAiming> (new OnAiming (false));
             AimAnimEnded ( );
-            Player.FX.StopVFX (attr.DashVFX);
+            Player.FX.StopVFX (Player.VFXAction[EVFXAction.DASH]);
         }
 
         //Check if player bomb into any collider which can reset its dash state
@@ -210,7 +210,7 @@
                 Vector2 tmp = Control.GamePlay.Aim.ReadValue<Vector2> ( ).normalized;
                 direction = tmp == Vector2.zero?Vector2.right : tmp;
                 Time.timeScale = attr.AimTimeScale;
-                Player.FX.PlayVFX (EVFXType.GATHER_RECTANGLE);
+                Player.FX.PlayVFX (Player.VFXAction[EVFXAction.CHARGE]);
                 Player.FX.PlayLoopSFX (ESFXType.CHARGE);
                 DomainEvents.Raise<OnAiming> (new OnAiming (true));
             }

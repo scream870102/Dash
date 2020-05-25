@@ -91,7 +91,7 @@
 
         public void AddEnergy (float supplement) {
             Dash.AddEnergy (supplement);
-            FX.PlayVFX (EVFXType.GREEN_LIGHT);
+            FX.PlayVFX (VFXAction[EVFXAction.HEAL]);
             FX.PlaySFX (ESFXType.HEAL);
         }
         void OnTriggerEnter2D (Collider2D other) {
