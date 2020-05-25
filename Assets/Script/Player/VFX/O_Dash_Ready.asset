@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: N_DashReady
+  m_Script: {fileID: 11500000, guid: a297a06c1c7087a4da79c267b7cec51e, type: 3}
+  m_Name: O_Dash_Ready
   m_EditorClassIdentifier: Assembly-CSharp:CJStudio.Dash.Player:VFXObject
   action: 2
   type: 4
+  root: {fileID: 7729229325782880881, guid: a7653fef1dd108043bac0ccf92e2e7a7, type: 3}

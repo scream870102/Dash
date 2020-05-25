@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: O_DashReady
+  m_Name: N_Dash_Ready
   m_EditorClassIdentifier: Assembly-CSharp:CJStudio.Dash.Player:VFXObject
   action: 2
   type: 4
+  root: {fileID: 7729229325782880881, guid: a7653fef1dd108043bac0ccf92e2e7a7, type: 3}

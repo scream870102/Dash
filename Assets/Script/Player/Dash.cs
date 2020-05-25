@@ -125,7 +125,7 @@
                 Player.Anim.SetBool ("dash", true);
                 Player.GameController.CameraController.ShakeCamera (attr.DashShakeProps);
                 Player.Rb.velocity = Vector2.zero;
-                Player.FX.PlayVFX (Player.VFXAction[EVFXAction.DASH], Player.IsFacingRight, Math.GetDegree (direction), direction, attr.MaxMagicalCircleAngle);
+                Player.FX.PlayVFX (Player.VFXAction[EVFXAction.DASH], Player.IsFacingRight, Math.GetDegree (direction), direction);
                 Player.FX.PlaySFX (ESFXType.DASH);
                 GamepadController.VibrateController (EVibrateDuration.NORMAL, EVibrateStrength.STRONG);
                 Player.Col.size = oriColSize * attr.DashColSizeMultiplier;
@@ -278,8 +278,6 @@
         public CameraShakeProps AimShakeProps = null;
         public float DashColSizeMultiplier = 0.5f;
         public float RecoverRate = .1f;
-        public EVFXType DashVFX = EVFXType.FIRE;
-        public float MaxMagicalCircleAngle = 70f;
     }
     class DashProps {
         public float Charge { get; set; }

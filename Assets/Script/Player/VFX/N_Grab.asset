@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp:CJStudio.Dash.Player:VFXObject
   action: 3
   type: 0
+  root: {fileID: 3445029452405663262, guid: 25be95c8ace7b714e8a002f7447f427c, type: 3}

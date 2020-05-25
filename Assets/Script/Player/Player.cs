@@ -15,7 +15,6 @@
         Animator anim = null;
         SpriteRenderer rend = null;
         BoxCollider2D col = null;
-        Transform dustTf = null;
         GameController gameController = null;
         [SerializeField] RayCastController rayCastController = null;
 #region ATTR
@@ -56,8 +55,11 @@
             components.Add (new Dash (this, dashAttr));
             components.Add (new FX (this, fxRefs));
             VFXAction = new Dictionary<EVFXAction, EVFXType> ( );
-            foreach (VFXObject a in fxRefs.VFXAction)
+            foreach (VFXObject a in fxRefs.VFXAction) {
+                GameObject root = Instantiate (a.root, Tf);
+                FX.VFXS[a.type].Init (root);
                 VFXAction.Add (a.action, a.type);
+            }
 
         }
 
