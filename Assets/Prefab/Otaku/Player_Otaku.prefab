@@ -342,10 +342,10 @@ MonoBehaviour:
     VFXAction:
     - {fileID: 11400000, guid: b1334541469d4f64ca0bf919e6623bb3, type: 2}
     - {fileID: 11400000, guid: fa28730ce28d1d445b13800842472e30, type: 2}
-    - {fileID: 11400000, guid: 95d5d57d703bcaf4ea873517859cc0ec, type: 2}
-    - {fileID: 11400000, guid: 63ff2e02cc1784f43abd11e1b3503880, type: 2}
-    - {fileID: 11400000, guid: 44ce104efd2ea2f438b919efa3539aba, type: 2}
-    - {fileID: 11400000, guid: e9cf5b76f5bb6224bb64ee0cf2c779b1, type: 2}
+    - {fileID: 11400000, guid: a76637024a50cda45b0a794a9767f78a, type: 2}
+    - {fileID: 11400000, guid: 849eaba3090fa57489b345fd0a66934e, type: 2}
+    - {fileID: 11400000, guid: 20094ee148492204e8479460835d3f48, type: 2}
+    - {fileID: 11400000, guid: 1847d62f1ae11254e90da81753bab85e, type: 2}
     audio: {fileID: 8105157757490912489}
     loopAudio: {fileID: 8010354367394952526}
     SFXClips:

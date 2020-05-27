@@ -3658,6 +3658,7 @@ MonoBehaviour:
   loadText: {fileID: 1081353721}
   userText: {fileID: 1378425116}
   inputField: {fileID: 912555017}
+  initLevel: 1
   scoreObjs:
   - {fileID: 1142409715}
   - {fileID: 1861684779}

@@ -305,8 +305,6 @@ MonoBehaviour:
       shakeDuration: 0
     DashColSizeMultiplier: 0.5
     RecoverRate: 0.1
-    DashVFX: 2
-    MaxMagicalCircleAngle: 70
   fxRefs:
     VFXAction:
     - {fileID: 11400000, guid: ec14e42ab506c464fb709ec954f66de9, type: 2}

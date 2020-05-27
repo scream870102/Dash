@@ -15,6 +15,7 @@
         [SerializeField] Text loadText = null;
         [SerializeField] Text userText = null;
         [SerializeField] InputField inputField = null;
+        [SerializeField] ELevel initLevel = ELevel.STORY;
 #region SCORE_BOARD
         [SerializeField] List<Transform> scoreObjs = null;
         List<Text> scoreTexts = new List<Text> ( );
@@ -55,6 +56,9 @@
                 bSocreGet = false;
                 loadText.enabled = false;
             }
+            if (Input.GetKeyDown (KeyCode.F2)) {
+                initLevel = ELevel.LEVEL1_OTAKU;
+            }
         }
 
         void OnEnable ( ) {
@@ -85,7 +89,7 @@
         }
 
         public void OnNewGamePressed ( ) {
-            GameManager.Instance.LoadLevel (ELevel.STORY);
+            GameManager.Instance.LoadLevel (initLevel);
         }
         public void OnContinuePressed ( ) {
             SaveData data = SLController.Load ( );

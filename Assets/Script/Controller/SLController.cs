@@ -53,6 +53,6 @@ namespace CJStudio.Dash {
         TITLE = 0,
         STORY = 1,
         LEVEL1 = 2,
-        LEVEL2 = 3,
+        LEVEL1_OTAKU = 3,
     }
 }
