@@ -189,12 +189,24 @@
 
         void OnAimBtnStarted (InputAction.CallbackContext ctx) {
             if (bAim && !bUsingDash) {
-                direction = ctx.ReadValue<Vector2> ( ).normalized;
+                if (ctx.control.device.displayName == "Mouse") {
+                    Vector2 mousePos = Camera.main.ScreenToWorldPoint (ctx.ReadValue<Vector2> ( ));
+                    direction = (mousePos - (Vector2) Player.Tf.position).normalized;
+                }
+                else {
+                    direction = ctx.ReadValue<Vector2> ( ).normalized;
+                }
             }
         }
         void OnAimBtnPerformed (InputAction.CallbackContext ctx) {
             if (bAim && !bUsingDash) {
-                direction = ctx.ReadValue<Vector2> ( ).normalized;
+                if (ctx.control.device.displayName == "Mouse") {
+                    Vector2 mousePos = Camera.main.ScreenToWorldPoint (ctx.ReadValue<Vector2> ( ));
+                    direction = (mousePos - (Vector2) Player.Tf.position).normalized;
+                }
+                else {
+                    direction = ctx.ReadValue<Vector2> ( ).normalized;
+                }
             }
         }
         void OnJumpBtnStarted (InputAction.CallbackContext ctx) {
