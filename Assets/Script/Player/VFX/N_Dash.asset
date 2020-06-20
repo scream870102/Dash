@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a297a06c1c7087a4da79c267b7cec51e, type: 3}
+  m_Name: N_Dash
+  m_EditorClassIdentifier: Assembly-CSharp:CJStudio.Dash.Player:VFXObject
+  action: 1
+  type: 2
+  root: {fileID: 2191838905595499229, guid: 86623e7c2f2c0fd47943cb9542d17b81, type: 3}

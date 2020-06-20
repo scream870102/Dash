@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a297a06c1c7087a4da79c267b7cec51e, type: 3}
+  m_Name: N_Jump
+  m_EditorClassIdentifier: Assembly-CSharp:CJStudio.Dash.Player:VFXObject
+  action: 4
+  type: 1
+  root: {fileID: 8654583972561776197, guid: c3c78964f73500640ab32bd9b513fb1d, type: 3}

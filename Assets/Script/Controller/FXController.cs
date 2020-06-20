@@ -11,8 +11,6 @@
         [SerializeField] VFXPool explosionFX = null;
         [SerializeField] VFXPool ringFX = null;
         [SerializeField] List<SFXClip> SFXClips = new List<SFXClip> ( );
-        [SerializeField] float pitchAtAim = .5f;
-        [SerializeField] float pitchTimeTransFrmoNormalToAim = .2f;
         Dictionary<ESFXType, AudioClip> clips = new Dictionary<ESFXType, AudioClip> ( );
         Dictionary<ESFXType, float> volumes = new Dictionary<ESFXType, float> ( );
 

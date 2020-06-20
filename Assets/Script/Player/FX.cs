@@ -7,106 +7,29 @@
         FXRef refs = null;
         Dictionary<ESFXType, AudioClip> clips = new Dictionary<ESFXType, AudioClip> ( );
         Dictionary<ESFXType, float> volumes = new Dictionary<ESFXType, float> ( );
+        Dictionary<EVFXType, AVFXBase> vfxs = new Dictionary<EVFXType, AVFXBase> ( );
+        public Dictionary<EVFXType, AVFXBase> VFXS => vfxs;
         public FX (Player player, FXRef refs) : base (player) {
             this.refs = refs;
-            refs.GrabTF = refs.GrabVFX.transform;
-            refs.DustTF = refs.DustVFX.transform;
-            refs.DashTF = refs.DashVFX.transform;
-            refs.FireTF = refs.FireVFX.transform;
-            refs.FireRend = refs.FireVFX.GetComponent<ParticleSystemRenderer> ( );
-            refs.SmokeTF = refs.SmokeVFX.transform;
-            refs.SmokeRend = refs.SmokeVFX.GetComponent<ParticleSystemRenderer> ( );
             foreach (SFXClip o in refs.SFXClips) {
                 clips.Add (o.type, o.clip);
                 volumes.Add (o.type, o.volume);
             }
-        }
-        public void PlayVFX (EVFXType type, bool IsFacingRight = true, float degree = 0f) {
-            switch (type) {
-                case EVFXType.DUST:
-                    Vector3 dustS = refs.DustTF.localScale;
-                    dustS.x = IsFacingRight?1f: -1f;
-                    refs.DustTF.localScale = dustS;
-                    refs.DustVFX.Play ( );
-                    break;
-                case EVFXType.GRAB:
-                    if (refs.GrabVFX.isPlaying) return;
-                    Vector3 grabP = refs.GrabTF.localPosition;
-                    grabP.x = IsFacingRight? Mathf.Abs (grabP.x): -Mathf.Abs (grabP.x);
-                    refs.GrabTF.localPosition = grabP;
-                    refs.GrabVFX.Play ( );
-                    break;
-                case EVFXType.TRAIL:
-                    // Enable trail
-                    refs.TrailVFX.enabled = true;
-                    refs.TrailParticle.Play ( );
-                    // calc scale due to direction and enable dash particle
-                    Vector3 scale = refs.DashTF.localScale;
-                    scale.x = IsFacingRight?1f: -1f;
-                    refs.DashTF.localScale = scale;
-                    refs.DashVFX.Play ( );
-                    // calc roation due to degree
-                    // also calc particle direction by set startRotaion
-                    // calc startRotation value by degree and transfer it into radian
-                    Quaternion rotation = Quaternion.Euler (0f, 0f, degree);
-                    ParticleSystem.MinMaxCurve startRot = new ParticleSystem.MinMaxCurve (-degree * Mathf.Deg2Rad);
-                    refs.FireTF.rotation = rotation;
-                    refs.SmokeTF.rotation = rotation;
-                    ParticleSystem.MainModule smokeMain = refs.SmokeVFX.main;
-                    ParticleSystem.MainModule fireMain = refs.FireVFX.main;
-                    smokeMain.startRotation = startRot;
-                    fireMain.startRotation = startRot;
-                    // and if abs degree is greater than 90f means it will need to flip in vertical so also set the flip
-                    if (Mathf.Abs (degree) > 90f) {
-                        refs.SmokeRend.flip = new Vector3 (1f, 1f, 0f);
-                        refs.FireRend.flip = new Vector3 (1f, 1f, 0f);
-                    }
-                    else {
-                        refs.SmokeRend.flip = new Vector3 (1f, 0f, 0f);
-                        refs.FireRend.flip = new Vector3 (1f, 0f, 0f);
-                    }
-                    refs.SmokeVFX.Play ( );
-                    refs.FireVFX.Play ( );
-                    break;
-                case EVFXType.CHARGE:
-                    refs.ChargeParticle.Play ( );
-                    refs.RingVFX.Play ( );
-                    break;
-                case EVFXType.AURA:
-                    refs.AuraParticle.Play ( );
-                    break;
-                case EVFXType.HEAL:
-                    refs.HealVFX.Play ( );
-                    break;
-            }
+            vfxs.Add (EVFXType.DUST, new Dust ( ));
+            vfxs.Add (EVFXType.FIRE, new Fire ( ));
+            vfxs.Add (EVFXType.FLIP_RECTANGLE, new FlipRectangle ( ));
+            vfxs.Add (EVFXType.GATHER_RECTANGLE, new GatherRectangle ( ));
+            vfxs.Add (EVFXType.GREEN_LIGHT, new GreenLight ( ));
+            vfxs.Add (EVFXType.MAGICAL_CIRCLE, new MagicalCircle ( ));
+            vfxs.Add (EVFXType.UP_FLOW_RECTANGLE, new UpFlowRectangle ( ));
         }
 
-        public void StopVFX (EVFXType type, bool IsFacingRight = true) {
-            switch (type) {
-                case EVFXType.DUST:
-                    refs.DustVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
-                    break;
-                case EVFXType.GRAB:
-                    refs.GrabVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
-                    break;
-                case EVFXType.TRAIL:
-                    refs.TrailVFX.enabled = false;
-                    refs.TrailParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
-                    refs.DashVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
-                    refs.FireVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
-                    refs.SmokeVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
-                    break;
-                case EVFXType.CHARGE:
-                    refs.ChargeParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
-                    refs.RingVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
-                    break;
-                case EVFXType.AURA:
-                    refs.AuraParticle.Stop (true, ParticleSystemStopBehavior.StopEmitting);
-                    break;
-                case EVFXType.HEAL:
-                    refs.HealVFX.Stop (true, ParticleSystemStopBehavior.StopEmitting);
-                    break;
-            }
+        public void PlayVFX (EVFXType type, bool IsFacingRight = true, float degree = 0f, Vector2 direction = default (Vector2)) {
+            vfxs[type].PlayVFX (IsFacingRight, degree, direction);
+        }
+
+        public void StopVFX (EVFXType type) {
+            vfxs[type].StopVFX ( );
         }
 
         public void PlaySFX (ESFXType type) {
@@ -126,7 +49,6 @@
         public void StopLoopSFX ( ) {
             refs.loopAudio.Stop ( );
         }
-
         override public void Tick ( ) { }
         override public void FixedTick ( ) { }
         override public void OnEnable ( ) { }
@@ -136,24 +58,8 @@
 
     [System.Serializable]
     class FXRef : PlayerAttr {
-        public ParticleSystem GrabVFX = null;
-        public ParticleSystem DustVFX = null;
-        public TrailRenderer TrailVFX = null;
-        public ParticleSystem TrailParticle = null;
-        public ParticleSystem ChargeParticle = null;
-        public ParticleSystem AuraParticle = null;
-        public ParticleSystem DashVFX = null;
-        public ParticleSystem HealVFX = null;
-        public ParticleSystem RingVFX = null;
-        public ParticleSystem FireVFX = null;
-        public ParticleSystem SmokeVFX = null;
-        public Transform DashTF { get; set; }
-        public Transform GrabTF { get; set; }
-        public Transform DustTF { get; set; }
-        public Transform FireTF { get; set; }
-        public Transform SmokeTF { get; set; }
-        public ParticleSystemRenderer SmokeRend { get; set; }
-        public ParticleSystemRenderer FireRend { get; set; }
+        public List<VFXObject> VFXAction = new List<VFXObject> ( );
+        [Header ("OTHER")]
         public AudioSource audio;
         public AudioSource loopAudio;
         public SFXClip[ ] SFXClips;
@@ -166,13 +72,15 @@
         public float volume = 1f;
     }
 
+    [System.Serializable]
     enum EVFXType {
-        GRAB,
+        UP_FLOW_RECTANGLE,
         DUST,
-        TRAIL,
-        CHARGE,
-        AURA,
-        HEAL,
+        FIRE,
+        GATHER_RECTANGLE,
+        FLIP_RECTANGLE,
+        GREEN_LIGHT,
+        MAGICAL_CIRCLE,
     }
     enum ESFXType {
         RESET_DASH,
@@ -180,5 +88,15 @@
         DASH,
         JUMP,
         CHARGE
+    }
+
+    [System.Serializable]
+    enum EVFXAction {
+        CHARGE,
+        DASH,
+        DASH_READY,
+        GRAB,
+        JUMP,
+        HEAL
     }
 }
