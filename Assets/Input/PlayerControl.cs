@@ -423,6 +423,28 @@ namespace CJStudio.Dash
                 },
                 {
                     ""name"": """",
+                    ""id"": ""302d6791-ef5b-4d61-bd71-cf4cc5b43b0a"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""625d1872-e332-49e2-9674-2900b1bfa128"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""b330d845-7e7b-4ccf-8984-1047ac837c44"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
