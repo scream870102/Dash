@@ -73,7 +73,7 @@
     }
 
     [System.Serializable]
-    enum EVFXType {
+    public enum EVFXType {
         UP_FLOW_RECTANGLE,
         DUST,
         FIRE,
@@ -91,7 +91,7 @@
     }
 
     [System.Serializable]
-    enum EVFXAction {
+    public enum EVFXAction {
         CHARGE,
         DASH,
         DASH_READY,
