@@ -1,0 +1,4 @@
+768*512
+切割16*16
+behind_map(地圖+物件
+foreground_map(前景裝飾沒碰撞

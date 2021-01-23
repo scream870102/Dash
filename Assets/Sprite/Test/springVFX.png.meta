@@ -1,0 +1,1180 @@
+fileFormatVersion: 2
+guid: a55a4c8570a4afa4ea8163f96d37bdda
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -700395331232633951
+    second: springVFX_0
+  - first:
+      213: 8749024500030397277
+    second: springVFX_1
+  - first:
+      213: -1093130961856660554
+    second: springVFX_2
+  - first:
+      213: 6226582005635177558
+    second: springVFX_3
+  - first:
+      213: -8633078624918593957
+    second: springVFX_4
+  - first:
+      213: 7340199588213980266
+    second: springVFX_5
+  - first:
+      213: 8820811436658441777
+    second: springVFX_6
+  - first:
+      213: 6179403064304756461
+    second: springVFX_7
+  - first:
+      213: -8964291218611145788
+    second: springVFX_8
+  - first:
+      213: 3719223552950354475
+    second: springVFX_9
+  - first:
+      213: 4674856349358714015
+    second: springVFX_10
+  - first:
+      213: -242680572290106042
+    second: springVFX_11
+  - first:
+      213: -152412713474841898
+    second: springVFX_12
+  - first:
+      213: -4269279350703705695
+    second: springVFX_13
+  - first:
+      213: -728497265350294296
+    second: springVFX_14
+  - first:
+      213: 4957208924298879053
+    second: springVFX_15
+  - first:
+      213: 6305380893830314279
+    second: springVFX_16
+  - first:
+      213: -2953120509270027009
+    second: springVFX_17
+  - first:
+      213: 1526809705499396910
+    second: springVFX_18
+  - first:
+      213: 627413101184056901
+    second: springVFX_19
+  - first:
+      213: 2463128447222457157
+    second: springVFX_20
+  - first:
+      213: 2877985354680272873
+    second: springVFX_21
+  - first:
+      213: -863253872927528724
+    second: springVFX_22
+  - first:
+      213: -7568663076905863421
+    second: springVFX_23
+  - first:
+      213: -6216790060525375954
+    second: springVFX_24
+  - first:
+      213: 3802019427107752081
+    second: springVFX_25
+  - first:
+      213: 8154869200737740437
+    second: springVFX_26
+  - first:
+      213: 6682229227922217379
+    second: springVFX_27
+  - first:
+      213: -6295325810210559999
+    second: springVFX_28
+  - first:
+      213: 3423798541216501305
+    second: springVFX_29
+  - first:
+      213: -5994985674851496463
+    second: springVFX_30
+  - first:
+      213: 5325638133888758172
+    second: springVFX_31
+  - first:
+      213: -7088795731877898991
+    second: springVFX_32
+  - first:
+      213: 1581090558568109217
+    second: springVFX_33
+  - first:
+      213: 4211227901143795226
+    second: springVFX_34
+  - first:
+      213: 2288264357571907871
+    second: springVFX_35
+  - first:
+      213: -6329481900932821949
+    second: springVFX_36
+  - first:
+      213: 740211167965766442
+    second: springVFX_37
+  - first:
+      213: -8855523288515046015
+    second: springVFX_38
+  - first:
+      213: 2151441445184929348
+    second: springVFX_39
+  - first:
+      213: -8992041016338771529
+    second: springVFX_40
+  - first:
+      213: 5423985655764003149
+    second: springVFX_41
+  - first:
+      213: 2527865627592256104
+    second: springVFX_42
+  - first:
+      213: -4938535295473508101
+    second: springVFX_43
+  - first:
+      213: 5698656134224754404
+    second: springVFX_44
+  - first:
+      213: -1845560948082262537
+    second: springVFX_45
+  - first:
+      213: -1406586316978275500
+    second: springVFX_46
+  - first:
+      213: -7407650084808960390
+    second: springVFX_47
+  - first:
+      213: -7624995627590357753
+    second: springVFX_48
+  - first:
+      213: -5991486119171585197
+    second: springVFX_49
+  - first:
+      213: 1023250401039568065
+    second: springVFX_50
+  - first:
+      213: -3406042631259457343
+    second: springVFX_51
+  - first:
+      213: -5440175660989078663
+    second: springVFX_52
+  - first:
+      213: 7549415027897025490
+    second: springVFX_53
+  - first:
+      213: -6760242269280513633
+    second: springVFX_54
+  - first:
+      213: -7823400343353761970
+    second: springVFX_55
+  - first:
+      213: 1951475787837682348
+    second: springVFX_56
+  - first:
+      213: 2306247015327348274
+    second: springVFX_57
+  - first:
+      213: 8936184445511814639
+    second: springVFX_58
+  - first:
+      213: -2038191272951545954
+    second: springVFX_59
+  - first:
+      213: -5542918271089068675
+    second: springVFX_60
+  - first:
+      213: -7535726002013127980
+    second: springVFX_61
+  - first:
+      213: 7490305208351602311
+    second: springVFX_62
+  - first:
+      213: 7014805865989070967
+    second: springVFX_63
+  - first:
+      213: 4713837620910607972
+    second: springVFX_64
+  - first:
+      213: 2952207423326219170
+    second: springVFX_65
+  - first:
+      213: -4104554618232224067
+    second: springVFX_66
+  - first:
+      213: -7074941821770859051
+    second: springVFX_67
+  - first:
+      213: 993772870854475570
+    second: springVFX_68
+  - first:
+      213: 8002587690548477851
+    second: springVFX_69
+  - first:
+      213: 4484324117574400486
+    second: springVFX_70
+  - first:
+      213: -8386734641243849824
+    second: springVFX_71
+  - first:
+      213: -3397709982563613851
+    second: springVFX_72
+  - first:
+      213: -5796028447914203848
+    second: springVFX_73
+  - first:
+      213: 1678547176856229091
+    second: springVFX_74
+  - first:
+      213: 8999038809251897189
+    second: springVFX_75
+  - first:
+      213: 4279152237207206785
+    second: springVFX_76
+  - first:
+      213: 2292171808476300561
+    second: springVFX_77
+  - first:
+      213: 8454887530583834027
+    second: springVFX_78
+  - first:
+      213: -1312149765150552656
+    second: springVFX_79
+  - first:
+      213: -5452796844005733756
+    second: springVFX_80
+  - first:
+      213: 2916281734728163623
+    second: springVFX_81
+  - first:
+      213: 4512783100711673273
+    second: springVFX_82
+  - first:
+      213: 1838925682579959438
+    second: springVFX_83
+  - first:
+      213: 4876612614111930383
+    second: springVFX_84
+  - first:
+      213: 4575666894175272219
+    second: springVFX_85
+  - first:
+      213: 1291956588290653352
+    second: springVFX_86
+  - first:
+      213: 7897375305213756251
+    second: springVFX_87
+  - first:
+      213: 7117576353920665301
+    second: springVFX_88
+  - first:
+      213: 671161820445926402
+    second: springVFX_89
+  - first:
+      213: -7740870586006217090
+    second: springVFX_90
+  - first:
+      213: -5931133479315959197
+    second: springVFX_91
+  - first:
+      213: -6164903881804448256
+    second: springVFX_92
+  - first:
+      213: -8462313724462238355
+    second: springVFX_93
+  - first:
+      213: 4787781534727491802
+    second: springVFX_94
+  - first:
+      213: 2524342496799278096
+    second: springVFX_95
+  - first:
+      213: -6803030813930729769
+    second: springVFX_96
+  - first:
+      213: 2175531282634946924
+    second: springVFX_97
+  - first:
+      213: 3179478883190384161
+    second: springVFX_98
+  - first:
+      213: -6712270214252575251
+    second: springVFX_99
+  - first:
+      213: 2456333275419659646
+    second: springVFX_100
+  - first:
+      213: -3657250817547229107
+    second: springVFX_101
+  - first:
+      213: 6636634607482484100
+    second: springVFX_102
+  - first:
+      213: -3466583997558171302
+    second: springVFX_103
+  - first:
+      213: -4740049332982160550
+    second: springVFX_104
+  - first:
+      213: 5424779087917668501
+    second: springVFX_105
+  - first:
+      213: -8817290151290016387
+    second: springVFX_106
+  - first:
+      213: -1027802912331041324
+    second: springVFX_107
+  - first:
+      213: -3797337355380775490
+    second: springVFX_108
+  - first:
+      213: -7962945660668502408
+    second: springVFX_109
+  - first:
+      213: -6751151854393046160
+    second: springVFX_110
+  - first:
+      213: 4742437617826890149
+    second: springVFX_111
+  - first:
+      213: 2879820689261640390
+    second: springVFX_112
+  - first:
+      213: -769070292627067199
+    second: springVFX_113
+  - first:
+      213: 8481943992231095056
+    second: springVFX_114
+  - first:
+      213: 1934726766222912505
+    second: springVFX_115
+  - first:
+      213: 7329240484625157752
+    second: springVFX_116
+  - first:
+      213: -723400294125249435
+    second: springVFX_117
+  - first:
+      213: -5651551169014356275
+    second: springVFX_118
+  - first:
+      213: 7945176166183443183
+    second: springVFX_0
+  - first:
+      213: -6038162510854328403
+    second: springVFX_1
+  - first:
+      213: 8771721967697014628
+    second: springVFX_2
+  - first:
+      213: 2451244676288751318
+    second: springVFX_3
+  - first:
+      213: -4674780283103239847
+    second: springVFX_4
+  - first:
+      213: -7797843676682604225
+    second: springVFX_5
+  - first:
+      213: 4825112862546059457
+    second: springVFX_6
+  - first:
+      213: -1156522841771903196
+    second: springVFX_7
+  - first:
+      213: 8040900802363232462
+    second: springVFX_8
+  - first:
+      213: -1905851348696384022
+    second: springVFX_9
+  - first:
+      213: 3400565946603156320
+    second: springVFX_10
+  - first:
+      213: 8166608579187824954
+    second: springVFX_11
+  - first:
+      213: -5966336299374900179
+    second: springVFX_12
+  - first:
+      213: -8530623182847855507
+    second: springVFX_13
+  - first:
+      213: -6326205633806053169
+    second: springVFX_14
+  - first:
+      213: 1263754979930740952
+    second: springVFX_15
+  - first:
+      213: 6861186509170210195
+    second: springVFX_16
+  - first:
+      213: -1053516176589637236
+    second: springVFX_17
+  - first:
+      213: -5852568414511903974
+    second: springVFX_18
+  - first:
+      213: -6805148582393444629
+    second: springVFX_19
+  - first:
+      213: 521745438300522335
+    second: springVFX_20
+  - first:
+      213: 6224348920262531946
+    second: springVFX_21
+  - first:
+      213: 5039947192621497862
+    second: springVFX_22
+  - first:
+      213: 1528478055819542962
+    second: springVFX_23
+  - first:
+      213: -2657890264698407565
+    second: springVFX_24
+  - first:
+      213: -8330588850512298452
+    second: springVFX_25
+  - first:
+      213: -6323457634693019819
+    second: springVFX_26
+  - first:
+      213: -2811867721074064693
+    second: springVFX_27
+  - first:
+      213: 1628537612885217261
+    second: springVFX_28
+  - first:
+      213: -2529584164372654952
+    second: springVFX_29
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 50
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: springVFX_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fea9347b0afe24e60800000000000000
+      internalID: 7945176166183443183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 200
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daf627c1033243ca0800000000000000
+      internalID: -6038162510854328403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 200
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46f2211b7aa6bb970800000000000000
+      internalID: 8771721967697014628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 200
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d622cbbb02940220800000000000000
+      internalID: 2451244676288751318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 200
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 951a1aeb918df1fb0800000000000000
+      internalID: -4674780283103239847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 200
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f31be45ad7e78c390800000000000000
+      internalID: -7797843676682604225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 150
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c0e93d759e36f240800000000000000
+      internalID: 4825112862546059457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_7
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 150
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4277f895a9433ffe0800000000000000
+      internalID: -1156522841771903196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_8
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 150
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec0930f5da4079f60800000000000000
+      internalID: 8040900802363232462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_9
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 150
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aedb046cb4e0d85e0800000000000000
+      internalID: -1905851348696384022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_10
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 150
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 063329226bc313f20800000000000000
+      internalID: 3400565946603156320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_11
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 150
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a39d526fb3f955170800000000000000
+      internalID: 8166608579187824954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2c8d392fb0533da0800000000000000
+      internalID: -5966336299374900179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_13
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 100
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6434a199632d9980800000000000000
+      internalID: -8530623182847855507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_14
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 100
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc05ae46e7dc438a0800000000000000
+      internalID: -6326205633806053169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_15
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 100
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d817e56572c98110800000000000000
+      internalID: 1263754979930740952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_16
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 100
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 395fac827c4d73f50800000000000000
+      internalID: 6861186509170210195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_17
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 100
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c893f318e982161f0800000000000000
+      internalID: -1053516176589637236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1bc855090087cea0800000000000000
+      internalID: -5852568414511903974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_19
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be68fa66b614f81a0800000000000000
+      internalID: -6805148582393444629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_20
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f57451936bc9d3700800000000000000
+      internalID: 521745438300522335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_21
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6b955e6d54516650800000000000000
+      internalID: 6224348920262531946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_22
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60e7ee6d44d71f540800000000000000
+      internalID: 5039947192621497862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_23
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 50
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b18a1c81be363510800000000000000
+      internalID: 1528478055819542962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 375bea8e2e64d1bd0800000000000000
+      internalID: -2657890264698407565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_25
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2e726be39dc36c80800000000000000
+      internalID: -8330588850512298452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_26
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55704ebc8c09e38a0800000000000000
+      internalID: -6323457634693019819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_27
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc24ef1a43d3af8d0800000000000000
+      internalID: -2811867721074064693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_28
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: defc26f945ab99610800000000000000
+      internalID: 1628537612885217261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: springVFX_29
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8945d15da9c15ecd0800000000000000
+      internalID: -2529584164372654952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
