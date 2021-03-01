@@ -3,12 +3,12 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
-Assets/Firebase/
-Assets/StreamingAssets/
-Assets/Plugins/
-Assets/Parse/
-Assets/PlayServicesResolver/
-Assets/Editor Default Resources/
+# Assets/Firebase/
+# Assets/StreamingAssets/
+# Assets/Plugins/
+# Assets/Parse/
+# Assets/PlayServicesResolver/
+# Assets/Editor Default Resources/
 
 # Visual Studio cache directory
 .vs/

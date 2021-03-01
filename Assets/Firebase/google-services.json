@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "211138977483",
+    "firebase_url": "https://dash-b2f1f.firebaseio.com",
+    "project_id": "dash-b2f1f",
+    "storage_bucket": "dash-b2f1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211138977483:android:b49ef2bebf8f867e80054e",
+        "android_client_info": {
+          "package_name": "com.CJStudio.Dash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211138977483-mhi2ov8ems8k6f2cb5e65dgf60ohcdtv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYdB6OFX_KCqvOwHYnVYd6bFlqwonL4lc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211138977483-mhi2ov8ems8k6f2cb5e65dgf60ohcdtv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
