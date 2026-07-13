@@ -1,0 +1,10 @@
+
+[mcp_servers.serena]
+command = "serena"
+args = ["start-mcp-server", "--context=codex"]
+
+[mcp_servers.codebase-memory-mcp]
+command = "C:/Users/screa/.local/bin/codebase-memory-mcp.exe"
+
+[mcp_servers.unityMCP]
+url = "http://127.0.0.1:8080/mcp"

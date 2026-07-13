@@ -1,0 +1,20 @@
+{
+    "mcpServers":  {
+                       "unityMCP":  {
+                                        "type":  "http",
+                                        "url":  "http://127.0.0.1:8080/mcp"
+                                    },
+                       "serena":  {
+                                      "type":  "stdio",
+                                      "command":  "serena",
+                                      "args":  [
+                                                   "start-mcp-server",
+                                                   "--context=claude-code"
+                                               ]
+                                  },
+                       "codebase-memory-mcp":  {
+                                                   "type":  "stdio",
+                                                   "command":  "C:/Users/screa/.local/bin/codebase-memory-mcp.exe"
+                                               }
+                   }
+}
